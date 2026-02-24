@@ -1,0 +1,15 @@
+# =============================
+# Frontend Dev (Vite Hot Reload)
+# =============================
+FROM node:18
+
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+RUN npm install
+
+COPY . .
+
+EXPOSE 3008
+
+CMD ["npm", "run", "dev", "--", "--host", "--port", "3008"]

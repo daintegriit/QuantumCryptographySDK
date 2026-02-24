@@ -1,0 +1,53 @@
+# ===============================
+# Stage 1 — Build Rust Crypto Core
+# ===============================
+FROM rust:latest AS builder
+
+WORKDIR /app
+
+# Copy Rust crate
+COPY backend/crypto_core_rust ./crypto_core_rust
+
+# Build shared library
+WORKDIR /app/crypto_core_rust
+RUN cargo build --release
+
+# ===============================
+# Stage 2 — Python FastAPI Runtime
+# ===============================
+FROM python:3.10-slim
+
+# System deps for Rust .so loading
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libgcc1 \
+    libstdc++6 \
+    libssl-dev \
+    ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Copy API source
+COPY backend/ .
+
+# Copy Python requirements
+COPY requirements.txt .
+
+# Copy compiled Rust shared library
+COPY --from=builder /app/crypto_core_rust/target/release/*.so /app/
+
+# Python env safety
+ENV PYTHONPATH=/app
+
+# Install Python deps
+RUN pip install --no-cache-dir -r requirements.txt \
+ && pip install fastapi uvicorn
+
+# Expose API port
+EXPOSE 8008
+
+# Healthcheck (recommended)
+HEALTHCHECK CMD curl --fail http://localhost:8008/health || exit 1
+
+# Run API
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8008"]

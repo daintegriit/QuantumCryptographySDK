@@ -1,0 +1,1 @@
+C:\Users\Darryl\ Carpenter\Coding\VScodeProjects\QuantumResistantCryptographySDK\crypto_core_rust\target\debug\crypto_core.dll: C:\Users\Darryl\ Carpenter\Coding\VScodeProjects\QuantumResistantCryptographySDK\crypto_core_rust\src\lib.rs

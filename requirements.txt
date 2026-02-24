@@ -1,0 +1,10 @@
+numpy
+scipy
+scikit-learn
+torch
+qiskit
+pytorch-lightning
+phe  # For partially homomorphic encryption
+cryptography
+pycryptodome
+sympy
