@@ -58,7 +58,7 @@ export default function SimulationPanel({ result }) {
       {/* ============================= */}
       <Card className="space-y-4">
         <h3 className={`font-semibold ${theme.panelTitle}`}>
-          Portfolio Risk Summary
+          📊 Portfolio Risk Summary
         </h3>
 
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-sm">
@@ -93,7 +93,7 @@ export default function SimulationPanel({ result }) {
       {/* ============================= */}
       <Card>
         <h3 className={`font-semibold mb-3 ${theme.panelTitle}`}>
-          Inspect Individual Key
+          🔑 Inspect Individual Key
         </h3>
 
         <select

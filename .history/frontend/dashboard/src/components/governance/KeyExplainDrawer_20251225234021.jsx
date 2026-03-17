@@ -82,7 +82,7 @@ export default function KeyExplainDrawer({ keyId, onClose }) {
         >
           <div>
             <h2 className={`text-xl font-bold ${theme.panelTitle}`}>
-              Key Governance Explanation
+              🔍 Key Governance Explanation
             </h2>
             <p className={`text-xs font-mono ${theme.mutedText}`}>
               {keyId}
@@ -124,7 +124,7 @@ export default function KeyExplainDrawer({ keyId, onClose }) {
               <Card>
                 <div className="flex items-center justify-between">
                   <h3 className={`font-semibold ${theme.panelTitle}`}>
-                    Risk Status
+                    ⚠️ Risk Status
                   </h3>
 
                   {anomaly?.severity ? (

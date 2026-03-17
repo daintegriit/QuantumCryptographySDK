@@ -52,8 +52,8 @@ export default function KeygenPanel({ onActivated }) {
         `/api/keys/${result.key.key_id}/activate`
       );
 
-      onActivated?.();        // CryptoPage + Encrypt/Decrypt
-      refreshActiveKey?.();  // Sidebar + Audit + Telemetry
+      onActivated?.();        // ✅ CryptoPage + Encrypt/Decrypt
+      refreshActiveKey?.();  // ✅ Sidebar + Audit + Telemetry
 
     } catch (err) {
       console.error("Activation failed:", err);

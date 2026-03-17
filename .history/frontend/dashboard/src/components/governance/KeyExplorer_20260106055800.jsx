@@ -100,7 +100,7 @@ export default function KeyExplorer() {
       <div className="space-y-4">
         <div>
           <h2 className={`text-xl font-bold ${theme.panelTitle}`}>
-            Key Explorer
+            🗂️ Key Explorer
           </h2>
           <p className={theme.mutedText}>
             Inspect cryptographic keys, policy posture, usage, and migration risk.
@@ -162,10 +162,10 @@ export default function KeyExplorer() {
 
                     <Td>
                       <div className="text-xs">
-                        {k.telemetry?.encrypt_count ?? "—"} enc
+                        🔐 {k.telemetry?.encrypt_count ?? "—"} enc
                       </div>
                       <div className="text-xs">
-                        {k.telemetry?.decrypt_count ?? "—"} dec
+                        🔓 {k.telemetry?.decrypt_count ?? "—"} dec
                       </div>
                     </Td>
 
@@ -220,7 +220,7 @@ export default function KeyExplorer() {
 }
 
 // =====================================================
-// Governance Normalization
+// Governance Normalization (CRITICAL)
 // =====================================================
 
 function deriveGovernanceStatus(key) {

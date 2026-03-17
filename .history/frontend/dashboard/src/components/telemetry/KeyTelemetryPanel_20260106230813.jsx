@@ -27,7 +27,7 @@ export default function KeyTelemetryPanel({ keyId }) {
     let mounted = true;
 
     async function loadTelemetry() {
-      // No key → no fetch
+      // 🚫 No key → no fetch
       if (!keyId) {
         setTelemetry(null);
         setLoading(false);
@@ -41,7 +41,7 @@ export default function KeyTelemetryPanel({ keyId }) {
         const data = await fetchKeyTelemetry(keyId);
         if (mounted) setTelemetry(data);
       } catch (err) {
-        // 404 = key exists but no audit history yet
+        // ✅ 404 = key exists but no audit history yet
         if (err.message.includes("404")) {
           if (mounted) setTelemetry(null);
         } else {
@@ -99,7 +99,7 @@ export default function KeyTelemetryPanel({ keyId }) {
     <Card>
       <div className="space-y-4">
         <h4 className={`font-semibold ${theme.panelTitle}`}>
-          Key Telemetry
+          📈 Key Telemetry
         </h4>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">

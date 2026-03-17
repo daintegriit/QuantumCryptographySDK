@@ -132,7 +132,7 @@ export default function GovernanceOverview() {
       {/* ============================= */}
       <div>
         <h2 className={`text-xl font-bold ${theme.panelTitle}`}>
-          Governance Overview
+          🏛️ Governance Overview
         </h2>
         <p className={theme.mutedText}>
           System-wide cryptographic posture, policy compliance,
@@ -150,7 +150,7 @@ export default function GovernanceOverview() {
       {/* ============================= */}
       <div className={`${theme.panel} p-6 rounded-xl`}>
         <h3 className={`font-semibold mb-4 ${theme.panelTitle}`}>
-          Cryptographic Scheme Usage
+          🔐 Cryptographic Scheme Usage
         </h3>
 
         {Object.keys(telemetry.per_scheme_usage || {}).length === 0 ? (

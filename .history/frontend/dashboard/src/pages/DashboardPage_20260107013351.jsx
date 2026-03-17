@@ -87,7 +87,7 @@ export default function DashboardPage() {
         {/* ===== Active Key (PRIMARY) ===== */}
         <Card highlight>
           <h3 className="text-sm font-semibold text-green-400">
-            Active Cryptographic Key
+            🔐 Active Cryptographic Key
           </h3>
 
           {activeKey ? (

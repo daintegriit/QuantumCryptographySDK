@@ -43,7 +43,7 @@ export default function CryptoPage() {
         ) : activeKey ? (
           <div className="space-y-1">
             <div className="text-green-400 font-semibold">
-              Active Key Enabled
+              🔐 Active Key Enabled
             </div>
             <div>
               <span className="text-gray-400">Key ID:</span>{" "}

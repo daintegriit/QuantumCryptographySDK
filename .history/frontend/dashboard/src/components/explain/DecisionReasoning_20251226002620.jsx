@@ -13,7 +13,7 @@ import { useTheme } from "../../context/ThemeContext";
  * - Executive + auditor readable
  *
  * Answers exactly one question:
- * Why did the system make this decision?
+ * 👉 Why did the system make this decision?
  */
 export default function DecisionReasoning({ decision }) {
   const { theme } = useTheme();
@@ -50,7 +50,7 @@ export default function DecisionReasoning({ decision }) {
       {/* ============================= */}
       <div>
         <h3 className={`text-lg font-bold ${theme.panelTitle}`}>
-          Decision Reasoning
+          🧠 Decision Reasoning
         </h3>
         <p className={theme.mutedText}>
           Deterministic justification for governance outcomes derived from

@@ -33,7 +33,7 @@ export default function ExplainPage() {
       {/* ============================= */}
       <div>
         <h1 className={`text-xl font-bold ${theme.panelTitle}`}>
-          Explainability
+          🧠 Explainability
         </h1>
         <p className={theme.mutedText}>
           Deterministic explanations for cryptographic governance decisions,

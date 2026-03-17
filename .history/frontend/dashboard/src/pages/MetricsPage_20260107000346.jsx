@@ -102,7 +102,7 @@ export default function AuditPage() {
         {activeKey ? (
           <div className="space-y-1">
             <div className="text-green-400 font-semibold">
-              Active Key Context
+              🔐 Active Key Context
             </div>
             <div>
               <span className="text-gray-400">Key ID:</span>{" "}
@@ -128,7 +128,7 @@ export default function AuditPage() {
       {/* ================= HEADER ================= */}
       <div>
         <h2 className={`text-xl font-bold ${theme.panelTitle}`}>
-          Audit Trail
+          📜 Audit Trail
         </h2>
         <p className={theme.mutedText}>
           Immutable, chronological record of cryptographic operations, key

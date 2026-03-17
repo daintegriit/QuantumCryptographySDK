@@ -6,9 +6,9 @@ import { useTheme } from "../../context/ThemeContext";
  *
  * Deterministic, audit-safe governance explanation engine.
  *
- * No generative reasoning
- * No probabilistic inference
- * Fully derived from immutable audit signals
+ * ❌ No generative reasoning
+ * ❌ No probabilistic inference
+ * ✅ Fully derived from immutable audit signals
  */
 export default function ExplainPanel({ keyId }) {
   const { theme } = useTheme();
@@ -99,7 +99,7 @@ export default function ExplainPanel({ keyId }) {
       {/* ================= HEADER ================= */}
       <div>
         <h2 className={`text-xl font-bold ${theme.panelTitle}`}>
-          Governance Explanation
+          🧠 Governance Explanation
         </h2>
         <p className={theme.mutedText}>
           Deterministic explanation derived from cryptographic

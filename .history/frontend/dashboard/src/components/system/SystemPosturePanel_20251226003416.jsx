@@ -143,7 +143,7 @@ export default function SystemPosturePanel() {
       {/* ============================= */}
       <div>
         <h2 className={`text-xl font-bold ${theme.panelTitle}`}>
-          System Posture
+          🧭 System Posture
         </h2>
         <p className={theme.mutedText}>
           Consolidated, real-time assessment of cryptographic

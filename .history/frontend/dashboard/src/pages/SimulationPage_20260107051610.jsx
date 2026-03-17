@@ -55,7 +55,7 @@ export default function SimulationPage() {
       {/* ============================= */}
       <Card>
         <h3 className={`font-semibold mb-2 ${theme.panelTitle}`}>
-          Scenario Configuration
+          🎛️ Scenario Configuration
         </h3>
         <p className={`${theme.mutedText} mb-4`}>
           Select a projection scenario to explore how cryptographic posture
@@ -70,7 +70,7 @@ export default function SimulationPage() {
       {/* ============================= */}
       <Card>
         <h3 className={`font-semibold mb-2 ${theme.panelTitle}`}>
-          Migration Projection
+          📈 Migration Projection
         </h3>
         <p className={`${theme.mutedText} mb-4`}>
           Forward-looking view of key migration pressure and quantum risk
@@ -85,7 +85,7 @@ export default function SimulationPage() {
       {/* ============================= */}
       <Card>
         <h3 className={`font-semibold mb-2 ${theme.panelTitle}`}>
-          Simulation Analysis
+          🧠 Simulation Analysis
         </h3>
         <p className={`${theme.mutedText} mb-4`}>
           Interpret projected outcomes and understand how policy, lifecycle,

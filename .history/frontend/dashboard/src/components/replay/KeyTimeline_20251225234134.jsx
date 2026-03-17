@@ -31,7 +31,7 @@ export default function KeyTimeline({ keyId }) {
         setError(null);
 
         const res = await fetch(
-          `http://localhost:8008/api/replay/keys/${keyId}`
+          `http://localhost:8000/api/replay/keys/${keyId}`
         );
 
         if (!res.ok) {
@@ -146,7 +146,7 @@ export default function KeyTimeline({ keyId }) {
       {/* ================= HEADER ================= */}
       <div>
         <h3 className={`text-lg font-bold ${theme.panelTitle}`}>
-          Key Audit Timeline
+          🧾 Key Audit Timeline
         </h3>
         <p className={theme.mutedText}>
           Immutable, phase-structured sequence of cryptographic,

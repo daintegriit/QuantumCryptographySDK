@@ -78,7 +78,7 @@ export default function ScenarioSelector({ onResult }) {
       {/* ============================= */}
       <div>
         <h3 className={`text-lg font-semibold ${theme.panelTitle}`}>
-          Scenario Simulation
+          🧪 Scenario Simulation
         </h3>
         <p className={theme.mutedText}>
           Evaluate cryptographic durability under alternative quantum

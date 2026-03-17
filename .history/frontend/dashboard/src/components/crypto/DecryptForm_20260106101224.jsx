@@ -44,7 +44,7 @@ export default function DecryptForm({ activeKey }) {
       {/* Header */}
       <div>
         <h3 className={`text-sm font-semibold ${theme.panelTitle}`}>
-          Decryption
+          🔓 Decryption
         </h3>
         <p className={theme.mutedText}>
           Decrypt ciphertext using the currently active cryptographic key.

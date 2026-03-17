@@ -6,10 +6,10 @@ import { useTheme } from "../context/ThemeContext";
  *
  * Deterministic anomaly detection surface.
  *
- * No ML hallucinations
- * No probabilistic inference
- * Fully derived from audit + telemetry rules
- * Governance-grade and regulator-ready
+ * ❌ No ML hallucinations
+ * ❌ No probabilistic inference
+ * ✅ Fully derived from audit + telemetry rules
+ * ✅ Governance-grade and regulator-ready
  */
 export default function AnomalyDashboard() {
   const { theme } = useTheme();
@@ -90,7 +90,7 @@ export default function AnomalyDashboard() {
       {/* ================= HEADER ================= */}
       <div>
         <h2 className={`text-xl font-bold ${theme.panelTitle}`}>
-          Anomaly Detection
+          🚨 Anomaly Detection
         </h2>
         <p className={theme.mutedText}>
           Deterministic detection of abnormal cryptographic usage,

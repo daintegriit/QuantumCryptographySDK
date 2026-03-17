@@ -121,7 +121,7 @@ export default function MigrationProjectionChart({
       {/* ============================= */}
       <div>
         <h3 className={`text-lg font-semibold ${theme.panelTitle}`}>
-          Migration Projection
+          📈 Migration Projection
         </h3>
         <p className={theme.mutedText}>
           Year-by-year cryptographic risk projection based on

@@ -120,7 +120,7 @@ export default function TelemetryDashboard() {
       {/* ============================= */}
       <div>
         <h2 className={`text-xl font-bold ${theme.panelTitle}`}>
-          Telemetry Dashboard
+          📡 Telemetry Dashboard
         </h2>
         <p className={theme.mutedText}>
           Real-time cryptographic activity, lifecycle events, and policy
@@ -138,7 +138,7 @@ export default function TelemetryDashboard() {
       {/* ============================= */}
       <div className={`${theme.panel} p-6 rounded-xl`}>
         <h3 className={`font-semibold mb-4 ${theme.panelTitle}`}>
-          Event Activity Breakdown
+          🧾 Event Activity Breakdown
         </h3>
 
         {Object.keys(metrics.events_by_type || {}).length === 0 ? (
@@ -171,7 +171,7 @@ export default function TelemetryDashboard() {
       {/* ============================= */}
       <div className={`${theme.panel} p-6 rounded-xl`}>
         <h3 className={`font-semibold mb-4 ${theme.panelTitle}`}>
-          Policy Enforcement Signals
+          🛂 Policy Enforcement Signals
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

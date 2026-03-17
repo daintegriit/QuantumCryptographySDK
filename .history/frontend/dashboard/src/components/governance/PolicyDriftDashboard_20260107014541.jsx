@@ -28,13 +28,13 @@ export default function PolicyDriftDashboard() {
   const [error, setError] = useState(null);
 
   // ------------------------------------------------------------
-  // Endpoint candidates
+  // Endpoint candidates (backend may have slightly different paths)
   // ------------------------------------------------------------
   const endpointCandidates = useMemo(() => {
     const base = "http://localhost:8008/api";
     return [
-      `${base}/policy-drift`,          
-      `${base}/policy-drift/status`,   
+      `${base}/policy-drift`,          // ✅ PRIMARY (correct)
+      `${base}/policy-drift/status`,   // ✅ health fallback
       `${base}/policy/drift`,
       `${base}/policy_drift`,
       `${base}/telemetry/policy_drift`,
