@@ -40,7 +40,7 @@ class AdapterKeyMaterial:
 
 
 # ============================================================
-# Base Adapter Interface
+# Base Adapter Interface (CRITICAL)
 # ============================================================
 
 class CryptoAdapter(ABC):
