@@ -123,7 +123,7 @@ def _real_decrypt(payload, parameter_set, private_key_b64):
     return _decrypt_via_python(payload, parameter_set, private_key_b64)
 
 @router.post("/encrypt", tags=["crypto"])
-def encrypt(payload: Dict[str, Any]):
+def encrypt(request: Request, payload: Dict[str, Any]):
     plaintext = payload.get("plaintext")
     key_id: Optional[str] = payload.get("key_id")
     if not plaintext:
@@ -154,7 +154,7 @@ def encrypt(payload: Dict[str, Any]):
         "crypto_backend": "rust" if _rust_available() else "python"}
 
 @router.post("/decrypt", tags=["crypto"])
-def decrypt(payload: Dict[str, Any]):
+def decrypt(request: Request, payload: Dict[str, Any]):
     ciphertext = payload.get("ciphertext")
     key_id: Optional[str] = payload.get("key_id")
     if not ciphertext:
