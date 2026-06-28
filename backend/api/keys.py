@@ -140,7 +140,7 @@ def api_activate_key(key_id: str, request: Request):
     record = engine.get(key_id)
     if not record:
         raise HTTPException(status_code=404, detail=f"Key {key_id} not found")
-    rotation.set_active_key(key_id)
+    rotation.set_active_key_id(key_id)
     return {"activated": True, "key_id": key_id, "key": sanitize_key(record)}
 
 @router.get("/keys/{key_id}/status", tags=["policy"])
