@@ -19,6 +19,7 @@ import CliPage from "./pages/CliPage";
 import AlgorithmsPage from "./pages/AlgorithmsPage";
 import HowItWorksPage from "./pages/HowItWorksPage";
 import LoginPage from "./pages/LoginPage";
+import AuthCallbackPage from "./pages/AuthCallbackPage";
 
 function ProtectedRoute({ children }) {
   const { user, loading } = useAuth();
@@ -35,6 +36,7 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/auth/callback" element={<AuthCallbackPage />} />
       <Route element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
         <Route index element={<DashboardPage />} />
         <Route path="dashboard" element={<DashboardPage />} />

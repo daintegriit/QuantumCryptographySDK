@@ -74,13 +74,8 @@ async def google_callback(code: str, state: str):
     user = User.from_row(row)
     jwt_token = create_token(user.user_id, user.email, user.is_admin)
 
-    response = RedirectResponse(url=f"{FRONTEND_URL}/dashboard")
-    response.set_cookie(
-        key="access_token", value=jwt_token,
-        httponly=True, secure=True, samesite="lax",
-        max_age=86400, domain=".qsentry.io",
-    )
-    return response
+    # Pass token via URL fragment → stored in localStorage by frontend
+    return RedirectResponse(url=f"{FRONTEND_URL}/auth/callback?token={jwt_token}")
 
 @router.get("/status")
 async def auth_status(request: Request):
@@ -91,9 +86,7 @@ async def auth_status(request: Request):
 
 @router.post("/logout")
 async def logout():
-    response = JSONResponse({"message": "Logged out"})
-    response.delete_cookie("access_token", domain=".qsentry.io")
-    return response
+    return JSONResponse({"message": "Logged out"})
 
 @router.get("/me")
 async def get_me(request: Request):

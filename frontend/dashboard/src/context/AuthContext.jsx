@@ -1,5 +1,10 @@
 import { createContext, useContext, useEffect, useState } from "react";
+
 const AuthContext = createContext(null);
+
+export function getToken() {
+  return localStorage.getItem("qsentry_token");
+}
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
@@ -8,12 +13,15 @@ export function AuthProvider({ children }) {
   useEffect(() => { checkAuth(); }, []);
 
   async function checkAuth() {
+    const token = getToken();
+    if (!token) { setLoading(false); return; }
     try {
       const res = await fetch(`${import.meta.env.VITE_API_BASE}/auth/status`, {
-        credentials: "include",
+        headers: { "Authorization": `Bearer ${token}` },
       });
       const data = await res.json();
       setUser(data.authenticated ? data.user : null);
+      if (!data.authenticated) localStorage.removeItem("qsentry_token");
     } catch {
       setUser(null);
     } finally {
@@ -22,9 +30,7 @@ export function AuthProvider({ children }) {
   }
 
   async function logout() {
-    await fetch(`${import.meta.env.VITE_API_BASE}/auth/logout`, {
-      method: "POST", credentials: "include",
-    });
+    localStorage.removeItem("qsentry_token");
     setUser(null);
     window.location.href = "/login";
   }

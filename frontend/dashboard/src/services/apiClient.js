@@ -1,13 +1,20 @@
 // src/services/apiClient.js
+const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:8008";
 
-const API_BASE =
-  import.meta.env.VITE_API_BASE || "http://localhost:8008";
+function getToken() {
+  return localStorage.getItem("qsentry_token");
+}
 
 async function request(path, options = {}) {
+  const token = getToken();
   const url = `${API_BASE}${path}`;
   const res = await fetch(url, {
     credentials: "include",
-    headers: { "Content-Type": "application/json", ...(options.headers || {}) },
+    headers: {
+      "Content-Type": "application/json",
+      ...(token ? { "Authorization": `Bearer ${token}` } : {}),
+      ...(options.headers || {}),
+    },
     ...options,
   });
 
@@ -25,7 +32,6 @@ async function request(path, options = {}) {
 export const apiGet  = (path)       => request(path, { method: "GET" });
 export const apiPost = (path, body) => request(path, { method: "POST", body: JSON.stringify(body) });
 
-// ── Keys ──────────────────────────────────────────────────────
 export const KeysAPI = {
   list:          (limit=25)     => apiGet(`/api/keys?limit=${limit}`),
   get:           (keyId)        => apiGet(`/api/keys/${keyId}`),
@@ -47,7 +53,6 @@ export const KeysAPI = {
   migrate:       (keyId, force=false) => apiPost(`/api/keys/${keyId}/migrate`, { force }),
 };
 
-// ── Crypto ────────────────────────────────────────────────────
 export const CryptoAPI = {
   keygen:           (payload={})                => apiPost("/api/keygen", payload),
   encrypt:          (keyId, plaintext)          => apiPost("/api/encrypt", { key_id: keyId, plaintext }),
@@ -60,7 +65,6 @@ export const CryptoAPI = {
   signClassical:    (message, scheme="ecc-p256")   => apiPost("/api/sign-classical", { message, scheme }),
 };
 
-// ── Policy ────────────────────────────────────────────────────
 export const PolicyAPI = {
   check:       (scheme, parameterSet, longevity=30) =>
                  apiGet(`/api/policy/check?scheme=${scheme}&parameter_set=${parameterSet}&longevity=${longevity}`),
@@ -73,7 +77,6 @@ export const PolicyAPI = {
   driftStatus: () => apiGet("/api/policy-drift/status"),
 };
 
-// ── Telemetry ─────────────────────────────────────────────────
 export const TelemetryAPI = {
   system:        ()               => apiGet("/api/telemetry/system"),
   key:           (keyId)          => apiGet(`/api/telemetry/keys/${keyId}`),
@@ -84,14 +87,11 @@ export const TelemetryAPI = {
   metricsStatus: ()               => apiGet("/api/telemetry/metrics/status"),
 };
 
-// ── Anomaly ───────────────────────────────────────────────────
 export const AnomalyAPI = {
-  // FIX: was /api/anomalies/summary → correct is /api/anomalies/scan
   scan:   (windowHours=24) => apiGet(`/api/anomalies/scan?window_hours=${windowHours}`),
   status: ()               => apiGet("/api/anomalies/status"),
 };
 
-// ── Simulation ────────────────────────────────────────────────
 export const SimulationAPI = {
   status:    ()           => apiGet("/api/simulations/status"),
   portfolio: (payload={}) => apiPost("/api/simulations/portfolio", {
@@ -100,29 +100,22 @@ export const SimulationAPI = {
   key: (keyId, params={}) => KeysAPI.simulate(keyId, params),
 };
 
-// ── Replay / Audit ────────────────────────────────────────────
 export const ReplayAPI = {
-  // FIX: was /api/replay/keys/:id → correct is /api/keys/:id/replay
   key:    (keyId) => apiGet(`/api/keys/${keyId}/replay`),
   all:    ()      => apiGet("/api/replay"),
   status: ()      => apiGet("/api/replay/status"),
 };
 
-// ── Explain ───────────────────────────────────────────────────
 export const ExplainAPI = {
-  // FIX: was /api/explain/keys/:id → correct is /api/keys/:id/explain
   key:    (keyId, profile="enterprise-default") => KeysAPI.explain(keyId, profile),
   status: () => apiGet("/api/explain/status"),
 };
 
-// ── Rust Benchmark ────────────────────────────────────────────
 export const BenchmarkAPI = {
   rust: (mode="benchmark") => apiGet(`/api/rust/benchmark?mode=${mode}`),
 };
 
-// ── Governance (mapped to real routes) ───────────────────────
 export const GovernanceAPI = {
-  // FIX: /api/governance/risk doesn't exist → use policy drift
   risk:         ()          => PolicyAPI.drift(),
   policyDrift:  (params={}) => PolicyAPI.drift(params),
   lifecycleScan:(limit=50)  => KeysAPI.lifecycleScan(limit),
