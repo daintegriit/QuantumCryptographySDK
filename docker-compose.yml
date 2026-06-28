@@ -1,5 +1,4 @@
 version: "3.9"
-
 services:
   backend:
     build:
@@ -8,8 +7,9 @@ services:
     container_name: crypto-backend
     ports:
       - "8008:8008"
+    env_file:
+      - backend/.env
     restart: unless-stopped
-
   frontend:
     build:
       context: frontend/dashboard
