@@ -198,7 +198,7 @@ def api_key_explain(key_id: str, request: Request,
     record = engine.get(key_id)
     if not record:
         raise HTTPException(status_code=404, detail=f"Key {key_id} not found")
-    from api.explain import explain_key
+    from api.explain import api_explain_key as explain_key
     return explain_key(record, profile=profile)
 
 @router.get("/keys/{key_id}/replay", tags=["replay"])

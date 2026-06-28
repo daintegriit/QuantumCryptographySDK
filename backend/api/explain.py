@@ -1,13 +1,32 @@
 # backend/api/explain.py
 from __future__ import annotations
 
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, HTTPException, Request, Query
 from typing import Dict, Any
 
 from ai.explain import get_explain_engine
 from key_management.keygen import get_keygen_engine
 
 router = APIRouter()
+def _get_engine(request):
+    token = request.cookies.get('access_token') if request else None
+    auth_header = request.headers.get('Authorization', '') if request else ''
+    if not token and auth_header.startswith('Bearer '):
+        token = auth_header[7:]
+    if token:
+        try:
+            from auth.jwt_handler import decode_token
+            from auth.user_context import user_keystore_dir
+            from key_management.keygen import KeygenEngine
+            payload = decode_token(token)
+            if payload and payload.get('sub'):
+                return KeygenEngine(keystore_dir=user_keystore_dir(payload['sub']))
+        except Exception:
+            pass
+    from key_management.keygen import get_keygen_engine
+    return get_keygen_engine()
+
+
 
 
 # ============================================================
@@ -22,7 +41,7 @@ router = APIRouter()
 
 @router.get("/explain/status")
 def api_explain_status() -> Dict[str, Any]:
-    engine = get_keygen_engine()
+    engine = _get_engine(request)
     keys = engine.list(limit=1)
     return {
         "explain_engine": "ready",
@@ -53,7 +72,7 @@ def api_explain_key(
     Explain why a key is allowed, risky, or requires action.
     Produces a governance explanation, not crypto math.
     """
-    engine = get_keygen_engine()
+    engine = _get_engine(request)
     key = engine.get(key_id)
 
     if not key:
