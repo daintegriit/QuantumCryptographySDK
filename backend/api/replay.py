@@ -1,37 +1,18 @@
 # backend/api/replay.py
 from __future__ import annotations
 
-from fastapi import APIRouter, HTTPException, Request
+from fastapi import APIRouter, HTTPException
 from typing import Dict, Any, Optional
 
 from telemetry.replay import replay_key_timeline, replay_all
 from key_management.keygen import get_keygen_engine
 
 router = APIRouter()
-def _get_engine(request):
-    token = request.cookies.get('access_token') if request else None
-    auth_header = request.headers.get('Authorization', '') if request else ''
-    if not token and auth_header.startswith('Bearer '):
-        token = auth_header[7:]
-    if token:
-        try:
-            from auth.jwt_handler import decode_token
-            from auth.user_context import user_keystore_dir
-            from key_management.keygen import KeygenEngine
-            payload = decode_token(token)
-            if payload and payload.get('sub'):
-                return KeygenEngine(keystore_dir=user_keystore_dir(payload['sub']))
-        except Exception:
-            pass
-    from key_management.keygen import get_keygen_engine
-    return get_keygen_engine()
-
-
 
 
 @router.get("/keys/{key_id}/replay")
-def api_replay_key(request: Request, key_id: str, limit_scan: Optional[int] = None):
-    engine = _get_engine(request)
+def api_replay_key(key_id: str, limit_scan: Optional[int] = None):
+    engine = get_keygen_engine()
     key = engine.get(key_id)
 
     if not key:
@@ -51,13 +32,13 @@ def api_replay_key(request: Request, key_id: str, limit_scan: Optional[int] = No
 
 
 @router.get("/replay")
-def api_replay_all_keys(request: Request, limit_scan: Optional[int] = None):
+def api_replay_all_keys(limit_scan: Optional[int] = None):
     return replay_all(limit_scan=limit_scan)
 
 
 @router.get("/replay/status")
-def api_replay_status(request: Request, ):
-    engine = _get_engine(request)
+def api_replay_status():
+    engine = get_keygen_engine()
     keys = engine.list(limit=1)
     return {
         "replay_engine": "ready",

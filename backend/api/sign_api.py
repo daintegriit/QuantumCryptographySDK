@@ -1,6 +1,6 @@
 # backend/api/sign_api.py
 from __future__ import annotations
-from fastapi import APIRouter, HTTPException, Request
+from fastapi import APIRouter, HTTPException
 from typing import Dict, Any, Optional
 import base64
 import oqs
@@ -15,25 +15,6 @@ def _rust_available() -> bool:
     return _RUST_BRIDGE is not None and getattr(_RUST_BRIDGE, "available", False)
 
 router = APIRouter()
-
-def _get_engine(request):
-    token = request.cookies.get('access_token') if request else None
-    auth_header = request.headers.get('Authorization', '') if request else ''
-    if not token and auth_header.startswith('Bearer '):
-        token = auth_header[7:]
-    if token:
-        try:
-            from auth.jwt_handler import decode_token
-            from auth.user_context import user_keystore_dir
-            from key_management.keygen import KeygenEngine
-            payload = decode_token(token)
-            if payload and payload.get('sub'):
-                return KeygenEngine(keystore_dir=user_keystore_dir(payload['sub']))
-        except Exception:
-            pass
-    from key_management.keygen import get_keygen_engine
-    return get_keygen_engine()
-
 
 def _b64url_encode(b: bytes) -> str:
     return base64.urlsafe_b64encode(b).decode().rstrip("=")
@@ -186,12 +167,12 @@ from key_management.rotation import get_rotation_engine
 from policy.security_store import record_key_event, check_key_allowed
 
 @router.post("/sign", tags=["crypto"])
-def sign(request: Request, payload: Dict[str, Any]):
+def sign(payload: Dict[str, Any]):
     message: Optional[str] = payload.get("message")
     key_id: Optional[str] = payload.get("key_id")
     if not message:
         raise HTTPException(status_code=400, detail="message required")
-    keygen = _get_engine(request)
+    keygen = get_keygen_engine()
     rotation = get_rotation_engine()
     if not key_id:
         key_id = rotation.get_active_key_id()
@@ -225,7 +206,7 @@ def sign(request: Request, payload: Dict[str, Any]):
 
 
 @router.post("/verify", tags=["crypto"])
-def verify(request: Request, payload: Dict[str, Any]):
+def verify(payload: Dict[str, Any]):
     message: Optional[str] = payload.get("message")
     signature_b64: Optional[str] = payload.get("signature")
     key_id: Optional[str] = payload.get("key_id")
@@ -233,7 +214,7 @@ def verify(request: Request, payload: Dict[str, Any]):
         raise HTTPException(status_code=400, detail="message and signature required")
     if not key_id:
         raise HTTPException(status_code=400, detail="key_id required")
-    keygen = _get_engine(request)
+    keygen = get_keygen_engine()
     key = keygen.get(key_id)
     if not key:
         raise HTTPException(status_code=404, detail="Key not found")
