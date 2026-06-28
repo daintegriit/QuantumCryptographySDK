@@ -8,10 +8,6 @@ from typing import Any, Dict, List, Optional
 from telemetry.audit_log import read_events, DEFAULT_AUDIT_LOG_PATH
 
 
-# ============================================================
-# Helpers
-# ============================================================
-
 def _parse_ts(ts: Optional[str]) -> Optional[datetime]:
     if not ts:
         return None
@@ -20,14 +16,6 @@ def _parse_ts(ts: Optional[str]) -> Optional[datetime]:
     except Exception:
         return None
 
-
-def _safe(d: Dict[str, Any], key: str, default=None):
-    return d.get(key, default)
-
-
-# ============================================================
-# Replay Models
-# ============================================================
 
 @dataclass(frozen=True)
 class ReplayEvent:
@@ -51,63 +39,43 @@ class KeyTimeline:
     superseded_by: Optional[str]
 
 
-# ============================================================
-# Replay Engine
-# ============================================================
-
 class ReplayEngine:
-    """
-    Deterministic cryptographic replay engine.
-
-    Guarantees:
-      - Read-only
-      - Chronologically ordered
-      - Fully auditable
-      - Explains WHY actions occurred
-    """
 
     def __init__(self, audit_path: str = DEFAULT_AUDIT_LOG_PATH):
         self.audit_path = audit_path
 
-    # ------------------------------------------------
-    # Load + order events
-    # ------------------------------------------------
-
     def _load_events(self, limit: Optional[int] = None) -> List[Dict[str, Any]]:
+        # BUG FIX: normalize=True ensures both flat and payload-wrapped
+        # events are readable. Original replay_key() used e.get("key_id")
+        # which caught flat events but missed payload-wrapped ones.
+        # After normalization key_id is always top-level.
         events = list(read_events(audit_path=self.audit_path, limit=limit))
         events.sort(key=lambda e: _parse_ts(e.get("timestamp_utc")) or datetime.min)
         return events
 
-    # ------------------------------------------------
-    # Key replay
-    # ------------------------------------------------
-
-    def replay_key(self, key_id: str, limit_scan: Optional[int] = None) -> Dict[str, Any]:
-        events = self._load_events(limit=limit_scan)
+    def _build_timeline(self, key_id: str, all_events: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """
+        Build a timeline for one key from a pre-loaded event list.
+        Separated from replay_key() so replay_all_keys() can reuse
+        the same loaded list instead of re-reading the file per key.
+        """
+        key_events = [e for e in all_events if e.get("key_id") == key_id]
 
         timeline: List[ReplayEvent] = []
-
         created_at = None
         scheme = None
         parameter_set = None
         superseded_by = None
         final_status = "ACTIVE"
 
-        for e in events:
-            ev_key_id = e.get("key_id")
-            if ev_key_id != key_id:
-                continue
-
+        for e in key_events:
             ts = e.get("timestamp_utc")
             et = e.get("event_type", "unknown")
 
             scheme = scheme or e.get("scheme")
             parameter_set = parameter_set or e.get("parameter_set")
 
-            # ------------------------------------
-            # Human-readable summaries
-            # ------------------------------------
-            if et == "keygen":
+            if et in ("keygen", "key_generated", "key_created"):
                 created_at = created_at or ts
                 summary = "Key generated"
             elif et == "encrypt":
@@ -115,6 +83,7 @@ class ReplayEngine:
             elif et == "decrypt":
                 summary = "Decryption operation"
             elif et == "policy_check":
+                # BUG FIX: result is now top-level after normalization
                 allowed = e.get("result", {}).get("allowed", True)
                 summary = f"Policy check: {'ALLOWED' if allowed else 'DENIED'}"
                 if not allowed:
@@ -134,48 +103,48 @@ class ReplayEngine:
             else:
                 summary = et.replace("_", " ").title()
 
-            # Detect supersession
+            # Supersession detection
             if et == "key_rotated":
                 parent = e.get("metadata", {}).get("parent_key_id")
                 if parent == key_id:
                     final_status = "SUPERSEDED"
                     superseded_by = e.get("key_id")
 
-            timeline.append(
-                ReplayEvent(
-                    timestamp_utc=ts,
-                    event_type=et,
-                    key_id=key_id,
-                    scheme=scheme,
-                    parameter_set=parameter_set,
-                    summary=summary,
-                    raw_event=e,
-                )
-            )
-
-        return asdict(
-            KeyTimeline(
+            timeline.append(ReplayEvent(
+                timestamp_utc=ts,
+                event_type=et,
                 key_id=key_id,
-                created_at_utc=created_at,
                 scheme=scheme,
                 parameter_set=parameter_set,
-                events=timeline,
-                final_status=final_status,
-                superseded_by=superseded_by,
-            )
-        )
+                summary=summary,
+                raw_event=e.get("_raw", e),
+            ))
 
-    # ------------------------------------------------
-    # Portfolio replay
-    # ------------------------------------------------
+        return asdict(KeyTimeline(
+            key_id=key_id,
+            created_at_utc=created_at,
+            scheme=scheme,
+            parameter_set=parameter_set,
+            events=timeline,
+            final_status=final_status,
+            superseded_by=superseded_by,
+        ))
+
+    def replay_key(self, key_id: str, limit_scan: Optional[int] = None) -> Dict[str, Any]:
+        all_events = self._load_events(limit=limit_scan)
+        return self._build_timeline(key_id, all_events)
 
     def replay_all_keys(self, limit_scan: Optional[int] = None) -> Dict[str, Any]:
-        events = self._load_events(limit=limit_scan)
+        # BUG FIX: original called replay_key() per key_id, and each
+        # replay_key() called _load_events() — reading the log file once
+        # per unique key. With k keys this is O(k) file reads and O(n*k)
+        # total work. Fixed: load once, build all timelines from that list.
+        all_events = self._load_events(limit=limit_scan)
 
-        key_ids = sorted({e.get("key_id") for e in events if e.get("key_id")})
+        key_ids = sorted({e.get("key_id") for e in all_events if e.get("key_id")})
 
         timelines = {
-            kid: self.replay_key(kid, limit_scan=limit_scan)
+            kid: self._build_timeline(kid, all_events)
             for kid in key_ids
         }
 
@@ -185,10 +154,6 @@ class ReplayEngine:
             "timelines": timelines,
         }
 
-
-# ============================================================
-# Convenience helpers
-# ============================================================
 
 _engine_singleton: Optional[ReplayEngine] = None
 

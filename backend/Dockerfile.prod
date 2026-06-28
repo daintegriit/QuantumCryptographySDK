@@ -3,51 +3,117 @@
 # ===============================
 FROM rust:latest AS builder
 
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libclang-dev \
+    clang \
+    cmake \
+    ninja-build \
+    pkg-config \
+    libssl-dev \
+ && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
-# Copy Rust crate
-COPY backend/crypto_core_rust ./crypto_core_rust
+COPY backend/crypto_core_rust/Cargo.toml backend/crypto_core_rust/Cargo.lock ./crypto_core_rust/
 
-# Build shared library
 WORKDIR /app/crypto_core_rust
+
+RUN mkdir -p src \
+    && echo "" > src/lib.rs \
+    && echo "fn main() {}" > src/main.rs
+
+RUN cargo build --release || true
+
+COPY backend/crypto_core_rust/src ./src
+
 RUN cargo build --release
+
 
 # ===============================
 # Stage 2 — Python FastAPI Runtime
 # ===============================
 FROM python:3.10-slim
 
-# System deps for Rust .so loading
+# ===============================
+# SYSTEM DEPENDENCIES
+# ===============================
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    cmake \
+    ninja-build \
+    git \
+    curl \
+    pkg-config \
+    libssl-dev \
+    libffi-dev \
+    python3-dev \
     libgcc1 \
     libstdc++6 \
-    libssl-dev \
     ca-certificates \
  && rm -rf /var/lib/apt/lists/*
 
+# ===============================
+# INSTALL liboqs 0.15.0 FROM SOURCE
+# Build with:
+#   -DOQS_OPT_TARGET=auto     → detects AArch64/AVX2 and enables assembly
+#   -DOQS_USE_OPENSSL=ON      → use OpenSSL for AES/SHA (faster than built-in)
+#   -DCMAKE_BUILD_TYPE=Release → full optimizations (-O3)
+#   -DBUILD_SHARED_LIBS=ON    → shared library for Python ctypes
+#
+# On Apple Silicon via Docker Desktop (linux/arm64):
+#   mlkem-native AArch64 assembly is auto-detected and enabled
+#   Expected gain: 3-5x vs 0.10.1 for ML-KEM operations
+#
+# NOTE: 0.15.0 removes Dilithium (use ML-DSA-44/65/87) and Kyber (use ML-KEM-512/768/1024)
+#       Q-SENTRY's normalize_scheme() and normalize_param() handle this transparently
+# ===============================
+RUN git clone --depth 1 --branch 0.15.0 \
+    https://github.com/open-quantum-safe/liboqs.git /tmp/liboqs \
+    && cmake -S /tmp/liboqs -B /tmp/liboqs/build \
+        -GNinja \
+        -DBUILD_SHARED_LIBS=ON \
+        -DOQS_USE_OPENSSL=ON \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DOQS_OPT_TARGET=auto \
+    && cmake --build /tmp/liboqs/build --parallel $(nproc) \
+    && cmake --build /tmp/liboqs/build --target install \
+    && ldconfig \
+    && rm -rf /tmp/liboqs
+
+# ===============================
+# INSTALL liboqs-python 0.15.0
+# Matches the C library version exactly — no version mismatch warning
+# ===============================
+RUN pip install --no-cache-dir liboqs-python==0.15.0
+
+# ===============================
+# APP SETUP
+# ===============================
 WORKDIR /app
 
-# Copy API source
-COPY backend/ .
-
-# Copy Python requirements
 COPY requirements.txt .
-
-# Copy compiled Rust shared library
-COPY --from=builder /app/crypto_core_rust/target/release/*.so /app/
-
-# Python env safety
-ENV PYTHONPATH=/app
-
-# Install Python deps
 RUN pip install --no-cache-dir -r requirements.txt \
- && pip install fastapi uvicorn
+ && pip install --no-cache-dir fastapi uvicorn
 
-# Expose API port
+COPY backend/ .
+COPY cli/ /app/cli/
+
+COPY --from=builder /app/crypto_core_rust/target/release/libcrypto_core_rust.so /app/
+COPY --from=builder /app/crypto_core_rust/target/release/crypto_core_bin /app/crypto_core_bin
+
+RUN chmod +x /app/crypto_core_bin
+
+# ===============================
+# ENV CONFIG
+# ===============================
+ENV PYTHONPATH=/app
+ENV LD_LIBRARY_PATH=/usr/local/lib
+
+# ===============================
+# API CONFIG
+# ===============================
 EXPOSE 8008
 
-# Healthcheck (recommended)
 HEALTHCHECK CMD curl --fail http://localhost:8008/health || exit 1
 
-# Run API
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8008"]

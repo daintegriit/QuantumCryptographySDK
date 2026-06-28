@@ -1,3 +1,4 @@
+# backend/api/simulations.py
 from __future__ import annotations
 
 from fastapi import APIRouter, HTTPException, Query
@@ -23,7 +24,58 @@ class PortfolioSimulationRequest(BaseModel):
 
 
 # ============================================================
-# Simulate key durability (single-key, policy-grade)
+# STATIC ROUTES — must come before /{key_id} routes
+# BUG FIX: /simulations/status and /simulations/portfolio are both
+# static. They were declared after /keys/{key_id}/simulation, which
+# doesn't shadow them (different path prefix), so ordering is fine here.
+# However /simulations/status must still precede any future
+# /simulations/{id} routes if added.
+# ============================================================
+
+@router.get("/simulations/status")
+def simulation_status():
+    """
+    Readiness probe for the simulation subsystem.
+    Safe for health checks and observability.
+    """
+    engine = get_keygen_engine()
+    keys = engine.list(limit=1)
+
+    return {
+        "simulation_engine": "ready",
+        "supports": {
+            "single_key_projection": True,
+            "portfolio_simulation": True,
+            "30_50_year_horizon": True,
+            "policy_based": True,
+            "audit_logged": True,
+            "mutates_keys": False,
+        },
+        "keys_present": len(keys),
+    }
+
+
+@router.post("/simulations/portfolio")
+def api_simulate_portfolio(req: PortfolioSimulationRequest):
+    """
+    Run a portfolio-wide quantum migration simulation.
+    """
+    try:
+        result = run_simulation(
+            safety_margin_years=req.safety_margin_years,
+            scenarios=req.scenarios,
+            limit=req.limit,
+            seed=req.seed,
+            write_output=True,
+        )
+        return result
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============================================================
+# Dynamic /{key_id} routes — AFTER static routes
 # ============================================================
 
 @router.get("/keys/{key_id}/simulation")
@@ -49,15 +101,17 @@ def api_simulate_key(
     """
     Simulate long-horizon cryptographic durability for a single key.
 
-    GUARANTEES:
-      - Deterministic
-      - Read-only
-      - Audit logged
-      - No key mutation
-
-    PRIMARY proof layer for 30–50 year cryptographic claims.
+    BUG FIX: original caught all exceptions and re-raised as HTTP 500
+    with str(e) — this leaks internal error details (file paths, stack
+    info embedded in exception messages) to API consumers. Split into
+    specific cases: 404 for missing key (already handled), ValueError
+    for bad input → 400, everything else → 500 with a safe message.
+    The key existence check was also redundant because simulate_key()
+    calls MigrationEngine → LifecycleEngine → _load_key_record() which
+    raises FileNotFoundError if the key is missing — but having the
+    explicit check here gives a cleaner 404 before we even enter the
+    simulation stack.
     """
-
     engine = get_keygen_engine()
     key = engine.get(key_id)
 
@@ -73,68 +127,18 @@ def api_simulate_key(
         )
         return result
 
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+    except FileNotFoundError:
+        # Race condition: key deleted between the check above and simulate_key()
+        raise HTTPException(status_code=404, detail="Key not found")
+
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-
-# ============================================================
-# Portfolio-wide scenario simulation
-# ============================================================
-
-@router.post("/simulations/portfolio")
-def api_simulate_portfolio(req: PortfolioSimulationRequest):
-    """
-    Run a portfolio-wide quantum migration simulation.
-
-    PURPOSE:
-      - Scenario-based planning
-      - Governance & policy modeling
-      - Migration pressure forecasting
-
-    GUARANTEES:
-      - Read-only by default
-      - Deterministic (seeded)
-      - Audit logged
-      - No key mutation
-    """
-
-    try:
-        result = run_simulation(
-            safety_margin_years=req.safety_margin_years,
-            scenarios=req.scenarios,
-            limit=req.limit,
-            seed=req.seed,
-            write_output=True,
+        # Log internally; return safe message to client
+        import logging
+        logging.getLogger(__name__).exception("Simulation failed for key %s", key_id)
+        raise HTTPException(
+            status_code=500,
+            detail=f"Simulation failed: {type(e).__name__}",
         )
-        return result
-
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-
-# ============================================================
-# Simulation readiness / sanity check
-# ============================================================
-
-@router.get("/simulations/status")
-def simulation_status():
-    """
-    Readiness probe for the simulation subsystem.
-    Safe for health checks and observability.
-    """
-
-    engine = get_keygen_engine()
-    keys = engine.list(limit=1)
-
-    return {
-        "simulation_engine": "ready",
-        "supports": {
-            "single_key_projection": True,
-            "portfolio_simulation": True,
-            "30_50_year_horizon": True,
-            "policy_based": True,
-            "audit_logged": True,
-            "mutates_keys": False,
-        },
-        "keys_present": len(keys),
-    }

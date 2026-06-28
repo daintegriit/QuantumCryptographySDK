@@ -1,234 +1,156 @@
+// src/pages/AnomalyDashboard.jsx  (also used as AnomalyPage)
 import { useEffect, useMemo, useState } from "react";
 import { useTheme } from "../context/ThemeContext";
+import { apiGet } from "../services/apiClient";
 
-/**
- * AnomalyDashboard
- *
- * Deterministic anomaly detection surface.
- *
- * No ML hallucinations
- * No probabilistic inference
- * Fully derived from audit + telemetry rules
- * Governance-grade and regulator-ready
- */
 export default function AnomalyDashboard() {
   const { theme } = useTheme();
-
-  const [anomalies, setAnomalies] = useState([]);
-  const [summary, setSummary] = useState(null);
+  const [report, setReport] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // =====================================================
-  // Load anomalies
-  // =====================================================
   useEffect(() => {
     async function loadAnomalies() {
       try {
         setLoading(true);
         setError(null);
-
-        const res = await fetch(
-          "http://localhost:8008/api/anomalies/scan?window_hours=24"
-        );
-
-        if (!res.ok) {
-          throw new Error("Failed to load anomalies");
-        }
-
-        const data = await res.json();
-
-        setAnomalies(data.anomalies || []);
-        setSummary(data.summary || null);
+        // BUG FIX 1: hardcoded http://localhost:8008 → apiGet
+        // BUG FIX 2: backend returns AnomalyReport { findings, total_findings, ... }
+        //            not { anomalies, summary }
+        const data = await apiGet("/api/anomalies/scan?window_hours=24");
+        setReport(data);
       } catch (err) {
         setError(err.message);
       } finally {
         setLoading(false);
       }
     }
-
     loadAnomalies();
   }, []);
 
-  // =====================================================
-  // Derived posture
-  // =====================================================
+  // Derive posture from findings (no summary object in backend response)
   const posture = useMemo(() => {
-    if (!summary) return "STABLE";
-    if (summary.critical > 0) return "CRITICAL";
-    if (summary.total > 0) return "ELEVATED";
+    const findings = report?.findings || [];
+    if (findings.some(f => f.severity === "CRITICAL")) return "CRITICAL";
+    if (findings.length > 0) return "ELEVATED";
     return "STABLE";
-  }, [summary]);
+  }, [report]);
 
-  // =====================================================
-  // States
-  // =====================================================
-  if (loading) {
-    return (
-      <div className={`${theme.panel} p-6 rounded-xl`}>
-        <p className={theme.mutedText}>
-          Scanning for anomalous cryptographic behavior…
-        </p>
-      </div>
-    );
-  }
+  // Severity counts derived client-side
+  const counts = useMemo(() => {
+    const findings = report?.findings || [];
+    return {
+      total: findings.length,
+      critical: findings.filter(f => f.severity === "CRITICAL").length,
+      high: findings.filter(f => f.severity === "HIGH").length,
+      medium: findings.filter(f => f.severity === "MEDIUM").length,
+      keysAffected: new Set(findings.filter(f => f.key_id).map(f => f.key_id)).size,
+    };
+  }, [report]);
 
-  if (error) {
-    return (
-      <div className={`${theme.panel} p-6 rounded-xl border border-red-500`}>
-        <p className="text-red-400 font-semibold">Anomaly Detection Error</p>
-        <p className={theme.mutedText}>{error}</p>
-      </div>
-    );
-  }
+  if (loading) return (
+    <div className={`${theme.panel} p-6 rounded-xl`}>
+      <p className={theme.mutedText}>Scanning for anomalous cryptographic behavior…</p>
+    </div>
+  );
 
-  // =====================================================
-  // UI
-  // =====================================================
+  if (error) return (
+    <div className={`${theme.panel} p-6 rounded-xl border border-red-500/30`}>
+      <p className="text-red-400 font-semibold">Anomaly Detection Error</p>
+      <p className={theme.mutedText}>{error}</p>
+    </div>
+  );
+
+  const findings = report?.findings || [];
+
   return (
     <div className="space-y-8">
-      {/* ================= HEADER ================= */}
       <div>
-        <h2 className={`text-xl font-bold ${theme.panelTitle}`}>
-          Anomaly Detection
-        </h2>
+        <h2 className={`text-xl font-bold ${theme.panelTitle}`}>Anomaly Detection</h2>
         <p className={theme.mutedText}>
-          Deterministic detection of abnormal cryptographic usage,
-          policy violations, and lifecycle deviations.
+          Deterministic detection of abnormal cryptographic usage, policy violations, and lifecycle deviations.
         </p>
       </div>
 
-      {/* ================= POSTURE ================= */}
-      <PostureBanner posture={posture} />
+      {/* Posture banner */}
+      <div className={`p-4 rounded-xl border text-sm font-medium ${
+        posture === "STABLE" ? "bg-green-500/10 border-green-500/30 text-green-400" :
+        posture === "ELEVATED" ? "bg-yellow-500/10 border-yellow-500/30 text-yellow-400" :
+        "bg-red-500/10 border-red-500/30 text-red-400"}`}>
+        {posture === "STABLE" && "No anomalous cryptographic behavior detected. System posture is stable."}
+        {posture === "ELEVATED" && "Anomalous activity detected. Review recommended for affected keys."}
+        {posture === "CRITICAL" && "Critical anomalies detected. Immediate investigation required."}
+      </div>
 
-      {/* ================= SUMMARY ================= */}
-      {summary && (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <SummaryCard
-            label="Total Anomalies"
-            value={summary.total}
-            theme={theme}
-          />
-          <SummaryCard
-            label="Critical"
-            value={summary.critical}
-            type="danger"
-            theme={theme}
-          />
-          <SummaryCard
-            label="Keys Affected"
-            value={summary.keys_affected}
-            theme={theme}
-          />
-        </div>
-      )}
+      {/* Summary cards */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {[
+          ["Total Findings", counts.total, "neutral"],
+          ["Critical", counts.critical, "danger"],
+          ["High", counts.high, "warn"],
+          ["Keys Affected", counts.keysAffected, "neutral"],
+        ].map(([label, value, type]) => (
+          <div key={label} className={`${theme.panel} p-4 rounded-xl`}>
+            <div className="text-xs text-gray-400">{label}</div>
+            <div className={`text-3xl font-bold ${
+              type === "danger" ? "text-red-400" :
+              type === "warn" ? "text-yellow-400" : "text-cyan-400"}`}>
+              {value}
+            </div>
+          </div>
+        ))}
+      </div>
 
-      {/* ================= LIST ================= */}
-      {anomalies.length === 0 ? (
+      {/* Findings list */}
+      {findings.length === 0 ? (
         <div className={`${theme.panel} p-6 rounded-xl`}>
-          <p className={theme.mutedText}>
-            No anomalies detected. System behavior is within expected bounds.
-          </p>
+          <p className={theme.mutedText}>No anomalies detected. System behavior is within expected bounds.</p>
         </div>
       ) : (
         <div className="space-y-4">
-          {anomalies.map((a, idx) => (
-            <AnomalyCard key={idx} anomaly={a} theme={theme} />
+          {findings.map((f, idx) => (
+            <div key={idx} className={`${theme.panel} p-5 rounded-xl border ${
+              f.severity === "CRITICAL" ? "border-red-500/40" :
+              f.severity === "HIGH" ? "border-orange-500/40" :
+              f.severity === "MEDIUM" ? "border-yellow-500/40" : "border-gray-700"}`}>
+              <div className="flex justify-between items-center mb-2">
+                {/* BUG FIX: anomaly_type not type, reason not description */}
+                <div className="font-semibold">
+                  {(f.anomaly_type || "UNKNOWN").replaceAll("_", " ")}
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className={`text-xs px-2 py-0.5 rounded font-mono ${
+                    f.severity === "CRITICAL" ? "bg-red-500/20 text-red-400" :
+                    f.severity === "HIGH" ? "bg-orange-500/20 text-orange-400" :
+                    f.severity === "MEDIUM" ? "bg-yellow-500/20 text-yellow-400" :
+                    "bg-gray-500/20 text-gray-400"}`}>
+                    {f.severity}
+                  </span>
+                  <span className="text-xs text-gray-500 font-mono">
+                    {f.detected_at_utc ? new Date(f.detected_at_utc).toLocaleString() : ""}
+                  </span>
+                </div>
+              </div>
+
+              <div className={`text-sm mb-2 ${theme.panelText}`}>
+                {f.reason}
+              </div>
+
+              {f.key_id && (
+                <div className="text-xs text-gray-400">
+                  Key: <span className="font-mono text-cyan-400">{f.key_id}</span>
+                </div>
+              )}
+
+              {f.evidence && Object.keys(f.evidence).length > 0 && (
+                <div className="mt-2 text-xs text-gray-500 font-mono">
+                  {JSON.stringify(f.evidence)}
+                </div>
+              )}
+            </div>
           ))}
         </div>
       )}
-    </div>
-  );
-}
-
-// =====================================================
-// Components
-// =====================================================
-
-function PostureBanner({ posture }) {
-  const styles = {
-    STABLE: "border-green-500/30 text-green-400 bg-green-500/10",
-    ELEVATED: "border-yellow-500/30 text-yellow-400 bg-yellow-500/10",
-    CRITICAL: "border-red-500/30 text-red-400 bg-red-500/10",
-  };
-
-  const messages = {
-    STABLE:
-      "No anomalous cryptographic behavior detected. System posture is stable.",
-    ELEVATED:
-      "Anomalous activity detected. Review recommended for affected keys.",
-    CRITICAL:
-      "Critical anomalies detected. Immediate investigation required.",
-  };
-
-  return (
-    <div
-      className={`p-4 rounded-xl border text-sm font-medium ${
-        styles[posture]
-      }`}
-    >
-      {messages[posture]}
-    </div>
-  );
-}
-
-function SummaryCard({ label, value, type = "neutral", theme }) {
-  const colors = {
-    neutral: "text-cyan-400",
-    danger: "text-red-400",
-  };
-
-  return (
-    <div className={`${theme.panel} p-4 rounded-xl`}>
-      <div className="text-xs text-gray-400">{label}</div>
-      <div className={`text-3xl font-bold ${colors[type]}`}>
-        {value}
-      </div>
-    </div>
-  );
-}
-
-function AnomalyCard({ anomaly, theme }) {
-  const severityStyles = {
-    LOW: "border-gray-600 text-gray-300",
-    MEDIUM: "border-yellow-500/40 text-yellow-400",
-    HIGH: "border-red-500/40 text-red-400",
-  };
-
-  return (
-    <div
-      className={`${theme.panel} p-5 rounded-xl border ${
-        severityStyles[anomaly.severity] || severityStyles.LOW
-      }`}
-    >
-      <div className="flex justify-between items-center mb-2">
-        <div className="font-semibold">
-          {anomaly.type.replaceAll("_", " ")}
-        </div>
-        <span className="text-xs font-mono">
-          {new Date(anomaly.detected_at_utc).toLocaleString()}
-        </span>
-      </div>
-
-      <div className={`text-sm mb-2 ${theme.panelText}`}>
-        {anomaly.description}
-      </div>
-
-      <div className="text-xs text-gray-400 flex gap-4">
-        {anomaly.key_id && (
-          <span>
-            <span className="text-gray-500">Key:</span>{" "}
-            <span className="font-mono text-cyan-400">
-              {anomaly.key_id}
-            </span>
-          </span>
-        )}
-
-        <span>
-          <span className="text-gray-500">Severity:</span>{" "}
-          <span className="font-mono">{anomaly.severity}</span>
-        </span>
-      </div>
     </div>
   );
 }

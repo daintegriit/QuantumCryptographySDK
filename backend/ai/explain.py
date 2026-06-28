@@ -29,18 +29,15 @@ class KeyExplanation:
     overall_risk_level: str
     headline: str
 
-    # Derived facts
     lifecycle_severity: str
     quantum_margin_years: Optional[int]
     migration_required: bool
     policy_allowed: Optional[bool]
 
-    # Actionable output
     required_actions: List[str]
     recommended_actions: List[str]
     warnings: List[str]
 
-    # Human-readable narrative
     explanation: List[ExplanationLine]
 
     generated_at_utc: str
@@ -53,19 +50,6 @@ class KeyExplanation:
 class ExplainEngine:
     """
     Deterministic governance explanations.
-
-    Inputs:
-      - key record (keystore)
-      - policy decision (security_store)
-      - migration decision (migration engine)
-      - lifecycle status (lifecycle engine)
-      - telemetry signals (signals engine)
-
-    Output:
-      - structured explanation suitable for:
-          * dashboards
-          * audits
-          * professor / gov compliance narrative
     """
 
     def __init__(self):
@@ -74,19 +58,25 @@ class ExplainEngine:
         self.migration = get_migration_engine()
         self.lifecycle = KeyLifecycleEngine()
 
-    def explain_key(self, key_id: str, profile: str = "default") -> Dict[str, Any]:
+    def explain_key(self, key_id: str, profile: str = "enterprise-default") -> Dict[str, Any]:
+        # BUG FIX: original used profile="default" but nist_pqc.py defines
+        # DEFAULT_PROFILE = "enterprise-default". Passing "default" caused
+        # get_profile() to receive an unrecognised profile name. While
+        # get_profile() ignores the value and always returns the same
+        # policy matrix, the profile string is embedded in PolicyDecision
+        # and audit logs — so "default" appeared as the profile in all
+        # audit records, making them inconsistent with every other call
+        # site that uses the correct constant.
+        # Fixed: default is now "enterprise-default" to match DEFAULT_PROFILE.
+
         key = self.keys.get(key_id)
         if not key:
             raise ValueError("Key not found")
 
-        # -----------------------------
-        # Gather deterministic facts
-        # -----------------------------
         sig = self.signals.derive_key_signals(key_id)
         mig = self.migration.evaluate_key_migration(key_id=key_id)
         life = self.lifecycle.evaluate_key_id(key_id, audit=False)
 
-        # Policy decision (use stored metadata)
         policy = check_key_allowed(
             profile=profile,
             scheme=key.algorithm,
@@ -96,19 +86,22 @@ class ExplainEngine:
             migration_ready=True,
             is_deprecated=(life.severity in ("DEPRECATED", "BLOCKED")),
             compliance_tags=[],
-            audit=True,  # keep evidence trail
+            audit=True,
         )
-        policy_allowed = bool(policy.get("allowed", True))
 
-        # -----------------------------
-        # Build explanation lines
-        # -----------------------------
+        # BUG FIX: original used bool(policy.get("allowed", True))
+        # The default=True meant that if "allowed" was somehow absent
+        # from the policy dict (e.g. on a policy evaluation exception),
+        # the key would be treated as ALLOWED. This is a fail-open
+        # security bug. Changed default to False (fail-closed).
+        policy_allowed: bool = bool(policy.get("allowed", False))
+
         lines: List[ExplanationLine] = []
         required_actions: List[str] = []
         recommended_actions: List[str] = []
         warnings: List[str] = []
 
-        # LIFECYCLE
+        # ── LIFECYCLE ─────────────────────────────────────────────────
         if life.severity == "BLOCKED":
             lines.append(ExplanationLine(
                 level="CRITICAL",
@@ -138,12 +131,15 @@ class ExplainEngine:
                 message=f"Lifecycle status OK: {life.reason}",
             ))
 
-        # QUANTUM / MIGRATION
+        # ── QUANTUM / MIGRATION ───────────────────────────────────────
         if mig.estimated_quantum_break_year is None:
             lines.append(ExplanationLine(
                 level="WARN",
                 category="QUANTUM",
-                message="No quantum break estimate is available for this scheme; treat as MONITOR until registry is expanded.",
+                message=(
+                    "No quantum break estimate is available for this scheme; "
+                    "treat as MONITOR until registry is expanded."
+                ),
             ))
             warnings.append("NO_QUANTUM_BREAK_ESTIMATE")
         else:
@@ -152,29 +148,43 @@ class ExplainEngine:
                 lines.append(ExplanationLine(
                     level="CRITICAL",
                     category="QUANTUM",
-                    message=f"Quantum break horizon exceeded (break year {mig.estimated_quantum_break_year}); migration is emergency-required.",
+                    message=(
+                        f"Quantum break horizon exceeded "
+                        f"(break year {mig.estimated_quantum_break_year}); "
+                        f"migration is emergency-required."
+                    ),
                 ))
                 required_actions.append("MIGRATE_IMMEDIATELY")
             elif mig.migration_required:
                 lines.append(ExplanationLine(
                     level="WARN",
                     category="QUANTUM",
-                    message=f"Migration required within safety margin: {mig.migration_reason} (break year {mig.estimated_quantum_break_year}).",
+                    message=(
+                        f"Migration required within safety margin: "
+                        f"{mig.migration_reason} "
+                        f"(break year {mig.estimated_quantum_break_year})."
+                    ),
                 ))
                 recommended_actions.append("MIGRATE_SOON")
             else:
                 lines.append(ExplanationLine(
                     level="INFO",
                     category="QUANTUM",
-                    message=f"Quantum horizon acceptable: {mig.migration_reason} (break year {mig.estimated_quantum_break_year}).",
+                    message=(
+                        f"Quantum horizon acceptable: {mig.migration_reason} "
+                        f"(break year {mig.estimated_quantum_break_year})."
+                    ),
                 ))
 
-        # POLICY
-        if policy_allowed is False:
+        # ── POLICY ───────────────────────────────────────────────────
+        if not policy_allowed:
             lines.append(ExplanationLine(
                 level="CRITICAL",
                 category="POLICY",
-                message="Policy engine DENIED this key configuration for the selected profile.",
+                message=(
+                    "Policy engine DENIED this key configuration "
+                    "for the selected profile."
+                ),
             ))
             required_actions.append("BLOCK_USAGE")
             required_actions.append("FIX_PARAMETERS")
@@ -183,20 +193,27 @@ class ExplainEngine:
             lines.append(ExplanationLine(
                 level="INFO",
                 category="POLICY",
-                message="Policy engine ALLOWED this key configuration for the selected profile.",
+                message=(
+                    "Policy engine ALLOWED this key configuration "
+                    "for the selected profile."
+                ),
             ))
             warnings.extend(policy.get("warnings", []) or [])
 
-        # USAGE / TELEMETRY
+        # ── USAGE / TELEMETRY ─────────────────────────────────────────
         if sig.get("policy_denials", 0) > 0:
             lines.append(ExplanationLine(
                 level="WARN",
                 category="USAGE",
-                message=f"Telemetry shows {sig['policy_denials']} policy denials associated with this key’s context.",
+                message=(
+                    f"Telemetry shows {sig['policy_denials']} policy denials "
+                    f"associated with this key's context."
+                ),
             ))
             recommended_actions.append("REVIEW_POLICY_DENIALS")
 
-        if sig.get("encrypt_count", 0) + sig.get("decrypt_count", 0) == 0:
+        usage_total = sig.get("encrypt_count", 0) + sig.get("decrypt_count", 0)
+        if usage_total == 0:
             lines.append(ExplanationLine(
                 level="INFO",
                 category="USAGE",
@@ -208,15 +225,17 @@ class ExplainEngine:
                 category="USAGE",
                 message=(
                     f"Usage counts: encrypt={sig.get('encrypt_count', 0)}, "
-                    f"decrypt={sig.get('decrypt_count', 0)}; last_used={sig.get('last_used_utc')}"
+                    f"decrypt={sig.get('decrypt_count', 0)}; "
+                    f"last_used={sig.get('last_used_utc')}"
                 ),
             ))
 
-        # GOVERNANCE synthesis
+        # ── SYNTHESIS ─────────────────────────────────────────────────
         overall_risk = sig.get("overall_risk_level", "LOW")
-        headline = _headline_from_risk(overall_risk, policy_allowed, mig.migration_required, life.severity)
+        headline = _headline_from_risk(
+            overall_risk, policy_allowed, mig.migration_required, life.severity
+        )
 
-        # Safety defaults: dedupe lists
         required_actions = _uniq(required_actions)
         recommended_actions = _uniq(recommended_actions)
         warnings = _uniq([w for w in warnings if isinstance(w, str) and w.strip()])
@@ -261,7 +280,7 @@ def _headline_from_risk(
 ) -> str:
     if risk == "CRITICAL":
         return "CRITICAL: Key must be rotated/migrated immediately to remain compliant."
-    if policy_allowed is False:
+    if not policy_allowed:
         return "DENIED: Key parameters are not allowed under the current policy profile."
     if migration_required:
         return "HIGH RISK: Migration is required within the defined quantum safety margin."
@@ -284,5 +303,5 @@ def get_explain_engine() -> ExplainEngine:
     return _engine_singleton
 
 
-def explain_key(key_id: str, profile: str = "default") -> Dict[str, Any]:
+def explain_key(key_id: str, profile: str = "enterprise-default") -> Dict[str, Any]:
     return get_explain_engine().explain_key(key_id=key_id, profile=profile)

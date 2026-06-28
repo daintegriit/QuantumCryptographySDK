@@ -15,6 +15,9 @@ import MetricsPage from "./pages/MetricsPage";
 import RiskSummaryPage from "./pages/RiskSummaryPage";
 import AnomalyDashboard from "./pages/AnomalyDashboard";
 import ExplainPage from "./pages/ExplainPage";
+import CliPage from "./pages/CliPage";
+import AlgorithmsPage from "./pages/AlgorithmsPage";
+import HowItWorksPage from "./pages/HowItWorksPage";
 
 export default function App() {
   return (
@@ -22,9 +25,6 @@ export default function App() {
       <ActiveKeyProvider>
         <Router>
           <Routes>
-            {/* ============================= */}
-            {/* Main Dashboard Layout */}
-            {/* ============================= */}
             <Route element={<DashboardLayout />}>
               <Route index element={<DashboardPage />} />
               <Route path="crypto" element={<CryptoPage />} />
@@ -37,6 +37,9 @@ export default function App() {
               <Route path="risk" element={<RiskSummaryPage />} />
               <Route path="anomalies" element={<AnomalyDashboard />} />
               <Route path="explain" element={<ExplainPage />} />
+              <Route path="cli" element={<CliPage />} />
+              <Route path="algorithms" element={<AlgorithmsPage />} />
+              <Route path="how-it-works" element={<HowItWorksPage />} />
             </Route>
           </Routes>
         </Router>

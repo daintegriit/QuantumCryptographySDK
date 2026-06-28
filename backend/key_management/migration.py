@@ -14,15 +14,8 @@ from key_management.lifecycle import KeyLifecycleEngine
 from policy.security_store import record_key_event
 
 
-# ============================================================
-# Models
-# ============================================================
-
 @dataclass(frozen=True)
 class MigrationDecision:
-    """
-    Result of a migration evaluation.
-    """
     key_id: str
     scheme: str
     parameter_set: str
@@ -32,32 +25,14 @@ class MigrationDecision:
     migration_required: bool
     migration_reason: str
     recommended_target_scheme: Optional[str]
-    severity: str  # OK | MONITOR | MIGRATE_SOON | EMERGENCY
+    severity: str
 
-
-# ============================================================
-# Migration Engine
-# ============================================================
 
 class MigrationEngine:
-    """
-    Long-horizon cryptographic migration engine.
-
-    Purpose:
-      - Anticipate quantum capability growth
-      - Enforce migration BEFORE cryptographic failure
-      - Provide auditable justification for rotations
-
-    This is a GOVERNANCE engine, not crypto math.
-    """
 
     def __init__(self):
         self.rotation = RotationEngine()
         self.lifecycle = KeyLifecycleEngine()
-
-    # ------------------------------------------------
-    # Core evaluation
-    # ------------------------------------------------
 
     def evaluate_key_migration(
         self,
@@ -66,12 +41,6 @@ class MigrationEngine:
         current_year: Optional[int] = None,
         safety_margin_years: int = 10,
     ) -> MigrationDecision:
-        """
-        Evaluate whether a key must be migrated due to future quantum risk.
-
-        safety_margin_years:
-          Number of years BEFORE estimated break that migration is required.
-        """
         current_year = current_year or datetime.now(timezone.utc).year
 
         status = self.lifecycle.evaluate_key_id(key_id, audit=False)
@@ -97,9 +66,6 @@ class MigrationEngine:
 
         years_left = break_year - current_year
 
-        # -------------------------------
-        # Decision thresholds
-        # -------------------------------
         if years_left <= 0:
             severity = "EMERGENCY"
             migrate = True
@@ -117,11 +83,7 @@ class MigrationEngine:
             migrate = False
             reason = "Sufficient quantum safety margin"
 
-        # Recommend next scheme (simple rule: highest-priority PQC)
-        recommended = None
-        if migrate:
-            # Currently ML-KEM is baseline; future-proof for extension
-            recommended = "ML-KEM"
+        recommended = "ML-KEM" if migrate else None
 
         decision = MigrationDecision(
             key_id=key_id,
@@ -136,7 +98,6 @@ class MigrationEngine:
             severity=severity,
         )
 
-        # Audit trail (critical for gov compliance)
         record_key_event(
             event_type="migration_evaluation",
             key_id=key_id,
@@ -147,19 +108,12 @@ class MigrationEngine:
 
         return decision
 
-    # ------------------------------------------------
-    # Execute migration
-    # ------------------------------------------------
-
     def migrate_key_if_needed(
         self,
         *,
         key_id: str,
         force: bool = False,
-    ) -> Dict[str, any]:
-        """
-        Perform migration if required.
-        """
+    ) -> Dict:
         decision = self.evaluate_key_migration(key_id=key_id)
 
         if not decision.migration_required and not force:
@@ -169,7 +123,6 @@ class MigrationEngine:
                 "message": "Migration not required",
             }
 
-        # Perform rotation (this is the actual migration)
         result = self.rotation.rotate_if_needed(
             key_id,
             target_scheme=decision.recommended_target_scheme,
@@ -193,10 +146,6 @@ class MigrationEngine:
         }
 
 
-# ============================================================
-# Convenience helpers
-# ============================================================
-
 _engine_singleton: Optional[MigrationEngine] = None
 
 
@@ -208,10 +157,8 @@ def get_migration_engine() -> MigrationEngine:
 
 
 def evaluate_migration(key_id: str) -> Dict:
-    eng = get_migration_engine()
-    return asdict(eng.evaluate_key_migration(key_id=key_id))
+    return asdict(get_migration_engine().evaluate_key_migration(key_id=key_id))
 
 
 def migrate_key(key_id: str, force: bool = False) -> Dict:
-    eng = get_migration_engine()
-    return eng.migrate_key_if_needed(key_id=key_id, force=force)
+    return get_migration_engine().migrate_key_if_needed(key_id=key_id, force=force)

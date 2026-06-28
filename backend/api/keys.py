@@ -20,6 +20,34 @@ from key_management.lifecycle import evaluate_key_status, scan_key_status
 router = APIRouter()
 
 # ==================================================
+# SECURITY: Strip sensitive fields
+# ==================================================
+
+SENSITIVE_FIELDS = {"private_key"}
+
+
+def sanitize_key(record) -> Dict[str, Any]:
+    # BUG FIX: handle both dict and dataclass/object uniformly
+    if hasattr(record, "__dict__"):
+        data = vars(record)
+    elif hasattr(record, "_asdict"):
+        data = record._asdict()
+    elif isinstance(record, dict):
+        data = record
+    else:
+        # dataclass — try asdict fallback
+        try:
+            from dataclasses import asdict
+            data = asdict(record)
+        except Exception:
+            data = dict(record)
+
+    safe = {k: v for k, v in data.items() if k not in SENSITIVE_FIELDS}
+    safe["key_reference_only"] = True
+    return safe
+
+
+# ==================================================
 # Key Generation
 # ==================================================
 
@@ -27,6 +55,7 @@ router = APIRouter()
 def api_generate_key(payload: Optional[Dict[str, Any]] = None):
     payload = payload or {}
 
+    # generate_key returns a dict (via serialize_public)
     record = generate_key(payload)
 
     policy = check_key_allowed(
@@ -37,13 +66,18 @@ def api_generate_key(payload: Optional[Dict[str, Any]] = None):
     )
 
     return {
-        "key": record,
+        "key": sanitize_key(record),
         "policy": policy,
     }
 
+
 # ==================================================
-# Active Key Management (⚠️ STATIC ROUTES FIRST)
+# STATIC ROUTES — must come before /{key_id} routes
 # ==================================================
+
+# BUG FIX: /keys/active and /keys/lifecycle/scan must be declared
+# BEFORE /keys/{key_id} or FastAPI routes "active" and "lifecycle"
+# as key_id values, making them unreachable.
 
 @router.get("/keys/active", tags=["lifecycle"])
 def api_get_active_key():
@@ -64,7 +98,7 @@ def api_get_active_key():
 
     return {
         "active": True,
-        "key": record.__dict__,
+        "key": sanitize_key(record),
     }
 
 
@@ -72,6 +106,37 @@ def api_get_active_key():
 def api_rotate_active_key(force: bool = Query(False)):
     rotation = get_rotation_engine()
     return rotation.rotate_active_if_needed(force=force)
+
+
+# BUG FIX: was declared after /keys/{key_id} — FastAPI would capture
+# "lifecycle" as the key_id param, making /keys/lifecycle/scan 404.
+@router.get("/keys/lifecycle/scan", tags=["lifecycle"])
+def api_scan_lifecycle(limit: int = Query(50, ge=1, le=500)):
+    return {"items": scan_key_status(limit=limit)}
+
+
+# ==================================================
+# Key Inventory
+# ==================================================
+
+@router.get("/keys", tags=["keys"])
+def api_list_keys(limit: int = Query(25, ge=1, le=500)):
+    engine = get_keygen_engine()
+    keys = engine.list(limit=limit)
+    return {"keys": [sanitize_key(k) for k in keys]}
+
+
+# ==================================================
+# Dynamic /{key_id} routes — AFTER all static routes
+# ==================================================
+
+@router.get("/keys/{key_id}", tags=["keys"])
+def api_get_key(key_id: str):
+    engine = get_keygen_engine()
+    record = engine.get(key_id)
+    if not record:
+        raise HTTPException(status_code=404, detail="Key not found")
+    return sanitize_key(record)
 
 
 @router.post("/keys/{key_id}/activate", tags=["lifecycle"])
@@ -90,24 +155,6 @@ def api_activate_key(key_id: str):
         "reason": "manual_activate",
     }
 
-# ==================================================
-# Key Inventory
-# ==================================================
-
-@router.get("/keys", tags=["keys"])
-def api_list_keys(limit: int = Query(25, ge=1, le=500)):
-    engine = get_keygen_engine()
-    keys = engine.list(limit=limit)
-    return {"keys": [k.__dict__ for k in keys]}
-
-
-@router.get("/keys/{key_id}", tags=["keys"])
-def api_get_key(key_id: str):
-    engine = get_keygen_engine()
-    record = engine.get(key_id)
-    if not record:
-        raise HTTPException(status_code=404, detail="Key not found")
-    return record.__dict__
 
 # ==================================================
 # Policy Status
@@ -120,6 +167,7 @@ def api_key_status(key_id: str):
     if not record:
         raise HTTPException(status_code=404, detail="Key not found")
 
+    # BUG FIX: record is a KeyRecord dataclass — use attribute access consistently
     policy = check_key_allowed(
         scheme=record.algorithm,
         parameter_set=record.parameter_set,
@@ -132,6 +180,7 @@ def api_key_status(key_id: str):
         "policy": policy,
     }
 
+
 # ==================================================
 # Lifecycle & Governance
 # ==================================================
@@ -143,10 +192,6 @@ def api_key_lifecycle(key_id: str):
     except FileNotFoundError:
         raise HTTPException(status_code=404, detail="Key not found")
 
-
-@router.get("/keys/lifecycle/scan", tags=["lifecycle"])
-def api_scan_lifecycle(limit: int = Query(50, ge=1, le=500)):
-    return {"items": scan_key_status(limit=limit)}
 
 # ==================================================
 # Rotation (Per-Key)

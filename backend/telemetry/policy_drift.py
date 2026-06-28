@@ -9,51 +9,27 @@ from collections import Counter
 from telemetry.audit_log import read_events, DEFAULT_AUDIT_LOG_PATH
 
 
-# ============================================================
-# Models
-# ============================================================
-
 @dataclass(frozen=True)
 class PolicyDriftResult:
     generated_at_utc: str
     baseline_window_days: int
     comparison_window_days: int
-
     policy_checks_baseline: int
     policy_checks_recent: int
-
     deny_rate_baseline: float
     deny_rate_recent: float
     deny_rate_delta: float
-
     scheme_usage_baseline: Dict[str, int]
     scheme_usage_recent: Dict[str, int]
-
     drift_detected: bool
-    drift_severity: str  # NONE | LOW | MEDIUM | HIGH
+    drift_severity: str
     explanation: List[str]
 
 
-# ============================================================
-# Engine
-# ============================================================
-
 class PolicyDriftEngine:
-    """
-    Detects long-horizon drift in cryptographic policy behavior.
-
-    This engine answers:
-      - Are we allowing weaker crypto over time?
-      - Are denials decreasing unexpectedly?
-      - Is policy enforcement degrading silently?
-    """
 
     def __init__(self, audit_path: str = DEFAULT_AUDIT_LOG_PATH):
         self.audit_path = audit_path
-
-    # ------------------------------------------------
-    # Core analysis
-    # ------------------------------------------------
 
     def analyze(
         self,
@@ -64,10 +40,14 @@ class PolicyDriftEngine:
     ) -> Dict[str, Any]:
 
         now = datetime.now(timezone.utc)
-
         baseline_since = now - timedelta(days=baseline_days)
         recent_since = now - timedelta(days=recent_days)
 
+        # BUG FIX: read_events() now normalizes by default.
+        # Original used e.get("result", {}).get("allowed") which worked
+        # for flat security_store events but failed for payload-wrapped
+        # events where "result" was nested under "payload".
+        # After normalization, "result" is always top-level.
         events = list(read_events(audit_path=self.audit_path, limit=limit_scan))
 
         baseline_events = []
@@ -77,7 +57,6 @@ class PolicyDriftEngine:
             ts = e.get("timestamp_utc")
             if not ts:
                 continue
-
             try:
                 ts_dt = datetime.fromisoformat(ts.replace("Z", "+00:00"))
             except Exception:
@@ -91,7 +70,7 @@ class PolicyDriftEngine:
         def _extract_policy_stats(evts: List[Dict[str, Any]]):
             checks = 0
             denies = 0
-            schemes = Counter()
+            schemes: Counter = Counter()
 
             for e in evts:
                 if e.get("event_type") != "policy_check":
@@ -99,16 +78,13 @@ class PolicyDriftEngine:
 
                 checks += 1
 
-                allowed = (
-                    e.get("result", {}).get("allowed")
-                    if isinstance(e.get("result"), dict)
-                    else None
-                )
-
+                # BUG FIX: after normalization, result is top-level
+                allowed = e.get("result", {}).get("allowed")
                 if allowed is False:
                     denies += 1
 
-                scheme = e.get("payload", {}).get("scheme")
+                # BUG FIX: after normalization, scheme is top-level
+                scheme = e.get("scheme")
                 if scheme:
                     schemes[str(scheme)] += 1
 
@@ -130,7 +106,6 @@ class PolicyDriftEngine:
                 f"Policy deny rate changed by {delta:+.2%} (baseline → recent)"
             )
 
-        # Detect new schemes appearing
         new_schemes = set(r_schemes) - set(b_schemes)
         if new_schemes:
             drift = True
@@ -138,7 +113,6 @@ class PolicyDriftEngine:
                 f"New cryptographic schemes observed: {sorted(new_schemes)}"
             )
 
-        # Severity classification
         if drift:
             if abs(delta) > 0.15 or new_schemes:
                 severity = "HIGH"
@@ -150,32 +124,22 @@ class PolicyDriftEngine:
         if not explanations:
             explanations.append("No significant policy drift detected")
 
-        result = PolicyDriftResult(
+        return asdict(PolicyDriftResult(
             generated_at_utc=now.isoformat(),
             baseline_window_days=baseline_days,
             comparison_window_days=recent_days,
-
             policy_checks_baseline=b_checks,
             policy_checks_recent=r_checks,
-
             deny_rate_baseline=b_deny_rate,
             deny_rate_recent=r_deny_rate,
             deny_rate_delta=delta,
-
             scheme_usage_baseline=b_schemes,
             scheme_usage_recent=r_schemes,
-
             drift_detected=drift,
             drift_severity=severity,
             explanation=explanations,
-        )
+        ))
 
-        return asdict(result)
-
-
-# ============================================================
-# Singleton Helper
-# ============================================================
 
 _engine: Optional[PolicyDriftEngine] = None
 

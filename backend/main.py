@@ -7,6 +7,8 @@ from fastapi.middleware.cors import CORSMiddleware
 # =================================================
 from api.keys import router as keys_router
 from api.encrypt_api import router as encrypt_router
+from api.sign_api import router as sign_router
+from api.classical_api import router as classical_router
 
 # =================================================
 # Governance & lifecycle engines
@@ -23,6 +25,11 @@ from api.replay import router as replay_router
 from api.explain import router as explain_router
 from api.anomaly import router as anomaly_router
 from api.policy_drift import router as policy_drift_router  # ⬅️ NEW
+from api.policy import router as policy_router  # ⬅️ NEW
+from api.kem_api import router as kem_router  # ⬅️ NEW
+from api.algorithms import router as algorithms_router
+
+
 
 # =================================================
 # App
@@ -61,6 +68,8 @@ def health():
 # --- Key management ---
 app.include_router(keys_router, prefix="/api", tags=["keys"])
 app.include_router(encrypt_router, prefix="/api", tags=["crypto"])
+app.include_router(sign_router, prefix="/api", tags=["signatures"])
+app.include_router(classical_router, prefix="/api", tags=["classical"])
 
 # --- Governance engines ---
 app.include_router(migration_router, prefix="/api", tags=["migration"])
@@ -72,4 +81,8 @@ app.include_router(metrics_router, prefix="/api", tags=["metrics"])
 app.include_router(replay_router, prefix="/api", tags=["replay"])
 app.include_router(explain_router, prefix="/api", tags=["explain"])
 app.include_router(anomaly_router, prefix="/api", tags=["anomalies"])
-app.include_router(policy_drift_router, prefix="/api", tags=["policy-drift"]) 
+app.include_router(policy_drift_router, prefix="/api", tags=["policy-drift"])
+app.include_router(policy_router, prefix="/api", tags=["policy"])
+app.include_router(kem_router, prefix="/api", tags=["kem"])
+app.include_router(algorithms_router, prefix="/api", tags=["algorithms"])
+

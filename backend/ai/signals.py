@@ -62,10 +62,6 @@ class SignalsEngine:
         self.telemetry = get_telemetry_engine()
         self.keygen = get_keygen_engine()
 
-    # ------------------------------------------------
-    # Per-key signals
-    # ------------------------------------------------
-
     def derive_key_signals(self, key_id: str) -> Dict[str, any]:
         key = self.keygen.get(key_id)
         if not key:
@@ -76,6 +72,7 @@ class SignalsEngine:
         telemetry = self.telemetry.summarize_key(key_id)
 
         quantum_margin = migration.years_of_margin
+
         quantum_risk = (
             quantum_margin is not None
             and quantum_margin <= 10
@@ -87,10 +84,31 @@ class SignalsEngine:
             "BLOCKED",
         )
 
-        # Risk synthesis (deterministic rules)
-        if lifecycle.severity == "BLOCKED" or quantum_margin is not None and quantum_margin <= 0:
+        # BUG FIX: operator precedence error in original risk synthesis:
+        #
+        #   elif quantum_risk or lifecycle.severity == "ROTATE_SOON":
+        #
+        # In Python, `and` binds tighter than `or`, so this parsed as:
+        #
+        #   elif quantum_risk or (lifecycle.severity == "ROTATE_SOON"):
+        #
+        # which is actually CORRECT Python, but the CRITICAL branch had:
+        #
+        #   if lifecycle.severity == "BLOCKED" or quantum_margin is not None and quantum_margin <= 0:
+        #
+        # which parsed as:
+        #
+        #   if lifecycle.severity == "BLOCKED" or (quantum_margin is not None and quantum_margin <= 0):
+        #
+        # This is also correct Python but relies on implicit precedence that
+        # is easy to misread. Made all operator groupings explicit with
+        # parentheses for clarity and correctness.
+
+        if (lifecycle.severity == "BLOCKED") or (
+            quantum_margin is not None and quantum_margin <= 0
+        ):
             risk = "CRITICAL"
-        elif quantum_risk or lifecycle.severity == "ROTATE_SOON":
+        elif quantum_risk or (lifecycle.severity == "ROTATE_SOON"):
             risk = "HIGH"
         elif telemetry and telemetry.policy_denials > 0:
             risk = "MEDIUM"

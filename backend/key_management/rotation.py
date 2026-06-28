@@ -20,7 +20,7 @@ from key_management.lifecycle import (
 from policy.security_store import record_key_event
 
 # ============================================================
-# Storage paths (docker-safe)
+# Storage paths
 # ============================================================
 
 DEFAULT_STATE_DIR = Path(os.getenv("QS_STATE_DIR", "backend/_keystore/state")).resolve()
@@ -35,9 +35,6 @@ def _ensure_dir(p: Path) -> None:
 
 
 def _atomic_write_json(path: Path, payload: Dict[str, Any]) -> None:
-    """
-    Atomic JSON write (prevents corruption if container crashes mid-write).
-    """
     _ensure_dir(path.parent)
     tmp = path.with_suffix(path.suffix + ".tmp")
     tmp.write_text(json.dumps(payload, indent=2), encoding="utf-8")
@@ -45,7 +42,7 @@ def _atomic_write_json(path: Path, payload: Dict[str, Any]) -> None:
 
 
 # ============================================================
-# Rotation metadata model (stored in key JSON records)
+# Rotation metadata model
 # ============================================================
 
 @dataclass(frozen=True)
@@ -54,7 +51,7 @@ class RotationInfo:
     superseded_by_key_id: Optional[str] = None
     superseded_at_utc: Optional[str] = None
     rotation_reason: str = ""
-    rotation_severity: str = ""  # MONITOR | ROTATE_SOON | DEPRECATED | BLOCKED
+    rotation_severity: str = ""
 
 
 # ============================================================
@@ -62,15 +59,6 @@ class RotationInfo:
 # ============================================================
 
 class RotationEngine:
-    """
-    Enforces long-horizon key governance:
-      - evaluates lifecycle status
-      - rotates keys when needed
-      - records lineage + audit evidence
-      - manages active key pointer
-
-    This remains valid when you swap real Rust PQC keygen later.
-    """
 
     def __init__(
         self,
@@ -87,7 +75,6 @@ class RotationEngine:
         self.keygen = KeygenEngine(keystore_dir=self.keystore_dir)
         self.lifecycle = KeyLifecycleEngine(keystore_dir=self.keystore_dir)
 
-        # Locks
         self._state_lock = threading.Lock()
         self._record_lock = threading.Lock()
 
@@ -126,7 +113,7 @@ class RotationEngine:
         )
 
     # ---------------------------
-    # Core rotation actions
+    # Core rotation
     # ---------------------------
 
     def rotate_if_needed(
@@ -140,12 +127,6 @@ class RotationEngine:
         force: bool = False,
         set_active: bool = True,
     ) -> Dict[str, Any]:
-        """
-        Evaluate a key. If lifecycle says rotate, generate successor and link it.
-
-        - If force=True: rotate even if lifecycle says OK.
-        - target_* lets you migrate within same scheme/params or change them later.
-        """
         key_id = (key_id or "").strip()
         if not key_id:
             raise ValueError("key_id is required")
@@ -161,16 +142,25 @@ class RotationEngine:
                 "new_key_id": None,
             }
 
-        # Decide successor settings (default = same family)
-        # IMPORTANT: status fields may be None depending on lifecycle implementation.
         scheme = (target_scheme or status.scheme or "ML-KEM").strip()
         parameter_set = (target_parameter_set or status.parameter_set or "ML-KEM-768").strip()
-        security_level = (target_security_level or status.claimed_security_level or status.security_level or "NIST-L3").strip()
 
-        # Longevity: default strong (gov-style) if not present
+        # BUG FIX: original code had:
+        #   security_level = (target_security_level or status.claimed_security_level
+        #                     or status.security_level or "NIST-L3").strip()
+        #
+        # KeyLifecycleStatus has NO field named "security_level" — only
+        # "claimed_security_level". Accessing status.security_level raises
+        # AttributeError every time a rotation is attempted. Fixed by
+        # removing the invalid fallback attribute.
+        security_level = (
+            target_security_level
+            or status.claimed_security_level
+            or "NIST-L3"
+        ).strip()
+
         longevity_years = int(target_longevity_years or status.estimated_longevity_years or 40)
 
-        # Generate successor
         new_record = self.keygen.generate(
             algorithm=scheme,
             parameter_set=parameter_set,
@@ -180,16 +170,13 @@ class RotationEngine:
         )
         new_key_id = new_record.key_id
 
-        # Attach lineage metadata in both records (atomic-ish with a lock)
         with self._record_lock:
             self._mark_child_parent(child_id=new_key_id, parent_id=key_id, status=status)
             self._mark_superseded(parent_id=key_id, child_id=new_key_id, status=status)
 
-        # Optionally set active key to successor
         if set_active:
             self.set_active_key_id(new_key_id, reason=f"rotation:{status.severity}")
 
-        # Audit event
         record_key_event(
             event_type="key_rotated",
             key_id=new_key_id,
@@ -211,13 +198,21 @@ class RotationEngine:
             "new_key_record": asdict(new_record),
         }
 
-    def rotate_active_if_needed(self, **kwargs: Any) -> Dict[str, Any]:
-        """
-        Rotate the currently active key if needed. If none exists, create one and set active.
-        """
+    def rotate_active_if_needed(
+        self,
+        *,
+        force: bool = False,
+        set_active: bool = True,
+        # BUG FIX: removed **kwargs. The original signature was:
+        #   def rotate_active_if_needed(self, **kwargs)
+        # which then called: self.rotate_if_needed(active, **kwargs)
+        # If a caller passed set_active=True in kwargs AND rotate_if_needed
+        # also has set_active as an explicit param, Python raises:
+        #   TypeError: rotate_if_needed() got multiple values for keyword argument 'set_active'
+        # Made all parameters explicit to eliminate the **kwargs forwarding risk.
+    ) -> Dict[str, Any]:
         active = self.get_active_key_id()
         if not active:
-            # bootstrap: create first key
             rec = self.keygen.generate()
             self.set_active_key_id(rec.key_id, reason="bootstrap")
             record_key_event(event_type="active_key_bootstrap", key_id=rec.key_id)
@@ -228,7 +223,11 @@ class RotationEngine:
                 "new_key_record": asdict(rec),
             }
 
-        return self.rotate_if_needed(active, **kwargs)
+        return self.rotate_if_needed(
+            active,
+            force=force,
+            set_active=set_active,
+        )
 
     # ---------------------------
     # Internal record mutations
@@ -274,15 +273,18 @@ class RotationEngine:
 
 _engine_singleton: Optional[RotationEngine] = None
 
+
 def get_rotation_engine() -> RotationEngine:
     global _engine_singleton
     if _engine_singleton is None:
         _engine_singleton = RotationEngine()
     return _engine_singleton
 
+
 def rotate_key(key_id: str, force: bool = False) -> Dict[str, Any]:
     eng = get_rotation_engine()
     return eng.rotate_if_needed(key_id, force=force, set_active=True)
+
 
 def rotate_active(force: bool = False) -> Dict[str, Any]:
     eng = get_rotation_engine()

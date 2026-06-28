@@ -1,3 +1,4 @@
+// src/components/layout/Sidebar.jsx
 import { NavLink } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext";
 import { useActiveKey } from "../../context/ActiveKeyContext";
@@ -6,12 +7,9 @@ import { useEffect, useState } from "react";
 
 export default function Sidebar() {
   const { theme } = useTheme();
-  const { activeKey } = useActiveKey(); // ✅ CONTEXT
+  const { activeKey } = useActiveKey();
   const [policyMetrics, setPolicyMetrics] = useState(null);
 
-  /* =====================================================
-   * Load policy metrics ONLY (key is reactive)
-   * ===================================================== */
   useEffect(() => {
     fetchTelemetryMetrics()
       .then(setPolicyMetrics)
@@ -22,30 +20,33 @@ export default function Sidebar() {
     {
       title: "Core",
       items: [
-        { label: "Dashboard", path: "/"},
-        { label: "Crypto Operations", path: "/crypto"},
+        { label: "Dashboard",         path: "/" },
+        { label: "Crypto Operations", path: "/crypto" },
+        { label: "Algorithms",        path: "/algorithms" },
+        { label: "CLI Setup",         path: "/cli" },
+        { label: "How It Works", path: "/how-it-works" },
       ],
     },
     {
       title: "Governance",
       items: [
         { label: "Governance Overview", path: "/governance" },
-        { label: "Key Explorer", path: "/keys"},
+        { label: "Key Explorer",        path: "/keys" },
         {
           label: "Risk Summary",
           path: "/risk",
           critical: true,
           badge: policyMetrics?.policy_deny || 0,
         },
-        { label: "Simulations", path: "/simulation"},
+        { label: "Simulations", path: "/simulation" },
       ],
     },
     {
       title: "Observability",
       items: [
-        { label: "Telemetry", path: "/telemetry"},
-        { label: "Audit Replay", path: "/audit"},
-        { label: "Metrics", path: "/metrics"},
+        { label: "Telemetry",    path: "/telemetry" },
+        { label: "Audit Replay", path: "/audit" },
+        { label: "Metrics",      path: "/metrics" },
       ],
     },
     {
@@ -64,71 +65,51 @@ export default function Sidebar() {
 
   return (
     <aside className={`${theme.panel} w-64 h-full border-r border-gray-800 flex flex-col`}>
-      {/* ================= HEADER ================= */}
+      {/* Header */}
       <div className="px-6 py-5 border-b border-gray-800 space-y-3">
         <div>
-          <div className={`text-lg font-bold ${theme.panelTitle}`}>
-            QuantumShield
-          </div>
-          <div className="text-xs text-gray-400 mt-1">
-            Cryptographic Governance Console
-          </div>
+          <div className={`text-lg font-bold ${theme.panelTitle}`}>QuantumShield</div>
+          <div className="text-xs text-gray-400 mt-1">Cryptographic Governance Console</div>
         </div>
 
-        {/* ===== Active Key Indicator (REACTIVE) ===== */}
+        {/* Active Key Indicator */}
         <div className="text-xs rounded-md border border-cyan-500/20 p-3">
           {activeKey ? (
             <div className="space-y-1">
-              <div className="text-green-400 font-semibold">
-                🔐 Active Key
-              </div>
-              <div className="font-mono text-cyan-300 truncate">
-                {activeKey.key_id}
-              </div>
-              <div className="text-gray-400">
-                {activeKey.algorithm}
-              </div>
+              <div className="text-green-400 font-semibold">Active Key</div>
+              <div className="font-mono text-cyan-300 truncate">{activeKey.key_id}</div>
+              <div className="text-gray-400">{activeKey.algorithm}</div>
             </div>
           ) : (
-            <div className="text-yellow-400">
-              ⚠ No Active Key
-            </div>
+            <div className="text-yellow-400">⚠ No Active Key</div>
           )}
         </div>
       </div>
 
-      {/* ================= NAV ================= */}
+      {/* Nav */}
       <nav className="flex-1 overflow-y-auto px-4 py-6 space-y-8">
         {navSections.map((section) => (
           <div key={section.title}>
             <div className="text-xs uppercase tracking-wide text-gray-500 px-2 mb-2">
               {section.title}
             </div>
-
             <ul className="space-y-1">
               {section.items.map((item) => (
                 <li key={item.path}>
                   <NavLink
                     to={item.path}
-                    end
+                    end={item.path === "/"}
                     className={({ isActive }) =>
-                      `
-                      flex items-center justify-between px-3 py-2 rounded-md text-sm transition
-                      ${
+                      `flex items-center justify-between px-3 py-2 rounded-md text-sm transition ${
                         isActive
                           ? "bg-cyan-500/15 text-cyan-400 font-medium"
                           : item.critical
                           ? "text-red-400 hover:bg-red-500/10"
                           : "text-gray-300 hover:bg-gray-800/60 hover:text-white"
-                      }
-                      `
+                      }`
                     }
                   >
-                    <div className="flex items-center gap-3">
-                      <span className="text-base">{item.icon}</span>
-                      <span>{item.label}</span>
-                    </div>
-
+                    <span>{item.label}</span>
                     {item.badge > 0 && (
                       <span className="text-xs bg-red-500/20 text-red-400 px-2 py-0.5 rounded-full font-mono">
                         {item.badge}
@@ -142,7 +123,7 @@ export default function Sidebar() {
         ))}
       </nav>
 
-      {/* ================= FOOTER ================= */}
+      {/* Footer */}
       <div className="px-6 py-4 border-t border-gray-800 text-xs text-gray-500">
         <div>Environment: Local</div>
         <div className="mt-1">Version: v0.1.0</div>

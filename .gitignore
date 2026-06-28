@@ -1,58 +1,49 @@
-# ==========================
 # Python
-# ==========================
+oqs-env/
 __pycache__/
-*.py[cod]
-*.so
-*.pyd
+*.pyc
 *.pyo
-
-# Virtual environments
-.venv/
-venv/
-env/
-
-# ==========================
-# Jupyter
-# ==========================
-.ipynb_checkpoints/
-
-# ==========================
-# Logs
-# ==========================
-*.log
-logs/
-
-# ==========================
-# Build / Dist
-# ==========================
-build/
-dist/
+*.pyd
+.Python
 *.egg-info/
+dist/
+build/
 
-# ==========================
-# Docker artifacts
-# ==========================
-*.tar
+# Keys / secrets — NEVER commit
+backend/_keystore/
+telemetry/
+*.jsonl
 
-# ==========================
-# IDE
-# ==========================
-.vscode/
-.idea/
+# Benchmark results
+results_paper/
+results_quick/
+results_v015/
+results_v015_paper/
+rust_benchmark/
+
+# Benchmark raw JSON outputs
+adversarial_*.json
+benchmark_full_*.json
+long_term_risk_*.json
+policy_validation_*.json
+security_scaling_*.json
+
+# VS Code history plugin
+.history/
+
+# Rust build artifacts
+backend/crypto_core_rust/target/
+
+# Frontend build
+frontend/dashboard/dist/
+frontend/dashboard/node_modules/
+
+# Charts / images generated
+cli/results/
+cli/*.png
+charts/
+
+# Misc
 .DS_Store
-desktop.ini
-
-# ==========================
-# Models / Large Files
-# ==========================
-*.pt
-*.pth
-*.onnx
-*.ckpt
-
-# ==========================
-# Environment
-# ==========================
-.env
-.env.*
+*.env
+.env*

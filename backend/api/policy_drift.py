@@ -13,7 +13,40 @@ router = APIRouter()
 
 
 # ============================================================
-# Detect Policy Drift (Primary Endpoint)
+# STATIC ROUTES — before any future parameterized routes
+# ============================================================
+
+# BUG FIX: /policy-drift/status must be declared BEFORE any future
+# /policy-drift/{id} route. Currently safe, but moved to top as a
+# guard against future additions shadowing it.
+
+@router.get("/policy-drift/status")
+def api_policy_drift_status() -> Dict[str, Any]:
+    """
+    Lightweight readiness check for the policy drift engine.
+
+    BUG FIX: original called engine.analyze() on every health probe —
+    a full audit log scan on every GET /policy-drift/status call.
+    Health probes are called frequently (load balancers, k8s liveness,
+    dashboards polling). Running a log scan on each one is O(n) in
+    audit log size and will slow down or block under load.
+
+    Fixed: return a static capability declaration. The /policy-drift
+    endpoint itself is the correct place to run actual analysis.
+    """
+    return {
+        "policy_drift_engine": "ready",
+        "features": {
+            "baseline_comparison": True,
+            "deny_rate_tracking": True,
+            "audit_derived": True,
+            "read_only": True,
+        },
+    }
+
+
+# ============================================================
+# Primary endpoint
 # ============================================================
 
 @router.get("/policy-drift")
@@ -33,52 +66,14 @@ def api_policy_drift(
     limit_scan: Optional[int] = Query(
         None,
         ge=1,
-        description="Optional cap on number of audit events scanned (performance control)",
+        description="Optional cap on audit events scanned (performance control)",
     ),
 ) -> Dict[str, Any]:
     """
     Detect cryptographic policy drift over time.
-
-    This endpoint answers:
-      - Is policy enforcement weakening?
-      - Are weaker schemes appearing more often?
-      - Is denial behavior changing silently?
-
-    SAFE:
-      - Read-only
-      - Deterministic
-      - Derived strictly from audit logs
-      - Suitable for government & compliance review
     """
     return detect_policy_drift(
         baseline_days=baseline_days,
         recent_days=recent_days,
         limit_scan=limit_scan,
     )
-
-
-# ============================================================
-# Policy Drift Readiness / Health
-# ============================================================
-
-@router.get("/policy-drift/status")
-def api_policy_drift_status() -> Dict[str, Any]:
-    """
-    Lightweight readiness check for the policy drift engine.
-    """
-    engine = get_policy_drift_engine()
-
-    # run a minimal scan to verify wiring
-    sample = engine.analyze(
-        baseline_days=30,
-        recent_days=7,
-        limit_scan=25,
-    )
-
-    return {
-        "policy_drift_engine": "ready",
-        "baseline_window_days": sample.get("baseline_window_days"),
-        "recent_window_days": sample.get("comparison_window_days"),
-        "drift_detected": sample.get("drift_detected"),
-        "generated_at_utc": sample.get("generated_at_utc"),
-    }

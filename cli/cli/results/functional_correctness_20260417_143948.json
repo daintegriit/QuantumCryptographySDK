@@ -1,0 +1,4405 @@
+{
+  "timestamp_utc": "2026-04-17T14:39:48.480892+00:00",
+  "suite_name": "Q-SENTRY Functional Correctness",
+  "backend": "http://localhost:8008/api",
+  "health": {
+    "status": "ok"
+  },
+  "results": [
+    {
+      "suite": "kyber_encrypt_decrypt",
+      "parameter_set": "kyber512",
+      "iterations": 100,
+      "passed": 100,
+      "failed": 0,
+      "success_rate": 100.0,
+      "latency": {
+        "avg_ms": 15.1009,
+        "p95_ms": 28.0735,
+        "p99_ms": 41.8888,
+        "min_ms": 9.8344,
+        "max_ms": 41.8888
+      },
+      "details": [
+        {
+          "test": "kyber512_roundtrip_1",
+          "parameter_set": "kyber512",
+          "key_id": "0df0cfd5-866c-4b37-a87a-e4f40b09278c",
+          "success": true,
+          "elapsed_ms": 34.1345,
+          "expected_plaintext": "hello quantum 0",
+          "actual_plaintext": "hello quantum 0"
+        },
+        {
+          "test": "kyber512_roundtrip_2",
+          "parameter_set": "kyber512",
+          "key_id": "a842e0df-cbbf-4477-8f1b-f0b362c41541",
+          "success": true,
+          "elapsed_ms": 16.5638,
+          "expected_plaintext": "hello quantum 1",
+          "actual_plaintext": "hello quantum 1"
+        },
+        {
+          "test": "kyber512_roundtrip_3",
+          "parameter_set": "kyber512",
+          "key_id": "0f1000b6-9d09-4f29-b7ac-bc77c6b448ac",
+          "success": true,
+          "elapsed_ms": 14.898,
+          "expected_plaintext": "hello quantum 2",
+          "actual_plaintext": "hello quantum 2"
+        },
+        {
+          "test": "kyber512_roundtrip_4",
+          "parameter_set": "kyber512",
+          "key_id": "72dfa9f4-7088-4127-9c4b-f5216fc9fd08",
+          "success": true,
+          "elapsed_ms": 15.8011,
+          "expected_plaintext": "hello quantum 3",
+          "actual_plaintext": "hello quantum 3"
+        },
+        {
+          "test": "kyber512_roundtrip_5",
+          "parameter_set": "kyber512",
+          "key_id": "2e98946d-b56b-4f73-8ea9-0ce7e6cae1d6",
+          "success": true,
+          "elapsed_ms": 14.3779,
+          "expected_plaintext": "hello quantum 4",
+          "actual_plaintext": "hello quantum 4"
+        },
+        {
+          "test": "kyber512_roundtrip_6",
+          "parameter_set": "kyber512",
+          "key_id": "a7d89f1e-6e6a-441c-b23b-b1475d4e3ba9",
+          "success": true,
+          "elapsed_ms": 16.6632,
+          "expected_plaintext": "hello quantum 5",
+          "actual_plaintext": "hello quantum 5"
+        },
+        {
+          "test": "kyber512_roundtrip_7",
+          "parameter_set": "kyber512",
+          "key_id": "22cd3202-b5cc-44a2-bd53-bf92617df721",
+          "success": true,
+          "elapsed_ms": 13.6217,
+          "expected_plaintext": "hello quantum 6",
+          "actual_plaintext": "hello quantum 6"
+        },
+        {
+          "test": "kyber512_roundtrip_8",
+          "parameter_set": "kyber512",
+          "key_id": "602b5451-95e1-4e59-b92c-048c24b03194",
+          "success": true,
+          "elapsed_ms": 12.413,
+          "expected_plaintext": "hello quantum 7",
+          "actual_plaintext": "hello quantum 7"
+        },
+        {
+          "test": "kyber512_roundtrip_9",
+          "parameter_set": "kyber512",
+          "key_id": "bd72d759-3a53-4e0e-af54-c59bc006c665",
+          "success": true,
+          "elapsed_ms": 13.7525,
+          "expected_plaintext": "hello quantum 8",
+          "actual_plaintext": "hello quantum 8"
+        },
+        {
+          "test": "kyber512_roundtrip_10",
+          "parameter_set": "kyber512",
+          "key_id": "23bb359a-d154-45e8-a641-394ced63b670",
+          "success": true,
+          "elapsed_ms": 12.9485,
+          "expected_plaintext": "hello quantum 9",
+          "actual_plaintext": "hello quantum 9"
+        },
+        {
+          "test": "kyber512_roundtrip_11",
+          "parameter_set": "kyber512",
+          "key_id": "61ea835b-ae6c-4218-a725-95dc288f5487",
+          "success": true,
+          "elapsed_ms": 13.7173,
+          "expected_plaintext": "hello quantum 10",
+          "actual_plaintext": "hello quantum 10"
+        },
+        {
+          "test": "kyber512_roundtrip_12",
+          "parameter_set": "kyber512",
+          "key_id": "15cb5990-a225-4e15-a48a-969a8a9cb2f7",
+          "success": true,
+          "elapsed_ms": 11.8852,
+          "expected_plaintext": "hello quantum 11",
+          "actual_plaintext": "hello quantum 11"
+        },
+        {
+          "test": "kyber512_roundtrip_13",
+          "parameter_set": "kyber512",
+          "key_id": "b64699a5-0025-405a-acee-47bbb7e36db3",
+          "success": true,
+          "elapsed_ms": 10.7635,
+          "expected_plaintext": "hello quantum 12",
+          "actual_plaintext": "hello quantum 12"
+        },
+        {
+          "test": "kyber512_roundtrip_14",
+          "parameter_set": "kyber512",
+          "key_id": "37444bca-0df5-4a4e-a153-2f3497a9a418",
+          "success": true,
+          "elapsed_ms": 11.956,
+          "expected_plaintext": "hello quantum 13",
+          "actual_plaintext": "hello quantum 13"
+        },
+        {
+          "test": "kyber512_roundtrip_15",
+          "parameter_set": "kyber512",
+          "key_id": "5d86823f-9b0a-47c3-9619-62667e10faad",
+          "success": true,
+          "elapsed_ms": 9.8344,
+          "expected_plaintext": "hello quantum 14",
+          "actual_plaintext": "hello quantum 14"
+        },
+        {
+          "test": "kyber512_roundtrip_16",
+          "parameter_set": "kyber512",
+          "key_id": "8f89c765-64df-44cc-a74c-d3c4aeb9cf1b",
+          "success": true,
+          "elapsed_ms": 12.6257,
+          "expected_plaintext": "hello quantum 15",
+          "actual_plaintext": "hello quantum 15"
+        },
+        {
+          "test": "kyber512_roundtrip_17",
+          "parameter_set": "kyber512",
+          "key_id": "9bf9ac2f-7000-4c94-a415-b600f0e8c544",
+          "success": true,
+          "elapsed_ms": 13.5576,
+          "expected_plaintext": "hello quantum 16",
+          "actual_plaintext": "hello quantum 16"
+        },
+        {
+          "test": "kyber512_roundtrip_18",
+          "parameter_set": "kyber512",
+          "key_id": "3e718f68-ea60-4bd9-9840-b8a07158b76d",
+          "success": true,
+          "elapsed_ms": 13.3102,
+          "expected_plaintext": "hello quantum 17",
+          "actual_plaintext": "hello quantum 17"
+        },
+        {
+          "test": "kyber512_roundtrip_19",
+          "parameter_set": "kyber512",
+          "key_id": "f5a630a7-f5e8-4593-8274-48c3ce25557b",
+          "success": true,
+          "elapsed_ms": 12.3277,
+          "expected_plaintext": "hello quantum 18",
+          "actual_plaintext": "hello quantum 18"
+        },
+        {
+          "test": "kyber512_roundtrip_20",
+          "parameter_set": "kyber512",
+          "key_id": "447d365d-2d11-403d-824f-a1bbec1940d4",
+          "success": true,
+          "elapsed_ms": 14.296,
+          "expected_plaintext": "hello quantum 19",
+          "actual_plaintext": "hello quantum 19"
+        },
+        {
+          "test": "kyber512_roundtrip_21",
+          "parameter_set": "kyber512",
+          "key_id": "01e1dfe0-5bf7-4931-8fb3-387650416bfb",
+          "success": true,
+          "elapsed_ms": 13.6117,
+          "expected_plaintext": "hello quantum 20",
+          "actual_plaintext": "hello quantum 20"
+        },
+        {
+          "test": "kyber512_roundtrip_22",
+          "parameter_set": "kyber512",
+          "key_id": "f53cf701-18b4-4202-8419-8c84e7f29b13",
+          "success": true,
+          "elapsed_ms": 12.3682,
+          "expected_plaintext": "hello quantum 21",
+          "actual_plaintext": "hello quantum 21"
+        },
+        {
+          "test": "kyber512_roundtrip_23",
+          "parameter_set": "kyber512",
+          "key_id": "c8f2b5c5-806a-4fd7-891e-ec5433c54d45",
+          "success": true,
+          "elapsed_ms": 12.8124,
+          "expected_plaintext": "hello quantum 22",
+          "actual_plaintext": "hello quantum 22"
+        },
+        {
+          "test": "kyber512_roundtrip_24",
+          "parameter_set": "kyber512",
+          "key_id": "839517b5-0c04-469c-a32d-55913f68974a",
+          "success": true,
+          "elapsed_ms": 11.4685,
+          "expected_plaintext": "hello quantum 23",
+          "actual_plaintext": "hello quantum 23"
+        },
+        {
+          "test": "kyber512_roundtrip_25",
+          "parameter_set": "kyber512",
+          "key_id": "cfaee470-6ef1-4fc5-bb70-d50d9c6f2c4f",
+          "success": true,
+          "elapsed_ms": 14.2353,
+          "expected_plaintext": "hello quantum 24",
+          "actual_plaintext": "hello quantum 24"
+        },
+        {
+          "test": "kyber512_roundtrip_26",
+          "parameter_set": "kyber512",
+          "key_id": "9c2672bc-ec16-4b7a-8e72-42a60c873605",
+          "success": true,
+          "elapsed_ms": 10.8846,
+          "expected_plaintext": "hello quantum 25",
+          "actual_plaintext": "hello quantum 25"
+        },
+        {
+          "test": "kyber512_roundtrip_27",
+          "parameter_set": "kyber512",
+          "key_id": "d6b2c85d-a911-4c20-bab4-9b357163c63d",
+          "success": true,
+          "elapsed_ms": 13.7483,
+          "expected_plaintext": "hello quantum 26",
+          "actual_plaintext": "hello quantum 26"
+        },
+        {
+          "test": "kyber512_roundtrip_28",
+          "parameter_set": "kyber512",
+          "key_id": "20f6a653-161e-49fe-ba81-8f11be7083a3",
+          "success": true,
+          "elapsed_ms": 11.384,
+          "expected_plaintext": "hello quantum 27",
+          "actual_plaintext": "hello quantum 27"
+        },
+        {
+          "test": "kyber512_roundtrip_29",
+          "parameter_set": "kyber512",
+          "key_id": "2ee0aa83-ff91-4a4e-ba14-587032ad4b08",
+          "success": true,
+          "elapsed_ms": 11.6396,
+          "expected_plaintext": "hello quantum 28",
+          "actual_plaintext": "hello quantum 28"
+        },
+        {
+          "test": "kyber512_roundtrip_30",
+          "parameter_set": "kyber512",
+          "key_id": "f6cc209b-a995-4245-800d-5cd158e1a9e3",
+          "success": true,
+          "elapsed_ms": 15.2335,
+          "expected_plaintext": "hello quantum 29",
+          "actual_plaintext": "hello quantum 29"
+        },
+        {
+          "test": "kyber512_roundtrip_31",
+          "parameter_set": "kyber512",
+          "key_id": "47adfcdc-689e-4c02-a9ff-9d8944f58c8d",
+          "success": true,
+          "elapsed_ms": 14.1083,
+          "expected_plaintext": "hello quantum 30",
+          "actual_plaintext": "hello quantum 30"
+        },
+        {
+          "test": "kyber512_roundtrip_32",
+          "parameter_set": "kyber512",
+          "key_id": "4e8c8403-93c2-4b02-a163-bfa07614def0",
+          "success": true,
+          "elapsed_ms": 15.1924,
+          "expected_plaintext": "hello quantum 31",
+          "actual_plaintext": "hello quantum 31"
+        },
+        {
+          "test": "kyber512_roundtrip_33",
+          "parameter_set": "kyber512",
+          "key_id": "1bfeb9ef-2f2a-4e0d-8bb7-3c93c5dd8c5c",
+          "success": true,
+          "elapsed_ms": 11.158,
+          "expected_plaintext": "hello quantum 32",
+          "actual_plaintext": "hello quantum 32"
+        },
+        {
+          "test": "kyber512_roundtrip_34",
+          "parameter_set": "kyber512",
+          "key_id": "e4fba3b0-da23-4cf0-a75a-a57c0514059e",
+          "success": true,
+          "elapsed_ms": 13.9219,
+          "expected_plaintext": "hello quantum 33",
+          "actual_plaintext": "hello quantum 33"
+        },
+        {
+          "test": "kyber512_roundtrip_35",
+          "parameter_set": "kyber512",
+          "key_id": "d0f8c315-9205-407f-bf0f-a87b81506617",
+          "success": true,
+          "elapsed_ms": 13.174,
+          "expected_plaintext": "hello quantum 34",
+          "actual_plaintext": "hello quantum 34"
+        },
+        {
+          "test": "kyber512_roundtrip_36",
+          "parameter_set": "kyber512",
+          "key_id": "d9dc1b9c-04a0-4742-8b2a-c0f401e98f29",
+          "success": true,
+          "elapsed_ms": 12.147,
+          "expected_plaintext": "hello quantum 35",
+          "actual_plaintext": "hello quantum 35"
+        },
+        {
+          "test": "kyber512_roundtrip_37",
+          "parameter_set": "kyber512",
+          "key_id": "02ce860d-f304-41d3-955c-b1bb16844804",
+          "success": true,
+          "elapsed_ms": 14.8803,
+          "expected_plaintext": "hello quantum 36",
+          "actual_plaintext": "hello quantum 36"
+        },
+        {
+          "test": "kyber512_roundtrip_38",
+          "parameter_set": "kyber512",
+          "key_id": "f13c250c-60fd-4f96-aa13-6cc053e36023",
+          "success": true,
+          "elapsed_ms": 11.3872,
+          "expected_plaintext": "hello quantum 37",
+          "actual_plaintext": "hello quantum 37"
+        },
+        {
+          "test": "kyber512_roundtrip_39",
+          "parameter_set": "kyber512",
+          "key_id": "47ee0d4b-43ec-4350-99f2-9599c4ebe139",
+          "success": true,
+          "elapsed_ms": 13.1948,
+          "expected_plaintext": "hello quantum 38",
+          "actual_plaintext": "hello quantum 38"
+        },
+        {
+          "test": "kyber512_roundtrip_40",
+          "parameter_set": "kyber512",
+          "key_id": "63d1c13a-bd10-43b1-ad90-b05ddd042d99",
+          "success": true,
+          "elapsed_ms": 14.1673,
+          "expected_plaintext": "hello quantum 39",
+          "actual_plaintext": "hello quantum 39"
+        },
+        {
+          "test": "kyber512_roundtrip_41",
+          "parameter_set": "kyber512",
+          "key_id": "bf613e06-fe05-4045-9297-e288bfcf3073",
+          "success": true,
+          "elapsed_ms": 16.3207,
+          "expected_plaintext": "hello quantum 40",
+          "actual_plaintext": "hello quantum 40"
+        },
+        {
+          "test": "kyber512_roundtrip_42",
+          "parameter_set": "kyber512",
+          "key_id": "a9e89e67-caad-439a-9cef-9bf5dc449b17",
+          "success": true,
+          "elapsed_ms": 18.7413,
+          "expected_plaintext": "hello quantum 41",
+          "actual_plaintext": "hello quantum 41"
+        },
+        {
+          "test": "kyber512_roundtrip_43",
+          "parameter_set": "kyber512",
+          "key_id": "2b99688e-637a-45e6-bebb-ec3d2d0f9a25",
+          "success": true,
+          "elapsed_ms": 13.4744,
+          "expected_plaintext": "hello quantum 42",
+          "actual_plaintext": "hello quantum 42"
+        },
+        {
+          "test": "kyber512_roundtrip_44",
+          "parameter_set": "kyber512",
+          "key_id": "7e779191-0bd2-4ff1-be71-9b0322857a11",
+          "success": true,
+          "elapsed_ms": 11.1276,
+          "expected_plaintext": "hello quantum 43",
+          "actual_plaintext": "hello quantum 43"
+        },
+        {
+          "test": "kyber512_roundtrip_45",
+          "parameter_set": "kyber512",
+          "key_id": "9e6f4205-518a-4360-8676-5787fbddead0",
+          "success": true,
+          "elapsed_ms": 15.2733,
+          "expected_plaintext": "hello quantum 44",
+          "actual_plaintext": "hello quantum 44"
+        },
+        {
+          "test": "kyber512_roundtrip_46",
+          "parameter_set": "kyber512",
+          "key_id": "8143b284-ff68-4535-a29e-e8906343cb81",
+          "success": true,
+          "elapsed_ms": 18.0114,
+          "expected_plaintext": "hello quantum 45",
+          "actual_plaintext": "hello quantum 45"
+        },
+        {
+          "test": "kyber512_roundtrip_47",
+          "parameter_set": "kyber512",
+          "key_id": "450b2dbb-1e59-4021-8758-751d9cfde5b9",
+          "success": true,
+          "elapsed_ms": 13.9113,
+          "expected_plaintext": "hello quantum 46",
+          "actual_plaintext": "hello quantum 46"
+        },
+        {
+          "test": "kyber512_roundtrip_48",
+          "parameter_set": "kyber512",
+          "key_id": "3b18013b-3393-4abb-8b75-fbd69416f1b4",
+          "success": true,
+          "elapsed_ms": 13.4236,
+          "expected_plaintext": "hello quantum 47",
+          "actual_plaintext": "hello quantum 47"
+        },
+        {
+          "test": "kyber512_roundtrip_49",
+          "parameter_set": "kyber512",
+          "key_id": "2ce20837-62d4-4a83-acc3-98b4818e8013",
+          "success": true,
+          "elapsed_ms": 12.842,
+          "expected_plaintext": "hello quantum 48",
+          "actual_plaintext": "hello quantum 48"
+        },
+        {
+          "test": "kyber512_roundtrip_50",
+          "parameter_set": "kyber512",
+          "key_id": "c4dadd9d-aba1-4d4e-aac0-09dc0fbef133",
+          "success": true,
+          "elapsed_ms": 19.599,
+          "expected_plaintext": "hello quantum 49",
+          "actual_plaintext": "hello quantum 49"
+        },
+        {
+          "test": "kyber512_roundtrip_51",
+          "parameter_set": "kyber512",
+          "key_id": "524cb24d-d7da-4278-8b0d-cfc501d1c942",
+          "success": true,
+          "elapsed_ms": 28.0629,
+          "expected_plaintext": "hello quantum 50",
+          "actual_plaintext": "hello quantum 50"
+        },
+        {
+          "test": "kyber512_roundtrip_52",
+          "parameter_set": "kyber512",
+          "key_id": "7699bc25-5431-4af1-845f-145e80356075",
+          "success": true,
+          "elapsed_ms": 28.0735,
+          "expected_plaintext": "hello quantum 51",
+          "actual_plaintext": "hello quantum 51"
+        },
+        {
+          "test": "kyber512_roundtrip_53",
+          "parameter_set": "kyber512",
+          "key_id": "6799e8e0-bce0-48ba-9a39-21aa82756a3a",
+          "success": true,
+          "elapsed_ms": 20.5567,
+          "expected_plaintext": "hello quantum 52",
+          "actual_plaintext": "hello quantum 52"
+        },
+        {
+          "test": "kyber512_roundtrip_54",
+          "parameter_set": "kyber512",
+          "key_id": "09991d56-53fe-484d-b584-1087f0f41bd7",
+          "success": true,
+          "elapsed_ms": 21.494,
+          "expected_plaintext": "hello quantum 53",
+          "actual_plaintext": "hello quantum 53"
+        },
+        {
+          "test": "kyber512_roundtrip_55",
+          "parameter_set": "kyber512",
+          "key_id": "6b8d8314-faaa-4f93-bbf5-b717f315b45b",
+          "success": true,
+          "elapsed_ms": 19.623,
+          "expected_plaintext": "hello quantum 54",
+          "actual_plaintext": "hello quantum 54"
+        },
+        {
+          "test": "kyber512_roundtrip_56",
+          "parameter_set": "kyber512",
+          "key_id": "3512a217-97d6-4b17-bfbc-4bd3a1973da0",
+          "success": true,
+          "elapsed_ms": 23.0619,
+          "expected_plaintext": "hello quantum 55",
+          "actual_plaintext": "hello quantum 55"
+        },
+        {
+          "test": "kyber512_roundtrip_57",
+          "parameter_set": "kyber512",
+          "key_id": "aa8439ef-eb5f-430c-a961-949decb0fa04",
+          "success": true,
+          "elapsed_ms": 32.1789,
+          "expected_plaintext": "hello quantum 56",
+          "actual_plaintext": "hello quantum 56"
+        },
+        {
+          "test": "kyber512_roundtrip_58",
+          "parameter_set": "kyber512",
+          "key_id": "c90b4856-7d3b-43e8-a096-e05cc1cc7af8",
+          "success": true,
+          "elapsed_ms": 41.8888,
+          "expected_plaintext": "hello quantum 57",
+          "actual_plaintext": "hello quantum 57"
+        },
+        {
+          "test": "kyber512_roundtrip_59",
+          "parameter_set": "kyber512",
+          "key_id": "0cd85623-5390-46c5-90b8-591766ef8ebc",
+          "success": true,
+          "elapsed_ms": 21.6368,
+          "expected_plaintext": "hello quantum 58",
+          "actual_plaintext": "hello quantum 58"
+        },
+        {
+          "test": "kyber512_roundtrip_60",
+          "parameter_set": "kyber512",
+          "key_id": "909be9df-b0cc-41b0-8617-ada0d2ce3539",
+          "success": true,
+          "elapsed_ms": 14.9224,
+          "expected_plaintext": "hello quantum 59",
+          "actual_plaintext": "hello quantum 59"
+        },
+        {
+          "test": "kyber512_roundtrip_61",
+          "parameter_set": "kyber512",
+          "key_id": "4af4f8f2-0ee3-4ff4-b75f-188b2005a336",
+          "success": true,
+          "elapsed_ms": 15.5392,
+          "expected_plaintext": "hello quantum 60",
+          "actual_plaintext": "hello quantum 60"
+        },
+        {
+          "test": "kyber512_roundtrip_62",
+          "parameter_set": "kyber512",
+          "key_id": "73ce5f35-4e2a-4f8d-afc3-c76cbf31d370",
+          "success": true,
+          "elapsed_ms": 12.3183,
+          "expected_plaintext": "hello quantum 61",
+          "actual_plaintext": "hello quantum 61"
+        },
+        {
+          "test": "kyber512_roundtrip_63",
+          "parameter_set": "kyber512",
+          "key_id": "72ebd4ab-fb7e-4255-b7ed-931f8b19526b",
+          "success": true,
+          "elapsed_ms": 11.3328,
+          "expected_plaintext": "hello quantum 62",
+          "actual_plaintext": "hello quantum 62"
+        },
+        {
+          "test": "kyber512_roundtrip_64",
+          "parameter_set": "kyber512",
+          "key_id": "9ef2e7d8-d83f-433b-992e-a23070ba5285",
+          "success": true,
+          "elapsed_ms": 12.4571,
+          "expected_plaintext": "hello quantum 63",
+          "actual_plaintext": "hello quantum 63"
+        },
+        {
+          "test": "kyber512_roundtrip_65",
+          "parameter_set": "kyber512",
+          "key_id": "365e9686-e4b7-41dc-bdda-ef1a1c8e2c4f",
+          "success": true,
+          "elapsed_ms": 12.3153,
+          "expected_plaintext": "hello quantum 64",
+          "actual_plaintext": "hello quantum 64"
+        },
+        {
+          "test": "kyber512_roundtrip_66",
+          "parameter_set": "kyber512",
+          "key_id": "727d3c57-6893-40c8-ae2f-5ff5395f9640",
+          "success": true,
+          "elapsed_ms": 13.22,
+          "expected_plaintext": "hello quantum 65",
+          "actual_plaintext": "hello quantum 65"
+        },
+        {
+          "test": "kyber512_roundtrip_67",
+          "parameter_set": "kyber512",
+          "key_id": "632c590b-a0e6-4727-ba94-0704d2073db6",
+          "success": true,
+          "elapsed_ms": 11.9163,
+          "expected_plaintext": "hello quantum 66",
+          "actual_plaintext": "hello quantum 66"
+        },
+        {
+          "test": "kyber512_roundtrip_68",
+          "parameter_set": "kyber512",
+          "key_id": "6a63aed7-8a37-4ed1-9646-e8b14298bf1a",
+          "success": true,
+          "elapsed_ms": 15.0586,
+          "expected_plaintext": "hello quantum 67",
+          "actual_plaintext": "hello quantum 67"
+        },
+        {
+          "test": "kyber512_roundtrip_69",
+          "parameter_set": "kyber512",
+          "key_id": "8ac38120-7172-4331-b6f9-b5442fa3903e",
+          "success": true,
+          "elapsed_ms": 12.3893,
+          "expected_plaintext": "hello quantum 68",
+          "actual_plaintext": "hello quantum 68"
+        },
+        {
+          "test": "kyber512_roundtrip_70",
+          "parameter_set": "kyber512",
+          "key_id": "d7d816c3-4391-40a8-bc41-efeb278cd9ce",
+          "success": true,
+          "elapsed_ms": 12.8723,
+          "expected_plaintext": "hello quantum 69",
+          "actual_plaintext": "hello quantum 69"
+        },
+        {
+          "test": "kyber512_roundtrip_71",
+          "parameter_set": "kyber512",
+          "key_id": "07275593-2dc0-4b47-bf3b-8b8847a41b5f",
+          "success": true,
+          "elapsed_ms": 16.4884,
+          "expected_plaintext": "hello quantum 70",
+          "actual_plaintext": "hello quantum 70"
+        },
+        {
+          "test": "kyber512_roundtrip_72",
+          "parameter_set": "kyber512",
+          "key_id": "e760cff1-3892-4f16-8444-176b2abd33b8",
+          "success": true,
+          "elapsed_ms": 11.9551,
+          "expected_plaintext": "hello quantum 71",
+          "actual_plaintext": "hello quantum 71"
+        },
+        {
+          "test": "kyber512_roundtrip_73",
+          "parameter_set": "kyber512",
+          "key_id": "013287d1-34cf-4d73-b30b-1fc068d6b81d",
+          "success": true,
+          "elapsed_ms": 13.9403,
+          "expected_plaintext": "hello quantum 72",
+          "actual_plaintext": "hello quantum 72"
+        },
+        {
+          "test": "kyber512_roundtrip_74",
+          "parameter_set": "kyber512",
+          "key_id": "b87f3b34-ac82-403c-9066-2bc450382e89",
+          "success": true,
+          "elapsed_ms": 24.8153,
+          "expected_plaintext": "hello quantum 73",
+          "actual_plaintext": "hello quantum 73"
+        },
+        {
+          "test": "kyber512_roundtrip_75",
+          "parameter_set": "kyber512",
+          "key_id": "5de8bd20-76dd-4cd0-b626-36b859d9a243",
+          "success": true,
+          "elapsed_ms": 13.1319,
+          "expected_plaintext": "hello quantum 74",
+          "actual_plaintext": "hello quantum 74"
+        },
+        {
+          "test": "kyber512_roundtrip_76",
+          "parameter_set": "kyber512",
+          "key_id": "de799cba-293e-4cf2-8fd9-8975cbc75886",
+          "success": true,
+          "elapsed_ms": 11.485,
+          "expected_plaintext": "hello quantum 75",
+          "actual_plaintext": "hello quantum 75"
+        },
+        {
+          "test": "kyber512_roundtrip_77",
+          "parameter_set": "kyber512",
+          "key_id": "768a75bd-45af-493a-87a5-b53e2a721fa8",
+          "success": true,
+          "elapsed_ms": 12.7839,
+          "expected_plaintext": "hello quantum 76",
+          "actual_plaintext": "hello quantum 76"
+        },
+        {
+          "test": "kyber512_roundtrip_78",
+          "parameter_set": "kyber512",
+          "key_id": "a2953fcd-c2af-4ad5-bddf-e3721946f706",
+          "success": true,
+          "elapsed_ms": 10.7294,
+          "expected_plaintext": "hello quantum 77",
+          "actual_plaintext": "hello quantum 77"
+        },
+        {
+          "test": "kyber512_roundtrip_79",
+          "parameter_set": "kyber512",
+          "key_id": "186bcd63-89e3-4ef9-bc20-45129fa28328",
+          "success": true,
+          "elapsed_ms": 13.4217,
+          "expected_plaintext": "hello quantum 78",
+          "actual_plaintext": "hello quantum 78"
+        },
+        {
+          "test": "kyber512_roundtrip_80",
+          "parameter_set": "kyber512",
+          "key_id": "7bb3b4f3-4793-42ed-933a-2fc8c6dab5eb",
+          "success": true,
+          "elapsed_ms": 12.3962,
+          "expected_plaintext": "hello quantum 79",
+          "actual_plaintext": "hello quantum 79"
+        },
+        {
+          "test": "kyber512_roundtrip_81",
+          "parameter_set": "kyber512",
+          "key_id": "34481750-2cb9-4087-8b4b-4a983a4c37ff",
+          "success": true,
+          "elapsed_ms": 15.3334,
+          "expected_plaintext": "hello quantum 80",
+          "actual_plaintext": "hello quantum 80"
+        },
+        {
+          "test": "kyber512_roundtrip_82",
+          "parameter_set": "kyber512",
+          "key_id": "1f81d411-de86-4f82-b63a-52b6184244cb",
+          "success": true,
+          "elapsed_ms": 15.764,
+          "expected_plaintext": "hello quantum 81",
+          "actual_plaintext": "hello quantum 81"
+        },
+        {
+          "test": "kyber512_roundtrip_83",
+          "parameter_set": "kyber512",
+          "key_id": "cadafee0-22aa-45be-9a22-c5d48d8c6b0e",
+          "success": true,
+          "elapsed_ms": 11.7201,
+          "expected_plaintext": "hello quantum 82",
+          "actual_plaintext": "hello quantum 82"
+        },
+        {
+          "test": "kyber512_roundtrip_84",
+          "parameter_set": "kyber512",
+          "key_id": "0dfd360c-84a3-4bdb-8fb3-2600667a65b0",
+          "success": true,
+          "elapsed_ms": 13.6894,
+          "expected_plaintext": "hello quantum 83",
+          "actual_plaintext": "hello quantum 83"
+        },
+        {
+          "test": "kyber512_roundtrip_85",
+          "parameter_set": "kyber512",
+          "key_id": "a4831f48-73fb-4597-8965-50a4a9b7fb2f",
+          "success": true,
+          "elapsed_ms": 36.1841,
+          "expected_plaintext": "hello quantum 84",
+          "actual_plaintext": "hello quantum 84"
+        },
+        {
+          "test": "kyber512_roundtrip_86",
+          "parameter_set": "kyber512",
+          "key_id": "af137ebb-5023-49f4-b4e4-283399c38f10",
+          "success": true,
+          "elapsed_ms": 10.3966,
+          "expected_plaintext": "hello quantum 85",
+          "actual_plaintext": "hello quantum 85"
+        },
+        {
+          "test": "kyber512_roundtrip_87",
+          "parameter_set": "kyber512",
+          "key_id": "8fab7b14-34ae-429b-96a7-79392dfa811f",
+          "success": true,
+          "elapsed_ms": 13.9335,
+          "expected_plaintext": "hello quantum 86",
+          "actual_plaintext": "hello quantum 86"
+        },
+        {
+          "test": "kyber512_roundtrip_88",
+          "parameter_set": "kyber512",
+          "key_id": "faec3425-f792-4197-a745-632618b79e88",
+          "success": true,
+          "elapsed_ms": 10.792,
+          "expected_plaintext": "hello quantum 87",
+          "actual_plaintext": "hello quantum 87"
+        },
+        {
+          "test": "kyber512_roundtrip_89",
+          "parameter_set": "kyber512",
+          "key_id": "fe9379e9-fe52-4ec0-82c2-c28f7be7a54e",
+          "success": true,
+          "elapsed_ms": 10.5185,
+          "expected_plaintext": "hello quantum 88",
+          "actual_plaintext": "hello quantum 88"
+        },
+        {
+          "test": "kyber512_roundtrip_90",
+          "parameter_set": "kyber512",
+          "key_id": "e4d83011-b20e-4d9d-b48d-4de4f926d632",
+          "success": true,
+          "elapsed_ms": 12.808,
+          "expected_plaintext": "hello quantum 89",
+          "actual_plaintext": "hello quantum 89"
+        },
+        {
+          "test": "kyber512_roundtrip_91",
+          "parameter_set": "kyber512",
+          "key_id": "ef6daf47-d508-4a34-9c23-78d52b7bf24f",
+          "success": true,
+          "elapsed_ms": 11.6734,
+          "expected_plaintext": "hello quantum 90",
+          "actual_plaintext": "hello quantum 90"
+        },
+        {
+          "test": "kyber512_roundtrip_92",
+          "parameter_set": "kyber512",
+          "key_id": "d721fdb3-12ef-4911-873d-c5dc1c0b6c1b",
+          "success": true,
+          "elapsed_ms": 11.3154,
+          "expected_plaintext": "hello quantum 91",
+          "actual_plaintext": "hello quantum 91"
+        },
+        {
+          "test": "kyber512_roundtrip_93",
+          "parameter_set": "kyber512",
+          "key_id": "24a4febc-5960-4e32-a675-3fb02a68f132",
+          "success": true,
+          "elapsed_ms": 13.0039,
+          "expected_plaintext": "hello quantum 92",
+          "actual_plaintext": "hello quantum 92"
+        },
+        {
+          "test": "kyber512_roundtrip_94",
+          "parameter_set": "kyber512",
+          "key_id": "7a0ce719-18d9-4edf-968f-d93d5ae8810d",
+          "success": true,
+          "elapsed_ms": 10.1827,
+          "expected_plaintext": "hello quantum 93",
+          "actual_plaintext": "hello quantum 93"
+        },
+        {
+          "test": "kyber512_roundtrip_95",
+          "parameter_set": "kyber512",
+          "key_id": "d1b8fef4-04ad-4a6f-8a7a-677585cda869",
+          "success": true,
+          "elapsed_ms": 19.8824,
+          "expected_plaintext": "hello quantum 94",
+          "actual_plaintext": "hello quantum 94"
+        },
+        {
+          "test": "kyber512_roundtrip_96",
+          "parameter_set": "kyber512",
+          "key_id": "b2a1c194-7fbb-4d87-9494-3d28a5523cec",
+          "success": true,
+          "elapsed_ms": 15.9327,
+          "expected_plaintext": "hello quantum 95",
+          "actual_plaintext": "hello quantum 95"
+        },
+        {
+          "test": "kyber512_roundtrip_97",
+          "parameter_set": "kyber512",
+          "key_id": "905d61f5-fb8a-4712-896e-564298ab0a20",
+          "success": true,
+          "elapsed_ms": 11.3057,
+          "expected_plaintext": "hello quantum 96",
+          "actual_plaintext": "hello quantum 96"
+        },
+        {
+          "test": "kyber512_roundtrip_98",
+          "parameter_set": "kyber512",
+          "key_id": "c1a33885-4604-4e28-9e8c-75a8dc45b4ea",
+          "success": true,
+          "elapsed_ms": 13.7722,
+          "expected_plaintext": "hello quantum 97",
+          "actual_plaintext": "hello quantum 97"
+        },
+        {
+          "test": "kyber512_roundtrip_99",
+          "parameter_set": "kyber512",
+          "key_id": "37e930ec-4bac-48be-8d71-8e901375b282",
+          "success": true,
+          "elapsed_ms": 14.3909,
+          "expected_plaintext": "hello quantum 98",
+          "actual_plaintext": "hello quantum 98"
+        },
+        {
+          "test": "kyber512_roundtrip_100",
+          "parameter_set": "kyber512",
+          "key_id": "b2f88c5d-e069-4529-8fb8-a5208d2b3293",
+          "success": true,
+          "elapsed_ms": 12.5331,
+          "expected_plaintext": "hello quantum 99",
+          "actual_plaintext": "hello quantum 99"
+        }
+      ]
+    },
+    {
+      "suite": "kyber_encrypt_decrypt",
+      "parameter_set": "kyber768",
+      "iterations": 100,
+      "passed": 100,
+      "failed": 0,
+      "success_rate": 100.0,
+      "latency": {
+        "avg_ms": 15.3148,
+        "p95_ms": 29.4891,
+        "p99_ms": 79.3205,
+        "min_ms": 9.2887,
+        "max_ms": 79.3205
+      },
+      "details": [
+        {
+          "test": "kyber768_roundtrip_1",
+          "parameter_set": "kyber768",
+          "key_id": "0a8426e1-7da5-4c52-a9fa-13155fe1b671",
+          "success": true,
+          "elapsed_ms": 21.9396,
+          "expected_plaintext": "hello quantum 0",
+          "actual_plaintext": "hello quantum 0"
+        },
+        {
+          "test": "kyber768_roundtrip_2",
+          "parameter_set": "kyber768",
+          "key_id": "87f1b0b9-c9a5-4614-84c9-46188bb579a0",
+          "success": true,
+          "elapsed_ms": 14.3425,
+          "expected_plaintext": "hello quantum 1",
+          "actual_plaintext": "hello quantum 1"
+        },
+        {
+          "test": "kyber768_roundtrip_3",
+          "parameter_set": "kyber768",
+          "key_id": "a4545e42-3b00-4674-97cf-dd0439c7eca6",
+          "success": true,
+          "elapsed_ms": 14.1614,
+          "expected_plaintext": "hello quantum 2",
+          "actual_plaintext": "hello quantum 2"
+        },
+        {
+          "test": "kyber768_roundtrip_4",
+          "parameter_set": "kyber768",
+          "key_id": "b2b71e79-1009-4f2b-87ce-8694e5a5fea9",
+          "success": true,
+          "elapsed_ms": 12.1885,
+          "expected_plaintext": "hello quantum 3",
+          "actual_plaintext": "hello quantum 3"
+        },
+        {
+          "test": "kyber768_roundtrip_5",
+          "parameter_set": "kyber768",
+          "key_id": "c191eabe-1f0e-4d9f-a764-e68796502466",
+          "success": true,
+          "elapsed_ms": 10.3591,
+          "expected_plaintext": "hello quantum 4",
+          "actual_plaintext": "hello quantum 4"
+        },
+        {
+          "test": "kyber768_roundtrip_6",
+          "parameter_set": "kyber768",
+          "key_id": "6f40e882-e08b-4204-ae8b-8fc67a047a30",
+          "success": true,
+          "elapsed_ms": 11.1268,
+          "expected_plaintext": "hello quantum 5",
+          "actual_plaintext": "hello quantum 5"
+        },
+        {
+          "test": "kyber768_roundtrip_7",
+          "parameter_set": "kyber768",
+          "key_id": "eece6d63-b665-45ae-9319-e89e112df6ea",
+          "success": true,
+          "elapsed_ms": 12.7863,
+          "expected_plaintext": "hello quantum 6",
+          "actual_plaintext": "hello quantum 6"
+        },
+        {
+          "test": "kyber768_roundtrip_8",
+          "parameter_set": "kyber768",
+          "key_id": "79aa127e-faac-4c64-85e9-678f1401323f",
+          "success": true,
+          "elapsed_ms": 10.8079,
+          "expected_plaintext": "hello quantum 7",
+          "actual_plaintext": "hello quantum 7"
+        },
+        {
+          "test": "kyber768_roundtrip_9",
+          "parameter_set": "kyber768",
+          "key_id": "640375dc-d3f0-4450-bd9b-a542060e19ef",
+          "success": true,
+          "elapsed_ms": 13.3501,
+          "expected_plaintext": "hello quantum 8",
+          "actual_plaintext": "hello quantum 8"
+        },
+        {
+          "test": "kyber768_roundtrip_10",
+          "parameter_set": "kyber768",
+          "key_id": "5c0a0687-78f8-413c-8ea5-799f4338b447",
+          "success": true,
+          "elapsed_ms": 22.6981,
+          "expected_plaintext": "hello quantum 9",
+          "actual_plaintext": "hello quantum 9"
+        },
+        {
+          "test": "kyber768_roundtrip_11",
+          "parameter_set": "kyber768",
+          "key_id": "f0df597c-926c-4c12-b7bd-e27f38367abe",
+          "success": true,
+          "elapsed_ms": 22.3099,
+          "expected_plaintext": "hello quantum 10",
+          "actual_plaintext": "hello quantum 10"
+        },
+        {
+          "test": "kyber768_roundtrip_12",
+          "parameter_set": "kyber768",
+          "key_id": "a0dfdb8f-d5bc-490a-993c-61d75f611776",
+          "success": true,
+          "elapsed_ms": 15.1754,
+          "expected_plaintext": "hello quantum 11",
+          "actual_plaintext": "hello quantum 11"
+        },
+        {
+          "test": "kyber768_roundtrip_13",
+          "parameter_set": "kyber768",
+          "key_id": "edd763ce-064f-4eb1-a91a-4e03ac9aef83",
+          "success": true,
+          "elapsed_ms": 10.9052,
+          "expected_plaintext": "hello quantum 12",
+          "actual_plaintext": "hello quantum 12"
+        },
+        {
+          "test": "kyber768_roundtrip_14",
+          "parameter_set": "kyber768",
+          "key_id": "71614f85-690d-4394-b602-71a381b8ae84",
+          "success": true,
+          "elapsed_ms": 10.7382,
+          "expected_plaintext": "hello quantum 13",
+          "actual_plaintext": "hello quantum 13"
+        },
+        {
+          "test": "kyber768_roundtrip_15",
+          "parameter_set": "kyber768",
+          "key_id": "47712020-fc20-4dc8-9918-b3f82bc5bb79",
+          "success": true,
+          "elapsed_ms": 11.4319,
+          "expected_plaintext": "hello quantum 14",
+          "actual_plaintext": "hello quantum 14"
+        },
+        {
+          "test": "kyber768_roundtrip_16",
+          "parameter_set": "kyber768",
+          "key_id": "0d2330ab-abff-497c-8ce2-b6d978423f59",
+          "success": true,
+          "elapsed_ms": 15.5582,
+          "expected_plaintext": "hello quantum 15",
+          "actual_plaintext": "hello quantum 15"
+        },
+        {
+          "test": "kyber768_roundtrip_17",
+          "parameter_set": "kyber768",
+          "key_id": "218956f2-3d2e-444d-9e08-51c7021e3cbe",
+          "success": true,
+          "elapsed_ms": 12.0074,
+          "expected_plaintext": "hello quantum 16",
+          "actual_plaintext": "hello quantum 16"
+        },
+        {
+          "test": "kyber768_roundtrip_18",
+          "parameter_set": "kyber768",
+          "key_id": "5eeacbed-ff43-4ac8-b775-dfe05fee9bba",
+          "success": true,
+          "elapsed_ms": 14.5296,
+          "expected_plaintext": "hello quantum 17",
+          "actual_plaintext": "hello quantum 17"
+        },
+        {
+          "test": "kyber768_roundtrip_19",
+          "parameter_set": "kyber768",
+          "key_id": "4006af05-5431-42ad-bef0-ce056331efbc",
+          "success": true,
+          "elapsed_ms": 15.5053,
+          "expected_plaintext": "hello quantum 18",
+          "actual_plaintext": "hello quantum 18"
+        },
+        {
+          "test": "kyber768_roundtrip_20",
+          "parameter_set": "kyber768",
+          "key_id": "7cba6242-21d7-4d62-b7d8-818f899c4d66",
+          "success": true,
+          "elapsed_ms": 33.956,
+          "expected_plaintext": "hello quantum 19",
+          "actual_plaintext": "hello quantum 19"
+        },
+        {
+          "test": "kyber768_roundtrip_21",
+          "parameter_set": "kyber768",
+          "key_id": "37c1b95a-9b91-46b0-ba40-03c7de9be232",
+          "success": true,
+          "elapsed_ms": 79.3205,
+          "expected_plaintext": "hello quantum 20",
+          "actual_plaintext": "hello quantum 20"
+        },
+        {
+          "test": "kyber768_roundtrip_22",
+          "parameter_set": "kyber768",
+          "key_id": "6e844b5d-e055-48ef-9bb8-1937662acb54",
+          "success": true,
+          "elapsed_ms": 21.783,
+          "expected_plaintext": "hello quantum 21",
+          "actual_plaintext": "hello quantum 21"
+        },
+        {
+          "test": "kyber768_roundtrip_23",
+          "parameter_set": "kyber768",
+          "key_id": "431901f3-3caf-4875-a5eb-493f7e696a32",
+          "success": true,
+          "elapsed_ms": 18.5219,
+          "expected_plaintext": "hello quantum 22",
+          "actual_plaintext": "hello quantum 22"
+        },
+        {
+          "test": "kyber768_roundtrip_24",
+          "parameter_set": "kyber768",
+          "key_id": "ced57f37-ece8-48d9-98f1-dd669811fac3",
+          "success": true,
+          "elapsed_ms": 17.6823,
+          "expected_plaintext": "hello quantum 23",
+          "actual_plaintext": "hello quantum 23"
+        },
+        {
+          "test": "kyber768_roundtrip_25",
+          "parameter_set": "kyber768",
+          "key_id": "18899b81-bd4d-43cc-b61f-abce343202ba",
+          "success": true,
+          "elapsed_ms": 16.6257,
+          "expected_plaintext": "hello quantum 24",
+          "actual_plaintext": "hello quantum 24"
+        },
+        {
+          "test": "kyber768_roundtrip_26",
+          "parameter_set": "kyber768",
+          "key_id": "a6c4a824-8a8f-4d8a-88ff-ee1f50261ca6",
+          "success": true,
+          "elapsed_ms": 14.2245,
+          "expected_plaintext": "hello quantum 25",
+          "actual_plaintext": "hello quantum 25"
+        },
+        {
+          "test": "kyber768_roundtrip_27",
+          "parameter_set": "kyber768",
+          "key_id": "a5cf654f-4256-4e84-91ad-2cd6219a82f0",
+          "success": true,
+          "elapsed_ms": 13.656,
+          "expected_plaintext": "hello quantum 26",
+          "actual_plaintext": "hello quantum 26"
+        },
+        {
+          "test": "kyber768_roundtrip_28",
+          "parameter_set": "kyber768",
+          "key_id": "7183e4dc-9780-4dd4-99fd-7d2d945615e3",
+          "success": true,
+          "elapsed_ms": 12.1708,
+          "expected_plaintext": "hello quantum 27",
+          "actual_plaintext": "hello quantum 27"
+        },
+        {
+          "test": "kyber768_roundtrip_29",
+          "parameter_set": "kyber768",
+          "key_id": "c4ea989b-5064-44c5-8174-b4139c33e6f6",
+          "success": true,
+          "elapsed_ms": 14.9088,
+          "expected_plaintext": "hello quantum 28",
+          "actual_plaintext": "hello quantum 28"
+        },
+        {
+          "test": "kyber768_roundtrip_30",
+          "parameter_set": "kyber768",
+          "key_id": "dfd9a4b2-6e65-4dd6-a807-96f39f0c08ea",
+          "success": true,
+          "elapsed_ms": 13.2413,
+          "expected_plaintext": "hello quantum 29",
+          "actual_plaintext": "hello quantum 29"
+        },
+        {
+          "test": "kyber768_roundtrip_31",
+          "parameter_set": "kyber768",
+          "key_id": "35f5abf1-49cb-4ae5-bbe6-a553ef8a3ef7",
+          "success": true,
+          "elapsed_ms": 12.7159,
+          "expected_plaintext": "hello quantum 30",
+          "actual_plaintext": "hello quantum 30"
+        },
+        {
+          "test": "kyber768_roundtrip_32",
+          "parameter_set": "kyber768",
+          "key_id": "5bebf131-bcf8-401f-847d-77e2ac5538c7",
+          "success": true,
+          "elapsed_ms": 12.8886,
+          "expected_plaintext": "hello quantum 31",
+          "actual_plaintext": "hello quantum 31"
+        },
+        {
+          "test": "kyber768_roundtrip_33",
+          "parameter_set": "kyber768",
+          "key_id": "5baa5634-4684-49a7-bde7-64b2e01df355",
+          "success": true,
+          "elapsed_ms": 12.0613,
+          "expected_plaintext": "hello quantum 32",
+          "actual_plaintext": "hello quantum 32"
+        },
+        {
+          "test": "kyber768_roundtrip_34",
+          "parameter_set": "kyber768",
+          "key_id": "7abd5008-b14f-40ef-b6db-26a4e6b2956c",
+          "success": true,
+          "elapsed_ms": 13.1281,
+          "expected_plaintext": "hello quantum 33",
+          "actual_plaintext": "hello quantum 33"
+        },
+        {
+          "test": "kyber768_roundtrip_35",
+          "parameter_set": "kyber768",
+          "key_id": "37df768c-3702-4576-bf27-a271ce653628",
+          "success": true,
+          "elapsed_ms": 13.3756,
+          "expected_plaintext": "hello quantum 34",
+          "actual_plaintext": "hello quantum 34"
+        },
+        {
+          "test": "kyber768_roundtrip_36",
+          "parameter_set": "kyber768",
+          "key_id": "dadba4e3-073e-483d-bf67-e18e7e1d4a4c",
+          "success": true,
+          "elapsed_ms": 12.2748,
+          "expected_plaintext": "hello quantum 35",
+          "actual_plaintext": "hello quantum 35"
+        },
+        {
+          "test": "kyber768_roundtrip_37",
+          "parameter_set": "kyber768",
+          "key_id": "b483f015-eb0c-45f3-aa4d-338045fce5db",
+          "success": true,
+          "elapsed_ms": 14.1466,
+          "expected_plaintext": "hello quantum 36",
+          "actual_plaintext": "hello quantum 36"
+        },
+        {
+          "test": "kyber768_roundtrip_38",
+          "parameter_set": "kyber768",
+          "key_id": "dcbc30b9-b379-484a-8d0d-7476a8374c07",
+          "success": true,
+          "elapsed_ms": 13.9325,
+          "expected_plaintext": "hello quantum 37",
+          "actual_plaintext": "hello quantum 37"
+        },
+        {
+          "test": "kyber768_roundtrip_39",
+          "parameter_set": "kyber768",
+          "key_id": "d68a2158-b7f3-4c27-b9d8-c1bd318b71b3",
+          "success": true,
+          "elapsed_ms": 13.5806,
+          "expected_plaintext": "hello quantum 38",
+          "actual_plaintext": "hello quantum 38"
+        },
+        {
+          "test": "kyber768_roundtrip_40",
+          "parameter_set": "kyber768",
+          "key_id": "1d2e01f2-03a9-4e4a-8c19-a5f88a209343",
+          "success": true,
+          "elapsed_ms": 11.1216,
+          "expected_plaintext": "hello quantum 39",
+          "actual_plaintext": "hello quantum 39"
+        },
+        {
+          "test": "kyber768_roundtrip_41",
+          "parameter_set": "kyber768",
+          "key_id": "d6eb5e18-4daf-4f58-aeec-37ef7b454641",
+          "success": true,
+          "elapsed_ms": 10.4631,
+          "expected_plaintext": "hello quantum 40",
+          "actual_plaintext": "hello quantum 40"
+        },
+        {
+          "test": "kyber768_roundtrip_42",
+          "parameter_set": "kyber768",
+          "key_id": "0d6489bc-684d-422a-81ea-6e045fddc22f",
+          "success": true,
+          "elapsed_ms": 9.9213,
+          "expected_plaintext": "hello quantum 41",
+          "actual_plaintext": "hello quantum 41"
+        },
+        {
+          "test": "kyber768_roundtrip_43",
+          "parameter_set": "kyber768",
+          "key_id": "10880b40-8ac3-417c-ab2f-00561ac01fa3",
+          "success": true,
+          "elapsed_ms": 10.9677,
+          "expected_plaintext": "hello quantum 42",
+          "actual_plaintext": "hello quantum 42"
+        },
+        {
+          "test": "kyber768_roundtrip_44",
+          "parameter_set": "kyber768",
+          "key_id": "91112c71-616d-4d39-8675-f7d2082b4591",
+          "success": true,
+          "elapsed_ms": 10.1663,
+          "expected_plaintext": "hello quantum 43",
+          "actual_plaintext": "hello quantum 43"
+        },
+        {
+          "test": "kyber768_roundtrip_45",
+          "parameter_set": "kyber768",
+          "key_id": "a7776df8-86f2-4df7-ae0f-23d37479eb41",
+          "success": true,
+          "elapsed_ms": 9.4211,
+          "expected_plaintext": "hello quantum 44",
+          "actual_plaintext": "hello quantum 44"
+        },
+        {
+          "test": "kyber768_roundtrip_46",
+          "parameter_set": "kyber768",
+          "key_id": "56b09669-2c90-4571-8a48-8f534420a17d",
+          "success": true,
+          "elapsed_ms": 9.2887,
+          "expected_plaintext": "hello quantum 45",
+          "actual_plaintext": "hello quantum 45"
+        },
+        {
+          "test": "kyber768_roundtrip_47",
+          "parameter_set": "kyber768",
+          "key_id": "13369ac5-6196-4f7b-8190-d46b7855bac5",
+          "success": true,
+          "elapsed_ms": 9.5773,
+          "expected_plaintext": "hello quantum 46",
+          "actual_plaintext": "hello quantum 46"
+        },
+        {
+          "test": "kyber768_roundtrip_48",
+          "parameter_set": "kyber768",
+          "key_id": "3edc84c5-3c75-4598-b8bc-18ad348db15d",
+          "success": true,
+          "elapsed_ms": 12.0129,
+          "expected_plaintext": "hello quantum 47",
+          "actual_plaintext": "hello quantum 47"
+        },
+        {
+          "test": "kyber768_roundtrip_49",
+          "parameter_set": "kyber768",
+          "key_id": "a1aa7d3d-9b19-45ad-af6e-55bd698d9b3a",
+          "success": true,
+          "elapsed_ms": 10.2065,
+          "expected_plaintext": "hello quantum 48",
+          "actual_plaintext": "hello quantum 48"
+        },
+        {
+          "test": "kyber768_roundtrip_50",
+          "parameter_set": "kyber768",
+          "key_id": "cf1579fa-16c9-4ff5-8453-a5be92b4ea78",
+          "success": true,
+          "elapsed_ms": 10.9923,
+          "expected_plaintext": "hello quantum 49",
+          "actual_plaintext": "hello quantum 49"
+        },
+        {
+          "test": "kyber768_roundtrip_51",
+          "parameter_set": "kyber768",
+          "key_id": "6e6853fd-b600-4ad8-bd51-63130f857b10",
+          "success": true,
+          "elapsed_ms": 13.5278,
+          "expected_plaintext": "hello quantum 50",
+          "actual_plaintext": "hello quantum 50"
+        },
+        {
+          "test": "kyber768_roundtrip_52",
+          "parameter_set": "kyber768",
+          "key_id": "7557e1fa-0067-474d-94a1-a2cbaac00f13",
+          "success": true,
+          "elapsed_ms": 13.5081,
+          "expected_plaintext": "hello quantum 51",
+          "actual_plaintext": "hello quantum 51"
+        },
+        {
+          "test": "kyber768_roundtrip_53",
+          "parameter_set": "kyber768",
+          "key_id": "aff7cb2d-3d8a-443b-85a1-f14823a9214b",
+          "success": true,
+          "elapsed_ms": 10.9707,
+          "expected_plaintext": "hello quantum 52",
+          "actual_plaintext": "hello quantum 52"
+        },
+        {
+          "test": "kyber768_roundtrip_54",
+          "parameter_set": "kyber768",
+          "key_id": "6ce03127-5ab3-4adb-b022-dc258d011803",
+          "success": true,
+          "elapsed_ms": 22.9713,
+          "expected_plaintext": "hello quantum 53",
+          "actual_plaintext": "hello quantum 53"
+        },
+        {
+          "test": "kyber768_roundtrip_55",
+          "parameter_set": "kyber768",
+          "key_id": "834859ca-83a1-451d-a71c-b78ca9e645ce",
+          "success": true,
+          "elapsed_ms": 48.692,
+          "expected_plaintext": "hello quantum 54",
+          "actual_plaintext": "hello quantum 54"
+        },
+        {
+          "test": "kyber768_roundtrip_56",
+          "parameter_set": "kyber768",
+          "key_id": "138337b5-21b6-414f-9096-a73ff8442c38",
+          "success": true,
+          "elapsed_ms": 57.6735,
+          "expected_plaintext": "hello quantum 55",
+          "actual_plaintext": "hello quantum 55"
+        },
+        {
+          "test": "kyber768_roundtrip_57",
+          "parameter_set": "kyber768",
+          "key_id": "52e9a61e-952d-42e3-9587-8172061319e9",
+          "success": true,
+          "elapsed_ms": 29.4891,
+          "expected_plaintext": "hello quantum 56",
+          "actual_plaintext": "hello quantum 56"
+        },
+        {
+          "test": "kyber768_roundtrip_58",
+          "parameter_set": "kyber768",
+          "key_id": "1c3c35b2-5958-4ee6-a1c6-29f5fa621ece",
+          "success": true,
+          "elapsed_ms": 12.467,
+          "expected_plaintext": "hello quantum 57",
+          "actual_plaintext": "hello quantum 57"
+        },
+        {
+          "test": "kyber768_roundtrip_59",
+          "parameter_set": "kyber768",
+          "key_id": "1ba3f573-6227-4c63-8cb9-11933bf3fc19",
+          "success": true,
+          "elapsed_ms": 17.3173,
+          "expected_plaintext": "hello quantum 58",
+          "actual_plaintext": "hello quantum 58"
+        },
+        {
+          "test": "kyber768_roundtrip_60",
+          "parameter_set": "kyber768",
+          "key_id": "c24aab86-7688-49f1-8707-84fd3e85c281",
+          "success": true,
+          "elapsed_ms": 14.3255,
+          "expected_plaintext": "hello quantum 59",
+          "actual_plaintext": "hello quantum 59"
+        },
+        {
+          "test": "kyber768_roundtrip_61",
+          "parameter_set": "kyber768",
+          "key_id": "12210878-8a03-442e-bf36-e14be562e3d0",
+          "success": true,
+          "elapsed_ms": 15.2288,
+          "expected_plaintext": "hello quantum 60",
+          "actual_plaintext": "hello quantum 60"
+        },
+        {
+          "test": "kyber768_roundtrip_62",
+          "parameter_set": "kyber768",
+          "key_id": "90e4651e-e9ad-4d83-805d-7512ea65da0d",
+          "success": true,
+          "elapsed_ms": 21.2635,
+          "expected_plaintext": "hello quantum 61",
+          "actual_plaintext": "hello quantum 61"
+        },
+        {
+          "test": "kyber768_roundtrip_63",
+          "parameter_set": "kyber768",
+          "key_id": "5cdaef1f-97c6-4b05-a34a-47b62b3a52de",
+          "success": true,
+          "elapsed_ms": 13.7642,
+          "expected_plaintext": "hello quantum 62",
+          "actual_plaintext": "hello quantum 62"
+        },
+        {
+          "test": "kyber768_roundtrip_64",
+          "parameter_set": "kyber768",
+          "key_id": "5d651088-5407-459b-948e-5ced74d16505",
+          "success": true,
+          "elapsed_ms": 11.6028,
+          "expected_plaintext": "hello quantum 63",
+          "actual_plaintext": "hello quantum 63"
+        },
+        {
+          "test": "kyber768_roundtrip_65",
+          "parameter_set": "kyber768",
+          "key_id": "88ecf856-7087-4f28-b78e-1406885b1335",
+          "success": true,
+          "elapsed_ms": 14.4687,
+          "expected_plaintext": "hello quantum 64",
+          "actual_plaintext": "hello quantum 64"
+        },
+        {
+          "test": "kyber768_roundtrip_66",
+          "parameter_set": "kyber768",
+          "key_id": "254ceaad-2d94-49e6-a90f-994e6d0d67f6",
+          "success": true,
+          "elapsed_ms": 13.6777,
+          "expected_plaintext": "hello quantum 65",
+          "actual_plaintext": "hello quantum 65"
+        },
+        {
+          "test": "kyber768_roundtrip_67",
+          "parameter_set": "kyber768",
+          "key_id": "5d8c7776-b626-43d9-9f00-a4c4dd2ea206",
+          "success": true,
+          "elapsed_ms": 12.222,
+          "expected_plaintext": "hello quantum 66",
+          "actual_plaintext": "hello quantum 66"
+        },
+        {
+          "test": "kyber768_roundtrip_68",
+          "parameter_set": "kyber768",
+          "key_id": "2c9b87f8-5a52-4f60-913b-9d777212ae0a",
+          "success": true,
+          "elapsed_ms": 10.9922,
+          "expected_plaintext": "hello quantum 67",
+          "actual_plaintext": "hello quantum 67"
+        },
+        {
+          "test": "kyber768_roundtrip_69",
+          "parameter_set": "kyber768",
+          "key_id": "1c64c18f-e2e3-4dc6-bc94-7786d65a93e0",
+          "success": true,
+          "elapsed_ms": 11.2772,
+          "expected_plaintext": "hello quantum 68",
+          "actual_plaintext": "hello quantum 68"
+        },
+        {
+          "test": "kyber768_roundtrip_70",
+          "parameter_set": "kyber768",
+          "key_id": "0f92845a-28f4-498f-8689-d7444d7859dc",
+          "success": true,
+          "elapsed_ms": 15.5509,
+          "expected_plaintext": "hello quantum 69",
+          "actual_plaintext": "hello quantum 69"
+        },
+        {
+          "test": "kyber768_roundtrip_71",
+          "parameter_set": "kyber768",
+          "key_id": "1b57e463-eed9-4906-9be0-ff834f223c80",
+          "success": true,
+          "elapsed_ms": 18.5256,
+          "expected_plaintext": "hello quantum 70",
+          "actual_plaintext": "hello quantum 70"
+        },
+        {
+          "test": "kyber768_roundtrip_72",
+          "parameter_set": "kyber768",
+          "key_id": "54827253-c6a6-46b0-8b5a-a092c143881f",
+          "success": true,
+          "elapsed_ms": 14.0904,
+          "expected_plaintext": "hello quantum 71",
+          "actual_plaintext": "hello quantum 71"
+        },
+        {
+          "test": "kyber768_roundtrip_73",
+          "parameter_set": "kyber768",
+          "key_id": "c1cc60b0-b96e-4b46-87b1-3a365239d689",
+          "success": true,
+          "elapsed_ms": 16.5091,
+          "expected_plaintext": "hello quantum 72",
+          "actual_plaintext": "hello quantum 72"
+        },
+        {
+          "test": "kyber768_roundtrip_74",
+          "parameter_set": "kyber768",
+          "key_id": "1e85331a-a913-4378-ba4d-fd62b0613de7",
+          "success": true,
+          "elapsed_ms": 15.301,
+          "expected_plaintext": "hello quantum 73",
+          "actual_plaintext": "hello quantum 73"
+        },
+        {
+          "test": "kyber768_roundtrip_75",
+          "parameter_set": "kyber768",
+          "key_id": "00a7ac41-4004-4728-9dcb-50741b5b4bea",
+          "success": true,
+          "elapsed_ms": 12.1139,
+          "expected_plaintext": "hello quantum 74",
+          "actual_plaintext": "hello quantum 74"
+        },
+        {
+          "test": "kyber768_roundtrip_76",
+          "parameter_set": "kyber768",
+          "key_id": "a16ff260-5c8e-4424-b738-86e9ef771fa3",
+          "success": true,
+          "elapsed_ms": 10.1761,
+          "expected_plaintext": "hello quantum 75",
+          "actual_plaintext": "hello quantum 75"
+        },
+        {
+          "test": "kyber768_roundtrip_77",
+          "parameter_set": "kyber768",
+          "key_id": "23722f1e-c8ed-4990-911c-0ca173e1d607",
+          "success": true,
+          "elapsed_ms": 11.7401,
+          "expected_plaintext": "hello quantum 76",
+          "actual_plaintext": "hello quantum 76"
+        },
+        {
+          "test": "kyber768_roundtrip_78",
+          "parameter_set": "kyber768",
+          "key_id": "839c4466-f748-4adc-9cc7-75c82e9b2de1",
+          "success": true,
+          "elapsed_ms": 11.204,
+          "expected_plaintext": "hello quantum 77",
+          "actual_plaintext": "hello quantum 77"
+        },
+        {
+          "test": "kyber768_roundtrip_79",
+          "parameter_set": "kyber768",
+          "key_id": "9568149f-ab42-4f05-a32f-314621bf896f",
+          "success": true,
+          "elapsed_ms": 19.8733,
+          "expected_plaintext": "hello quantum 78",
+          "actual_plaintext": "hello quantum 78"
+        },
+        {
+          "test": "kyber768_roundtrip_80",
+          "parameter_set": "kyber768",
+          "key_id": "4dedd40a-81d2-4105-8aff-021a3b2f7192",
+          "success": true,
+          "elapsed_ms": 15.3344,
+          "expected_plaintext": "hello quantum 79",
+          "actual_plaintext": "hello quantum 79"
+        },
+        {
+          "test": "kyber768_roundtrip_81",
+          "parameter_set": "kyber768",
+          "key_id": "1cae97ae-cd88-482d-b437-dba2c163e5bd",
+          "success": true,
+          "elapsed_ms": 11.1508,
+          "expected_plaintext": "hello quantum 80",
+          "actual_plaintext": "hello quantum 80"
+        },
+        {
+          "test": "kyber768_roundtrip_82",
+          "parameter_set": "kyber768",
+          "key_id": "ea6efd2c-b301-403e-aa29-abcee39913ba",
+          "success": true,
+          "elapsed_ms": 12.1133,
+          "expected_plaintext": "hello quantum 81",
+          "actual_plaintext": "hello quantum 81"
+        },
+        {
+          "test": "kyber768_roundtrip_83",
+          "parameter_set": "kyber768",
+          "key_id": "530b4008-12e9-4433-9cce-4cbd548c27e7",
+          "success": true,
+          "elapsed_ms": 10.9039,
+          "expected_plaintext": "hello quantum 82",
+          "actual_plaintext": "hello quantum 82"
+        },
+        {
+          "test": "kyber768_roundtrip_84",
+          "parameter_set": "kyber768",
+          "key_id": "d5be25be-8e4f-41d7-8442-e9648886500c",
+          "success": true,
+          "elapsed_ms": 15.6766,
+          "expected_plaintext": "hello quantum 83",
+          "actual_plaintext": "hello quantum 83"
+        },
+        {
+          "test": "kyber768_roundtrip_85",
+          "parameter_set": "kyber768",
+          "key_id": "8551ae14-845c-4ebe-aaca-140caebc2b12",
+          "success": true,
+          "elapsed_ms": 14.771,
+          "expected_plaintext": "hello quantum 84",
+          "actual_plaintext": "hello quantum 84"
+        },
+        {
+          "test": "kyber768_roundtrip_86",
+          "parameter_set": "kyber768",
+          "key_id": "826e264a-9264-4a09-83c6-5b6ad79f95f3",
+          "success": true,
+          "elapsed_ms": 10.5944,
+          "expected_plaintext": "hello quantum 85",
+          "actual_plaintext": "hello quantum 85"
+        },
+        {
+          "test": "kyber768_roundtrip_87",
+          "parameter_set": "kyber768",
+          "key_id": "5ec126ca-cb46-4035-b9c5-7419e2410ec3",
+          "success": true,
+          "elapsed_ms": 15.4949,
+          "expected_plaintext": "hello quantum 86",
+          "actual_plaintext": "hello quantum 86"
+        },
+        {
+          "test": "kyber768_roundtrip_88",
+          "parameter_set": "kyber768",
+          "key_id": "7ff26795-5078-4bf2-bff1-8d84ea2f6901",
+          "success": true,
+          "elapsed_ms": 11.4053,
+          "expected_plaintext": "hello quantum 87",
+          "actual_plaintext": "hello quantum 87"
+        },
+        {
+          "test": "kyber768_roundtrip_89",
+          "parameter_set": "kyber768",
+          "key_id": "c7326503-80b2-4423-bd45-f463f4c174b7",
+          "success": true,
+          "elapsed_ms": 9.4004,
+          "expected_plaintext": "hello quantum 88",
+          "actual_plaintext": "hello quantum 88"
+        },
+        {
+          "test": "kyber768_roundtrip_90",
+          "parameter_set": "kyber768",
+          "key_id": "e427438a-0e4b-4360-9ea9-02fe797e3b00",
+          "success": true,
+          "elapsed_ms": 9.9842,
+          "expected_plaintext": "hello quantum 89",
+          "actual_plaintext": "hello quantum 89"
+        },
+        {
+          "test": "kyber768_roundtrip_91",
+          "parameter_set": "kyber768",
+          "key_id": "b210b064-a476-4a41-a652-636ba7b713a7",
+          "success": true,
+          "elapsed_ms": 12.4148,
+          "expected_plaintext": "hello quantum 90",
+          "actual_plaintext": "hello quantum 90"
+        },
+        {
+          "test": "kyber768_roundtrip_92",
+          "parameter_set": "kyber768",
+          "key_id": "e2916016-d68b-4956-8d76-be56e0a7f0cb",
+          "success": true,
+          "elapsed_ms": 11.4407,
+          "expected_plaintext": "hello quantum 91",
+          "actual_plaintext": "hello quantum 91"
+        },
+        {
+          "test": "kyber768_roundtrip_93",
+          "parameter_set": "kyber768",
+          "key_id": "4e03f247-5084-4ee8-ac01-e6074df1e7a9",
+          "success": true,
+          "elapsed_ms": 14.4279,
+          "expected_plaintext": "hello quantum 92",
+          "actual_plaintext": "hello quantum 92"
+        },
+        {
+          "test": "kyber768_roundtrip_94",
+          "parameter_set": "kyber768",
+          "key_id": "f9750db3-0227-4bef-b692-6e914e7197b6",
+          "success": true,
+          "elapsed_ms": 12.0482,
+          "expected_plaintext": "hello quantum 93",
+          "actual_plaintext": "hello quantum 93"
+        },
+        {
+          "test": "kyber768_roundtrip_95",
+          "parameter_set": "kyber768",
+          "key_id": "21e0efdb-4fa7-4871-9bfc-cb24f71cbdc4",
+          "success": true,
+          "elapsed_ms": 10.1729,
+          "expected_plaintext": "hello quantum 94",
+          "actual_plaintext": "hello quantum 94"
+        },
+        {
+          "test": "kyber768_roundtrip_96",
+          "parameter_set": "kyber768",
+          "key_id": "4b70948c-2735-4f07-8880-e85fcadfcb47",
+          "success": true,
+          "elapsed_ms": 13.9599,
+          "expected_plaintext": "hello quantum 95",
+          "actual_plaintext": "hello quantum 95"
+        },
+        {
+          "test": "kyber768_roundtrip_97",
+          "parameter_set": "kyber768",
+          "key_id": "e6a99376-8a54-48ce-b2af-ee47cc4e7153",
+          "success": true,
+          "elapsed_ms": 12.0668,
+          "expected_plaintext": "hello quantum 96",
+          "actual_plaintext": "hello quantum 96"
+        },
+        {
+          "test": "kyber768_roundtrip_98",
+          "parameter_set": "kyber768",
+          "key_id": "e3eef8ea-68d7-4e5f-ada7-a7522a9f58df",
+          "success": true,
+          "elapsed_ms": 15.6752,
+          "expected_plaintext": "hello quantum 97",
+          "actual_plaintext": "hello quantum 97"
+        },
+        {
+          "test": "kyber768_roundtrip_99",
+          "parameter_set": "kyber768",
+          "key_id": "8f1e0eb6-f8f9-4260-9669-5ac371b8fb61",
+          "success": true,
+          "elapsed_ms": 10.6096,
+          "expected_plaintext": "hello quantum 98",
+          "actual_plaintext": "hello quantum 98"
+        },
+        {
+          "test": "kyber768_roundtrip_100",
+          "parameter_set": "kyber768",
+          "key_id": "48e33055-4a0d-452c-b78c-387757d576d7",
+          "success": true,
+          "elapsed_ms": 11.0592,
+          "expected_plaintext": "hello quantum 99",
+          "actual_plaintext": "hello quantum 99"
+        }
+      ]
+    },
+    {
+      "suite": "kyber_encrypt_decrypt",
+      "parameter_set": "kyber1024",
+      "iterations": 100,
+      "passed": 100,
+      "failed": 0,
+      "success_rate": 100.0,
+      "latency": {
+        "avg_ms": 14.9341,
+        "p95_ms": 33.0945,
+        "p99_ms": 74.5892,
+        "min_ms": 9.4288,
+        "max_ms": 74.5892
+      },
+      "details": [
+        {
+          "test": "kyber1024_roundtrip_1",
+          "parameter_set": "kyber1024",
+          "key_id": "2a4f2092-5b52-480f-a2fa-9acdb5aca46c",
+          "success": true,
+          "elapsed_ms": 14.3202,
+          "expected_plaintext": "hello quantum 0",
+          "actual_plaintext": "hello quantum 0"
+        },
+        {
+          "test": "kyber1024_roundtrip_2",
+          "parameter_set": "kyber1024",
+          "key_id": "58df9e0b-e0ad-450f-9e16-e312226e2f27",
+          "success": true,
+          "elapsed_ms": 12.0373,
+          "expected_plaintext": "hello quantum 1",
+          "actual_plaintext": "hello quantum 1"
+        },
+        {
+          "test": "kyber1024_roundtrip_3",
+          "parameter_set": "kyber1024",
+          "key_id": "2b20f13f-a1ce-4f82-8f4d-2f7452fa23ca",
+          "success": true,
+          "elapsed_ms": 15.822,
+          "expected_plaintext": "hello quantum 2",
+          "actual_plaintext": "hello quantum 2"
+        },
+        {
+          "test": "kyber1024_roundtrip_4",
+          "parameter_set": "kyber1024",
+          "key_id": "4169f969-36ed-408a-9335-47f1af551fa4",
+          "success": true,
+          "elapsed_ms": 11.637,
+          "expected_plaintext": "hello quantum 3",
+          "actual_plaintext": "hello quantum 3"
+        },
+        {
+          "test": "kyber1024_roundtrip_5",
+          "parameter_set": "kyber1024",
+          "key_id": "922e0520-0b30-4481-8cc9-0130b38bb7f1",
+          "success": true,
+          "elapsed_ms": 9.7244,
+          "expected_plaintext": "hello quantum 4",
+          "actual_plaintext": "hello quantum 4"
+        },
+        {
+          "test": "kyber1024_roundtrip_6",
+          "parameter_set": "kyber1024",
+          "key_id": "3ceff309-8a97-4be7-bdb7-bd6d1d54d7f7",
+          "success": true,
+          "elapsed_ms": 10.4189,
+          "expected_plaintext": "hello quantum 5",
+          "actual_plaintext": "hello quantum 5"
+        },
+        {
+          "test": "kyber1024_roundtrip_7",
+          "parameter_set": "kyber1024",
+          "key_id": "dc4d80d3-6248-4c8a-bc6d-b4bbcaaa7b94",
+          "success": true,
+          "elapsed_ms": 11.0348,
+          "expected_plaintext": "hello quantum 6",
+          "actual_plaintext": "hello quantum 6"
+        },
+        {
+          "test": "kyber1024_roundtrip_8",
+          "parameter_set": "kyber1024",
+          "key_id": "ad151162-48cc-430a-b5ea-dfc0c5770ff8",
+          "success": true,
+          "elapsed_ms": 10.9067,
+          "expected_plaintext": "hello quantum 7",
+          "actual_plaintext": "hello quantum 7"
+        },
+        {
+          "test": "kyber1024_roundtrip_9",
+          "parameter_set": "kyber1024",
+          "key_id": "2c0637ee-ea43-4c43-8432-f1b3a122b543",
+          "success": true,
+          "elapsed_ms": 9.8038,
+          "expected_plaintext": "hello quantum 8",
+          "actual_plaintext": "hello quantum 8"
+        },
+        {
+          "test": "kyber1024_roundtrip_10",
+          "parameter_set": "kyber1024",
+          "key_id": "005c9f75-793c-4401-b0a0-e73e8862c838",
+          "success": true,
+          "elapsed_ms": 12.9281,
+          "expected_plaintext": "hello quantum 9",
+          "actual_plaintext": "hello quantum 9"
+        },
+        {
+          "test": "kyber1024_roundtrip_11",
+          "parameter_set": "kyber1024",
+          "key_id": "e652183f-62b4-48b4-8a88-e6b48d4d95ce",
+          "success": true,
+          "elapsed_ms": 11.7927,
+          "expected_plaintext": "hello quantum 10",
+          "actual_plaintext": "hello quantum 10"
+        },
+        {
+          "test": "kyber1024_roundtrip_12",
+          "parameter_set": "kyber1024",
+          "key_id": "04e44e87-fa7d-4386-b72b-aaf9703632e4",
+          "success": true,
+          "elapsed_ms": 9.4288,
+          "expected_plaintext": "hello quantum 11",
+          "actual_plaintext": "hello quantum 11"
+        },
+        {
+          "test": "kyber1024_roundtrip_13",
+          "parameter_set": "kyber1024",
+          "key_id": "ff2ecdbb-959d-4e43-9caa-d3290f5c5dbb",
+          "success": true,
+          "elapsed_ms": 13.186,
+          "expected_plaintext": "hello quantum 12",
+          "actual_plaintext": "hello quantum 12"
+        },
+        {
+          "test": "kyber1024_roundtrip_14",
+          "parameter_set": "kyber1024",
+          "key_id": "ff10acf5-fbfa-4d6b-af04-c436a4e8b648",
+          "success": true,
+          "elapsed_ms": 12.7209,
+          "expected_plaintext": "hello quantum 13",
+          "actual_plaintext": "hello quantum 13"
+        },
+        {
+          "test": "kyber1024_roundtrip_15",
+          "parameter_set": "kyber1024",
+          "key_id": "5034cb7b-3d67-4e0a-b478-ac779118b667",
+          "success": true,
+          "elapsed_ms": 10.9035,
+          "expected_plaintext": "hello quantum 14",
+          "actual_plaintext": "hello quantum 14"
+        },
+        {
+          "test": "kyber1024_roundtrip_16",
+          "parameter_set": "kyber1024",
+          "key_id": "d19b3aff-7e78-4b69-b88f-62477df789fa",
+          "success": true,
+          "elapsed_ms": 10.2108,
+          "expected_plaintext": "hello quantum 15",
+          "actual_plaintext": "hello quantum 15"
+        },
+        {
+          "test": "kyber1024_roundtrip_17",
+          "parameter_set": "kyber1024",
+          "key_id": "a4d6656f-8835-477a-ad27-caa340fb3b60",
+          "success": true,
+          "elapsed_ms": 11.1199,
+          "expected_plaintext": "hello quantum 16",
+          "actual_plaintext": "hello quantum 16"
+        },
+        {
+          "test": "kyber1024_roundtrip_18",
+          "parameter_set": "kyber1024",
+          "key_id": "31fc8692-e3f9-46b1-a127-314c4761f848",
+          "success": true,
+          "elapsed_ms": 9.9883,
+          "expected_plaintext": "hello quantum 17",
+          "actual_plaintext": "hello quantum 17"
+        },
+        {
+          "test": "kyber1024_roundtrip_19",
+          "parameter_set": "kyber1024",
+          "key_id": "7a2a3394-df9a-4d73-9576-3b46e566170d",
+          "success": true,
+          "elapsed_ms": 9.8454,
+          "expected_plaintext": "hello quantum 18",
+          "actual_plaintext": "hello quantum 18"
+        },
+        {
+          "test": "kyber1024_roundtrip_20",
+          "parameter_set": "kyber1024",
+          "key_id": "e2834969-3742-45d0-b422-9314cf555294",
+          "success": true,
+          "elapsed_ms": 12.2046,
+          "expected_plaintext": "hello quantum 19",
+          "actual_plaintext": "hello quantum 19"
+        },
+        {
+          "test": "kyber1024_roundtrip_21",
+          "parameter_set": "kyber1024",
+          "key_id": "58184344-9b97-42ed-b3c3-9a841397b26e",
+          "success": true,
+          "elapsed_ms": 10.0824,
+          "expected_plaintext": "hello quantum 20",
+          "actual_plaintext": "hello quantum 20"
+        },
+        {
+          "test": "kyber1024_roundtrip_22",
+          "parameter_set": "kyber1024",
+          "key_id": "3156e699-b20a-459f-86ec-9e9314697b06",
+          "success": true,
+          "elapsed_ms": 13.7035,
+          "expected_plaintext": "hello quantum 21",
+          "actual_plaintext": "hello quantum 21"
+        },
+        {
+          "test": "kyber1024_roundtrip_23",
+          "parameter_set": "kyber1024",
+          "key_id": "42f5e823-5e6b-4d2f-b960-37ce5fdf9a30",
+          "success": true,
+          "elapsed_ms": 10.5395,
+          "expected_plaintext": "hello quantum 22",
+          "actual_plaintext": "hello quantum 22"
+        },
+        {
+          "test": "kyber1024_roundtrip_24",
+          "parameter_set": "kyber1024",
+          "key_id": "1796d1d3-7480-4146-8490-d809ab40c9ab",
+          "success": true,
+          "elapsed_ms": 10.3406,
+          "expected_plaintext": "hello quantum 23",
+          "actual_plaintext": "hello quantum 23"
+        },
+        {
+          "test": "kyber1024_roundtrip_25",
+          "parameter_set": "kyber1024",
+          "key_id": "ce96d2a4-5c46-45ed-ba5f-24e17c515385",
+          "success": true,
+          "elapsed_ms": 40.5948,
+          "expected_plaintext": "hello quantum 24",
+          "actual_plaintext": "hello quantum 24"
+        },
+        {
+          "test": "kyber1024_roundtrip_26",
+          "parameter_set": "kyber1024",
+          "key_id": "6cdace98-9ab3-42e2-a9f6-b57898d93117",
+          "success": true,
+          "elapsed_ms": 14.6814,
+          "expected_plaintext": "hello quantum 25",
+          "actual_plaintext": "hello quantum 25"
+        },
+        {
+          "test": "kyber1024_roundtrip_27",
+          "parameter_set": "kyber1024",
+          "key_id": "ceadbc75-9d08-4134-b607-4ac202b2a3a8",
+          "success": true,
+          "elapsed_ms": 14.1082,
+          "expected_plaintext": "hello quantum 26",
+          "actual_plaintext": "hello quantum 26"
+        },
+        {
+          "test": "kyber1024_roundtrip_28",
+          "parameter_set": "kyber1024",
+          "key_id": "27c940b5-c3dd-49e8-9d34-0fe287c7388c",
+          "success": true,
+          "elapsed_ms": 12.3897,
+          "expected_plaintext": "hello quantum 27",
+          "actual_plaintext": "hello quantum 27"
+        },
+        {
+          "test": "kyber1024_roundtrip_29",
+          "parameter_set": "kyber1024",
+          "key_id": "63af576b-0b99-45b8-841b-d95956a80f22",
+          "success": true,
+          "elapsed_ms": 11.7208,
+          "expected_plaintext": "hello quantum 28",
+          "actual_plaintext": "hello quantum 28"
+        },
+        {
+          "test": "kyber1024_roundtrip_30",
+          "parameter_set": "kyber1024",
+          "key_id": "b8dbf6c7-60dd-4e2e-9bae-bb67ee8da9a7",
+          "success": true,
+          "elapsed_ms": 12.2766,
+          "expected_plaintext": "hello quantum 29",
+          "actual_plaintext": "hello quantum 29"
+        },
+        {
+          "test": "kyber1024_roundtrip_31",
+          "parameter_set": "kyber1024",
+          "key_id": "35680fad-d92a-461a-b62c-d851428f660a",
+          "success": true,
+          "elapsed_ms": 10.8214,
+          "expected_plaintext": "hello quantum 30",
+          "actual_plaintext": "hello quantum 30"
+        },
+        {
+          "test": "kyber1024_roundtrip_32",
+          "parameter_set": "kyber1024",
+          "key_id": "43a6231d-49d5-4183-a516-ab23dada03e8",
+          "success": true,
+          "elapsed_ms": 11.8602,
+          "expected_plaintext": "hello quantum 31",
+          "actual_plaintext": "hello quantum 31"
+        },
+        {
+          "test": "kyber1024_roundtrip_33",
+          "parameter_set": "kyber1024",
+          "key_id": "19ea92b0-0769-447d-b83a-858d2cd70d05",
+          "success": true,
+          "elapsed_ms": 9.7434,
+          "expected_plaintext": "hello quantum 32",
+          "actual_plaintext": "hello quantum 32"
+        },
+        {
+          "test": "kyber1024_roundtrip_34",
+          "parameter_set": "kyber1024",
+          "key_id": "d929b358-3748-4170-9c20-1e9e69e0fb19",
+          "success": true,
+          "elapsed_ms": 11.7232,
+          "expected_plaintext": "hello quantum 33",
+          "actual_plaintext": "hello quantum 33"
+        },
+        {
+          "test": "kyber1024_roundtrip_35",
+          "parameter_set": "kyber1024",
+          "key_id": "bf624423-541d-40e9-8245-4e4144e4e540",
+          "success": true,
+          "elapsed_ms": 10.5926,
+          "expected_plaintext": "hello quantum 34",
+          "actual_plaintext": "hello quantum 34"
+        },
+        {
+          "test": "kyber1024_roundtrip_36",
+          "parameter_set": "kyber1024",
+          "key_id": "308c28b2-30f1-460c-92ba-f7ea23771033",
+          "success": true,
+          "elapsed_ms": 16.2497,
+          "expected_plaintext": "hello quantum 35",
+          "actual_plaintext": "hello quantum 35"
+        },
+        {
+          "test": "kyber1024_roundtrip_37",
+          "parameter_set": "kyber1024",
+          "key_id": "84ab71b0-7e6d-4468-8ed9-cfca660be139",
+          "success": true,
+          "elapsed_ms": 14.5293,
+          "expected_plaintext": "hello quantum 36",
+          "actual_plaintext": "hello quantum 36"
+        },
+        {
+          "test": "kyber1024_roundtrip_38",
+          "parameter_set": "kyber1024",
+          "key_id": "96379fa5-4590-456e-aa44-1ddde3f25e8b",
+          "success": true,
+          "elapsed_ms": 12.0797,
+          "expected_plaintext": "hello quantum 37",
+          "actual_plaintext": "hello quantum 37"
+        },
+        {
+          "test": "kyber1024_roundtrip_39",
+          "parameter_set": "kyber1024",
+          "key_id": "d04bfb01-0d36-4e93-9ff3-8dd0111fb036",
+          "success": true,
+          "elapsed_ms": 12.6835,
+          "expected_plaintext": "hello quantum 38",
+          "actual_plaintext": "hello quantum 38"
+        },
+        {
+          "test": "kyber1024_roundtrip_40",
+          "parameter_set": "kyber1024",
+          "key_id": "3abdd089-d982-4822-8f44-57cd5e2749f4",
+          "success": true,
+          "elapsed_ms": 10.7816,
+          "expected_plaintext": "hello quantum 39",
+          "actual_plaintext": "hello quantum 39"
+        },
+        {
+          "test": "kyber1024_roundtrip_41",
+          "parameter_set": "kyber1024",
+          "key_id": "c80a487e-5fa7-424a-b247-e4ed18dc9de0",
+          "success": true,
+          "elapsed_ms": 9.4951,
+          "expected_plaintext": "hello quantum 40",
+          "actual_plaintext": "hello quantum 40"
+        },
+        {
+          "test": "kyber1024_roundtrip_42",
+          "parameter_set": "kyber1024",
+          "key_id": "bcda2a23-d58a-4e81-a3dd-1483c23bd1f9",
+          "success": true,
+          "elapsed_ms": 12.49,
+          "expected_plaintext": "hello quantum 41",
+          "actual_plaintext": "hello quantum 41"
+        },
+        {
+          "test": "kyber1024_roundtrip_43",
+          "parameter_set": "kyber1024",
+          "key_id": "a3843757-d867-4b81-b0bc-04084702ee34",
+          "success": true,
+          "elapsed_ms": 9.5752,
+          "expected_plaintext": "hello quantum 42",
+          "actual_plaintext": "hello quantum 42"
+        },
+        {
+          "test": "kyber1024_roundtrip_44",
+          "parameter_set": "kyber1024",
+          "key_id": "a714a261-838d-45bb-8bf2-89331b259f58",
+          "success": true,
+          "elapsed_ms": 9.7071,
+          "expected_plaintext": "hello quantum 43",
+          "actual_plaintext": "hello quantum 43"
+        },
+        {
+          "test": "kyber1024_roundtrip_45",
+          "parameter_set": "kyber1024",
+          "key_id": "d4b2aa21-b4de-46ec-8304-bd1cf6dd8151",
+          "success": true,
+          "elapsed_ms": 16.7872,
+          "expected_plaintext": "hello quantum 44",
+          "actual_plaintext": "hello quantum 44"
+        },
+        {
+          "test": "kyber1024_roundtrip_46",
+          "parameter_set": "kyber1024",
+          "key_id": "47558b22-6b2e-4a05-b11a-7e520e1c1ca4",
+          "success": true,
+          "elapsed_ms": 15.1363,
+          "expected_plaintext": "hello quantum 45",
+          "actual_plaintext": "hello quantum 45"
+        },
+        {
+          "test": "kyber1024_roundtrip_47",
+          "parameter_set": "kyber1024",
+          "key_id": "a207a226-ab39-4c40-b69b-fed542a1b05b",
+          "success": true,
+          "elapsed_ms": 12.524,
+          "expected_plaintext": "hello quantum 46",
+          "actual_plaintext": "hello quantum 46"
+        },
+        {
+          "test": "kyber1024_roundtrip_48",
+          "parameter_set": "kyber1024",
+          "key_id": "ffa7ccb5-ffe7-4228-98b5-9383cbe3f625",
+          "success": true,
+          "elapsed_ms": 10.9267,
+          "expected_plaintext": "hello quantum 47",
+          "actual_plaintext": "hello quantum 47"
+        },
+        {
+          "test": "kyber1024_roundtrip_49",
+          "parameter_set": "kyber1024",
+          "key_id": "ec14f734-f44c-468f-a6bd-4db10b0205da",
+          "success": true,
+          "elapsed_ms": 12.3859,
+          "expected_plaintext": "hello quantum 48",
+          "actual_plaintext": "hello quantum 48"
+        },
+        {
+          "test": "kyber1024_roundtrip_50",
+          "parameter_set": "kyber1024",
+          "key_id": "5baa7280-2626-4018-844a-112bd1d1796a",
+          "success": true,
+          "elapsed_ms": 14.3255,
+          "expected_plaintext": "hello quantum 49",
+          "actual_plaintext": "hello quantum 49"
+        },
+        {
+          "test": "kyber1024_roundtrip_51",
+          "parameter_set": "kyber1024",
+          "key_id": "e30e0f14-14d9-4ad0-a4ec-085a7bb77de4",
+          "success": true,
+          "elapsed_ms": 12.1303,
+          "expected_plaintext": "hello quantum 50",
+          "actual_plaintext": "hello quantum 50"
+        },
+        {
+          "test": "kyber1024_roundtrip_52",
+          "parameter_set": "kyber1024",
+          "key_id": "b66a29e2-c17b-4b93-a7db-ddab9c0f1e57",
+          "success": true,
+          "elapsed_ms": 13.1793,
+          "expected_plaintext": "hello quantum 51",
+          "actual_plaintext": "hello quantum 51"
+        },
+        {
+          "test": "kyber1024_roundtrip_53",
+          "parameter_set": "kyber1024",
+          "key_id": "d0c1e996-08e9-4d80-87ee-37292e99d6bb",
+          "success": true,
+          "elapsed_ms": 11.9545,
+          "expected_plaintext": "hello quantum 52",
+          "actual_plaintext": "hello quantum 52"
+        },
+        {
+          "test": "kyber1024_roundtrip_54",
+          "parameter_set": "kyber1024",
+          "key_id": "2cc36666-f7b2-4904-aa4c-f57af284a78b",
+          "success": true,
+          "elapsed_ms": 13.6531,
+          "expected_plaintext": "hello quantum 53",
+          "actual_plaintext": "hello quantum 53"
+        },
+        {
+          "test": "kyber1024_roundtrip_55",
+          "parameter_set": "kyber1024",
+          "key_id": "be387d87-0d94-46e2-b909-dd94a23a188f",
+          "success": true,
+          "elapsed_ms": 13.3529,
+          "expected_plaintext": "hello quantum 54",
+          "actual_plaintext": "hello quantum 54"
+        },
+        {
+          "test": "kyber1024_roundtrip_56",
+          "parameter_set": "kyber1024",
+          "key_id": "cb962d40-b676-4770-adbd-b108856cdec2",
+          "success": true,
+          "elapsed_ms": 10.6667,
+          "expected_plaintext": "hello quantum 55",
+          "actual_plaintext": "hello quantum 55"
+        },
+        {
+          "test": "kyber1024_roundtrip_57",
+          "parameter_set": "kyber1024",
+          "key_id": "b75c1d12-8c5b-466f-87dd-28651280dbce",
+          "success": true,
+          "elapsed_ms": 12.0365,
+          "expected_plaintext": "hello quantum 56",
+          "actual_plaintext": "hello quantum 56"
+        },
+        {
+          "test": "kyber1024_roundtrip_58",
+          "parameter_set": "kyber1024",
+          "key_id": "18959b32-4dfc-4feb-b4bd-bcabcf5497ba",
+          "success": true,
+          "elapsed_ms": 11.683,
+          "expected_plaintext": "hello quantum 57",
+          "actual_plaintext": "hello quantum 57"
+        },
+        {
+          "test": "kyber1024_roundtrip_59",
+          "parameter_set": "kyber1024",
+          "key_id": "9b0f387e-29b6-4b38-a933-110c69470767",
+          "success": true,
+          "elapsed_ms": 11.312,
+          "expected_plaintext": "hello quantum 58",
+          "actual_plaintext": "hello quantum 58"
+        },
+        {
+          "test": "kyber1024_roundtrip_60",
+          "parameter_set": "kyber1024",
+          "key_id": "d85b43de-8257-425a-93ba-0767183ec983",
+          "success": true,
+          "elapsed_ms": 10.4589,
+          "expected_plaintext": "hello quantum 59",
+          "actual_plaintext": "hello quantum 59"
+        },
+        {
+          "test": "kyber1024_roundtrip_61",
+          "parameter_set": "kyber1024",
+          "key_id": "94bd9371-2977-451f-87c6-321de46187c2",
+          "success": true,
+          "elapsed_ms": 12.0537,
+          "expected_plaintext": "hello quantum 60",
+          "actual_plaintext": "hello quantum 60"
+        },
+        {
+          "test": "kyber1024_roundtrip_62",
+          "parameter_set": "kyber1024",
+          "key_id": "f4c9ada0-f92a-4f74-95a6-96844626e49a",
+          "success": true,
+          "elapsed_ms": 12.1139,
+          "expected_plaintext": "hello quantum 61",
+          "actual_plaintext": "hello quantum 61"
+        },
+        {
+          "test": "kyber1024_roundtrip_63",
+          "parameter_set": "kyber1024",
+          "key_id": "1b88e332-62d4-4ed2-93c8-9e9ed8ae7bfb",
+          "success": true,
+          "elapsed_ms": 42.1329,
+          "expected_plaintext": "hello quantum 62",
+          "actual_plaintext": "hello quantum 62"
+        },
+        {
+          "test": "kyber1024_roundtrip_64",
+          "parameter_set": "kyber1024",
+          "key_id": "635ea895-8e8c-4c51-9b5c-53639ceff027",
+          "success": true,
+          "elapsed_ms": 23.6722,
+          "expected_plaintext": "hello quantum 63",
+          "actual_plaintext": "hello quantum 63"
+        },
+        {
+          "test": "kyber1024_roundtrip_65",
+          "parameter_set": "kyber1024",
+          "key_id": "7c803560-3e3a-4d54-a931-c34debdfb1f6",
+          "success": true,
+          "elapsed_ms": 54.9191,
+          "expected_plaintext": "hello quantum 64",
+          "actual_plaintext": "hello quantum 64"
+        },
+        {
+          "test": "kyber1024_roundtrip_66",
+          "parameter_set": "kyber1024",
+          "key_id": "f1c8f359-9dba-4dfc-8d8e-bd43ced2e6ab",
+          "success": true,
+          "elapsed_ms": 12.9828,
+          "expected_plaintext": "hello quantum 65",
+          "actual_plaintext": "hello quantum 65"
+        },
+        {
+          "test": "kyber1024_roundtrip_67",
+          "parameter_set": "kyber1024",
+          "key_id": "000d5aee-ebf6-442e-a9b6-f3152625b396",
+          "success": true,
+          "elapsed_ms": 13.5848,
+          "expected_plaintext": "hello quantum 66",
+          "actual_plaintext": "hello quantum 66"
+        },
+        {
+          "test": "kyber1024_roundtrip_68",
+          "parameter_set": "kyber1024",
+          "key_id": "fd659ef6-2aa4-49dc-b55a-f19071574d45",
+          "success": true,
+          "elapsed_ms": 16.8368,
+          "expected_plaintext": "hello quantum 67",
+          "actual_plaintext": "hello quantum 67"
+        },
+        {
+          "test": "kyber1024_roundtrip_69",
+          "parameter_set": "kyber1024",
+          "key_id": "e7928f91-c01b-485c-88d2-8f0e8d0418d9",
+          "success": true,
+          "elapsed_ms": 14.575,
+          "expected_plaintext": "hello quantum 68",
+          "actual_plaintext": "hello quantum 68"
+        },
+        {
+          "test": "kyber1024_roundtrip_70",
+          "parameter_set": "kyber1024",
+          "key_id": "6ff8a13a-6be1-4a9d-9233-a633c1fc80b3",
+          "success": true,
+          "elapsed_ms": 13.5512,
+          "expected_plaintext": "hello quantum 69",
+          "actual_plaintext": "hello quantum 69"
+        },
+        {
+          "test": "kyber1024_roundtrip_71",
+          "parameter_set": "kyber1024",
+          "key_id": "e257ecd5-2e0c-47a9-b0cb-6aa37f93d808",
+          "success": true,
+          "elapsed_ms": 12.1104,
+          "expected_plaintext": "hello quantum 70",
+          "actual_plaintext": "hello quantum 70"
+        },
+        {
+          "test": "kyber1024_roundtrip_72",
+          "parameter_set": "kyber1024",
+          "key_id": "911507cf-e7c9-486e-b0ad-c2efad02f4b4",
+          "success": true,
+          "elapsed_ms": 13.3806,
+          "expected_plaintext": "hello quantum 71",
+          "actual_plaintext": "hello quantum 71"
+        },
+        {
+          "test": "kyber1024_roundtrip_73",
+          "parameter_set": "kyber1024",
+          "key_id": "868bd73f-6a07-4ca1-a167-9905df36d66c",
+          "success": true,
+          "elapsed_ms": 15.0304,
+          "expected_plaintext": "hello quantum 72",
+          "actual_plaintext": "hello quantum 72"
+        },
+        {
+          "test": "kyber1024_roundtrip_74",
+          "parameter_set": "kyber1024",
+          "key_id": "83a4a5b7-8339-4b7e-a315-8d5554fac802",
+          "success": true,
+          "elapsed_ms": 13.1721,
+          "expected_plaintext": "hello quantum 73",
+          "actual_plaintext": "hello quantum 73"
+        },
+        {
+          "test": "kyber1024_roundtrip_75",
+          "parameter_set": "kyber1024",
+          "key_id": "ad255b9b-bf31-4c62-b27c-20e4416f4af0",
+          "success": true,
+          "elapsed_ms": 14.5248,
+          "expected_plaintext": "hello quantum 74",
+          "actual_plaintext": "hello quantum 74"
+        },
+        {
+          "test": "kyber1024_roundtrip_76",
+          "parameter_set": "kyber1024",
+          "key_id": "23c24aba-55ac-4b32-a507-e10ffcc740af",
+          "success": true,
+          "elapsed_ms": 13.9521,
+          "expected_plaintext": "hello quantum 75",
+          "actual_plaintext": "hello quantum 75"
+        },
+        {
+          "test": "kyber1024_roundtrip_77",
+          "parameter_set": "kyber1024",
+          "key_id": "36880617-ba3b-4a15-b484-656d24b4ce73",
+          "success": true,
+          "elapsed_ms": 10.1136,
+          "expected_plaintext": "hello quantum 76",
+          "actual_plaintext": "hello quantum 76"
+        },
+        {
+          "test": "kyber1024_roundtrip_78",
+          "parameter_set": "kyber1024",
+          "key_id": "a8c0d69b-19ec-4aad-99eb-beff6fb590bf",
+          "success": true,
+          "elapsed_ms": 10.8262,
+          "expected_plaintext": "hello quantum 77",
+          "actual_plaintext": "hello quantum 77"
+        },
+        {
+          "test": "kyber1024_roundtrip_79",
+          "parameter_set": "kyber1024",
+          "key_id": "88ebdada-0c65-43cc-a801-9af2980cf91a",
+          "success": true,
+          "elapsed_ms": 11.3037,
+          "expected_plaintext": "hello quantum 78",
+          "actual_plaintext": "hello quantum 78"
+        },
+        {
+          "test": "kyber1024_roundtrip_80",
+          "parameter_set": "kyber1024",
+          "key_id": "d9c64391-ed84-4fa3-8939-a3c65a9415b6",
+          "success": true,
+          "elapsed_ms": 10.2421,
+          "expected_plaintext": "hello quantum 79",
+          "actual_plaintext": "hello quantum 79"
+        },
+        {
+          "test": "kyber1024_roundtrip_81",
+          "parameter_set": "kyber1024",
+          "key_id": "d30f17a2-ca8f-4729-a5ca-3ba4d9b9c60f",
+          "success": true,
+          "elapsed_ms": 13.9005,
+          "expected_plaintext": "hello quantum 80",
+          "actual_plaintext": "hello quantum 80"
+        },
+        {
+          "test": "kyber1024_roundtrip_82",
+          "parameter_set": "kyber1024",
+          "key_id": "e671423a-8e51-4070-a501-9af953509d11",
+          "success": true,
+          "elapsed_ms": 13.0989,
+          "expected_plaintext": "hello quantum 81",
+          "actual_plaintext": "hello quantum 81"
+        },
+        {
+          "test": "kyber1024_roundtrip_83",
+          "parameter_set": "kyber1024",
+          "key_id": "d3bf8f2d-a6c0-4e26-a8f5-74fb06e0c669",
+          "success": true,
+          "elapsed_ms": 16.5979,
+          "expected_plaintext": "hello quantum 82",
+          "actual_plaintext": "hello quantum 82"
+        },
+        {
+          "test": "kyber1024_roundtrip_84",
+          "parameter_set": "kyber1024",
+          "key_id": "14226eab-bf52-42d2-9af0-fff1ef3aa638",
+          "success": true,
+          "elapsed_ms": 17.168,
+          "expected_plaintext": "hello quantum 83",
+          "actual_plaintext": "hello quantum 83"
+        },
+        {
+          "test": "kyber1024_roundtrip_85",
+          "parameter_set": "kyber1024",
+          "key_id": "15218706-582d-4fc7-b9a9-a5779adee196",
+          "success": true,
+          "elapsed_ms": 20.2623,
+          "expected_plaintext": "hello quantum 84",
+          "actual_plaintext": "hello quantum 84"
+        },
+        {
+          "test": "kyber1024_roundtrip_86",
+          "parameter_set": "kyber1024",
+          "key_id": "48da527e-8805-4459-bbc0-2361f14f76c5",
+          "success": true,
+          "elapsed_ms": 14.6061,
+          "expected_plaintext": "hello quantum 85",
+          "actual_plaintext": "hello quantum 85"
+        },
+        {
+          "test": "kyber1024_roundtrip_87",
+          "parameter_set": "kyber1024",
+          "key_id": "17c7448a-08d8-4b0b-9eab-893537564c40",
+          "success": true,
+          "elapsed_ms": 13.0757,
+          "expected_plaintext": "hello quantum 86",
+          "actual_plaintext": "hello quantum 86"
+        },
+        {
+          "test": "kyber1024_roundtrip_88",
+          "parameter_set": "kyber1024",
+          "key_id": "82322b1f-676f-4131-a9b5-1e226f0333fc",
+          "success": true,
+          "elapsed_ms": 18.8118,
+          "expected_plaintext": "hello quantum 87",
+          "actual_plaintext": "hello quantum 87"
+        },
+        {
+          "test": "kyber1024_roundtrip_89",
+          "parameter_set": "kyber1024",
+          "key_id": "23377b4b-c225-4e5d-885b-8d7502f0e6a6",
+          "success": true,
+          "elapsed_ms": 15.4954,
+          "expected_plaintext": "hello quantum 88",
+          "actual_plaintext": "hello quantum 88"
+        },
+        {
+          "test": "kyber1024_roundtrip_90",
+          "parameter_set": "kyber1024",
+          "key_id": "db4313aa-47de-42f3-8aa2-cf383c2b52a5",
+          "success": true,
+          "elapsed_ms": 23.7319,
+          "expected_plaintext": "hello quantum 89",
+          "actual_plaintext": "hello quantum 89"
+        },
+        {
+          "test": "kyber1024_roundtrip_91",
+          "parameter_set": "kyber1024",
+          "key_id": "df0ab3f4-8565-434a-a3a0-592011c65262",
+          "success": true,
+          "elapsed_ms": 18.652,
+          "expected_plaintext": "hello quantum 90",
+          "actual_plaintext": "hello quantum 90"
+        },
+        {
+          "test": "kyber1024_roundtrip_92",
+          "parameter_set": "kyber1024",
+          "key_id": "77e9947f-5c73-492d-82e4-e791fe564196",
+          "success": true,
+          "elapsed_ms": 25.991,
+          "expected_plaintext": "hello quantum 91",
+          "actual_plaintext": "hello quantum 91"
+        },
+        {
+          "test": "kyber1024_roundtrip_93",
+          "parameter_set": "kyber1024",
+          "key_id": "51910fd4-6338-4418-9421-ccead5dad398",
+          "success": true,
+          "elapsed_ms": 13.7316,
+          "expected_plaintext": "hello quantum 92",
+          "actual_plaintext": "hello quantum 92"
+        },
+        {
+          "test": "kyber1024_roundtrip_94",
+          "parameter_set": "kyber1024",
+          "key_id": "c1a01281-0070-4572-950f-9161a75ca2d7",
+          "success": true,
+          "elapsed_ms": 13.9361,
+          "expected_plaintext": "hello quantum 93",
+          "actual_plaintext": "hello quantum 93"
+        },
+        {
+          "test": "kyber1024_roundtrip_95",
+          "parameter_set": "kyber1024",
+          "key_id": "90ed0936-0194-4632-a3d9-00372fad8a44",
+          "success": true,
+          "elapsed_ms": 74.5892,
+          "expected_plaintext": "hello quantum 94",
+          "actual_plaintext": "hello quantum 94"
+        },
+        {
+          "test": "kyber1024_roundtrip_96",
+          "parameter_set": "kyber1024",
+          "key_id": "242d64c6-d0ef-4cc7-94fc-3364999b8c1d",
+          "success": true,
+          "elapsed_ms": 33.0945,
+          "expected_plaintext": "hello quantum 95",
+          "actual_plaintext": "hello quantum 95"
+        },
+        {
+          "test": "kyber1024_roundtrip_97",
+          "parameter_set": "kyber1024",
+          "key_id": "90d5eead-fe67-4100-b821-beb12bd82459",
+          "success": true,
+          "elapsed_ms": 16.2352,
+          "expected_plaintext": "hello quantum 96",
+          "actual_plaintext": "hello quantum 96"
+        },
+        {
+          "test": "kyber1024_roundtrip_98",
+          "parameter_set": "kyber1024",
+          "key_id": "7bf181af-4b98-45af-9f33-f2bee260a8ce",
+          "success": true,
+          "elapsed_ms": 12.3207,
+          "expected_plaintext": "hello quantum 97",
+          "actual_plaintext": "hello quantum 97"
+        },
+        {
+          "test": "kyber1024_roundtrip_99",
+          "parameter_set": "kyber1024",
+          "key_id": "f62bbb8e-ea7e-4ec6-99a9-a86ee6769a14",
+          "success": true,
+          "elapsed_ms": 14.1985,
+          "expected_plaintext": "hello quantum 98",
+          "actual_plaintext": "hello quantum 98"
+        },
+        {
+          "test": "kyber1024_roundtrip_100",
+          "parameter_set": "kyber1024",
+          "key_id": "0b3af817-3677-436b-8e45-2ffccfcb83a8",
+          "success": true,
+          "elapsed_ms": 17.5185,
+          "expected_plaintext": "hello quantum 99",
+          "actual_plaintext": "hello quantum 99"
+        }
+      ]
+    },
+    {
+      "suite": "dilithium3_sign_verify",
+      "parameter_set": "dilithium3",
+      "iterations": 100,
+      "passed": 100,
+      "failed": 0,
+      "skipped": 0,
+      "success_rate_executed": 100.0,
+      "latency": {
+        "avg_ms": 19.8258,
+        "p95_ms": 47.5535,
+        "p99_ms": 113.2852,
+        "min_ms": 9.8728,
+        "max_ms": 113.2852
+      },
+      "details": [
+        {
+          "test": "dilithium3_sign_verify_1",
+          "parameter_set": "dilithium3",
+          "key_id": "756d5fec-8497-4ea6-a4a8-fc82459dbc00",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 28.0715
+        },
+        {
+          "test": "dilithium3_sign_verify_2",
+          "parameter_set": "dilithium3",
+          "key_id": "8ab4ca62-3e03-4e4d-92e6-bf4ecc7ce567",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 15.974
+        },
+        {
+          "test": "dilithium3_sign_verify_3",
+          "parameter_set": "dilithium3",
+          "key_id": "c1ba742d-ae35-409e-b293-4303f7a3d474",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 22.3514
+        },
+        {
+          "test": "dilithium3_sign_verify_4",
+          "parameter_set": "dilithium3",
+          "key_id": "e186ad33-e90a-4944-90f2-1d64aa79d761",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 23.8954
+        },
+        {
+          "test": "dilithium3_sign_verify_5",
+          "parameter_set": "dilithium3",
+          "key_id": "993940e9-6558-48c4-95d7-30d4dad78a5c",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 16.7616
+        },
+        {
+          "test": "dilithium3_sign_verify_6",
+          "parameter_set": "dilithium3",
+          "key_id": "f39873d7-fa0e-4585-bb63-6dcb56b058c6",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 22.9146
+        },
+        {
+          "test": "dilithium3_sign_verify_7",
+          "parameter_set": "dilithium3",
+          "key_id": "920f5c8f-a9b8-4fa1-967e-bb365f2462ed",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 18.0236
+        },
+        {
+          "test": "dilithium3_sign_verify_8",
+          "parameter_set": "dilithium3",
+          "key_id": "0bdfb66a-7d5b-456f-b88b-4c5bbe0c429d",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 26.1737
+        },
+        {
+          "test": "dilithium3_sign_verify_9",
+          "parameter_set": "dilithium3",
+          "key_id": "4a707dc7-0343-4058-9d08-4192ab812545",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 23.4017
+        },
+        {
+          "test": "dilithium3_sign_verify_10",
+          "parameter_set": "dilithium3",
+          "key_id": "e87e9be2-631c-42bd-a16e-33da5cab3dcb",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 44.043
+        },
+        {
+          "test": "dilithium3_sign_verify_11",
+          "parameter_set": "dilithium3",
+          "key_id": "66e61957-1e6b-4d2e-9d0a-02edf7b053b0",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 75.253
+        },
+        {
+          "test": "dilithium3_sign_verify_12",
+          "parameter_set": "dilithium3",
+          "key_id": "e9207f48-150f-49e6-b287-769c11b327e0",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 33.37
+        },
+        {
+          "test": "dilithium3_sign_verify_13",
+          "parameter_set": "dilithium3",
+          "key_id": "81898e05-333a-41d5-b934-089111afc1c4",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 17.1241
+        },
+        {
+          "test": "dilithium3_sign_verify_14",
+          "parameter_set": "dilithium3",
+          "key_id": "aeacba36-54e2-46f9-9044-da39ceb996ed",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 14.7253
+        },
+        {
+          "test": "dilithium3_sign_verify_15",
+          "parameter_set": "dilithium3",
+          "key_id": "cd6eb951-4361-4d42-83bf-a7f7317d7e0e",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 13.4368
+        },
+        {
+          "test": "dilithium3_sign_verify_16",
+          "parameter_set": "dilithium3",
+          "key_id": "490c5079-d069-4e0b-8914-9f715f279389",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 17.4653
+        },
+        {
+          "test": "dilithium3_sign_verify_17",
+          "parameter_set": "dilithium3",
+          "key_id": "c5848364-cb88-4b7d-916c-d4e89b9f8ae3",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 16.2687
+        },
+        {
+          "test": "dilithium3_sign_verify_18",
+          "parameter_set": "dilithium3",
+          "key_id": "1a6c7c72-f9cc-46ea-89b9-492cc41d36c6",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 20.1025
+        },
+        {
+          "test": "dilithium3_sign_verify_19",
+          "parameter_set": "dilithium3",
+          "key_id": "52263f89-ecb6-4dbe-abb9-738ca7f93432",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 16.0243
+        },
+        {
+          "test": "dilithium3_sign_verify_20",
+          "parameter_set": "dilithium3",
+          "key_id": "18cc2364-a1f0-4dd3-aa54-e9783df76a1e",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 16.7218
+        },
+        {
+          "test": "dilithium3_sign_verify_21",
+          "parameter_set": "dilithium3",
+          "key_id": "604a3ddb-ea7b-45dc-9557-39d0f8d5c1c4",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 15.9669
+        },
+        {
+          "test": "dilithium3_sign_verify_22",
+          "parameter_set": "dilithium3",
+          "key_id": "6005ead4-ef67-4bc6-85e6-5478b97a1dd5",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 14.9427
+        },
+        {
+          "test": "dilithium3_sign_verify_23",
+          "parameter_set": "dilithium3",
+          "key_id": "43dcc052-e5eb-443f-853b-c4f1c30f77e8",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 15.757
+        },
+        {
+          "test": "dilithium3_sign_verify_24",
+          "parameter_set": "dilithium3",
+          "key_id": "f43aa463-c990-4904-89f2-9601b627423f",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 17.4733
+        },
+        {
+          "test": "dilithium3_sign_verify_25",
+          "parameter_set": "dilithium3",
+          "key_id": "97988312-766e-4f07-aab7-c25c7353fe7f",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 19.4397
+        },
+        {
+          "test": "dilithium3_sign_verify_26",
+          "parameter_set": "dilithium3",
+          "key_id": "5db37bde-869c-4f10-862d-a82c594f04f3",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 16.296
+        },
+        {
+          "test": "dilithium3_sign_verify_27",
+          "parameter_set": "dilithium3",
+          "key_id": "d631c90f-a3fc-478b-af11-61fd477eed98",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 15.4651
+        },
+        {
+          "test": "dilithium3_sign_verify_28",
+          "parameter_set": "dilithium3",
+          "key_id": "31b1d9c8-e7c7-4848-81cf-eb5aabd7234f",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 21.713
+        },
+        {
+          "test": "dilithium3_sign_verify_29",
+          "parameter_set": "dilithium3",
+          "key_id": "b1b257cd-493c-4385-b221-70fc4a2b3fe4",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 24.4924
+        },
+        {
+          "test": "dilithium3_sign_verify_30",
+          "parameter_set": "dilithium3",
+          "key_id": "208bb089-5975-43de-b925-a7a8f1c4aa8b",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 15.917
+        },
+        {
+          "test": "dilithium3_sign_verify_31",
+          "parameter_set": "dilithium3",
+          "key_id": "5e18f42c-ff26-423d-83a6-a374eb0e0a49",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 14.1121
+        },
+        {
+          "test": "dilithium3_sign_verify_32",
+          "parameter_set": "dilithium3",
+          "key_id": "a65b84f5-3942-44f8-9bd0-94c02e625b33",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 12.8061
+        },
+        {
+          "test": "dilithium3_sign_verify_33",
+          "parameter_set": "dilithium3",
+          "key_id": "19f956e6-7cbd-498c-803c-a96bd421f3bb",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 14.2253
+        },
+        {
+          "test": "dilithium3_sign_verify_34",
+          "parameter_set": "dilithium3",
+          "key_id": "2d21b86f-5d84-4c0c-b07c-2d54a1c0a796",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 17.6749
+        },
+        {
+          "test": "dilithium3_sign_verify_35",
+          "parameter_set": "dilithium3",
+          "key_id": "cc6e8b5e-7750-423f-950d-59bc73b8dbad",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 17.0007
+        },
+        {
+          "test": "dilithium3_sign_verify_36",
+          "parameter_set": "dilithium3",
+          "key_id": "d5a49bfc-f289-464e-8616-9098e7a6deea",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 13.7198
+        },
+        {
+          "test": "dilithium3_sign_verify_37",
+          "parameter_set": "dilithium3",
+          "key_id": "00c42660-89dd-46eb-a973-9b56cd0e91ea",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 13.1849
+        },
+        {
+          "test": "dilithium3_sign_verify_38",
+          "parameter_set": "dilithium3",
+          "key_id": "a1b6ba6d-e392-4d0c-879a-5b9aacb4cbf3",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 17.0895
+        },
+        {
+          "test": "dilithium3_sign_verify_39",
+          "parameter_set": "dilithium3",
+          "key_id": "1c67b8af-f3e4-4b3b-9d2e-17be00efff8f",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 14.604
+        },
+        {
+          "test": "dilithium3_sign_verify_40",
+          "parameter_set": "dilithium3",
+          "key_id": "9f4cefe1-0d4c-42f7-aa00-20e9fa43538d",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 13.3124
+        },
+        {
+          "test": "dilithium3_sign_verify_41",
+          "parameter_set": "dilithium3",
+          "key_id": "52229532-1282-4452-8062-ca84d8afdc7c",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 19.8759
+        },
+        {
+          "test": "dilithium3_sign_verify_42",
+          "parameter_set": "dilithium3",
+          "key_id": "670c6299-939c-4011-b8e2-0a8b31cd2513",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 36.1588
+        },
+        {
+          "test": "dilithium3_sign_verify_43",
+          "parameter_set": "dilithium3",
+          "key_id": "9061ca43-a8a0-4186-b799-b589eae59836",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 13.4457
+        },
+        {
+          "test": "dilithium3_sign_verify_44",
+          "parameter_set": "dilithium3",
+          "key_id": "531f3726-fcf9-48a4-b820-b4ce9a6e9a38",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 12.7976
+        },
+        {
+          "test": "dilithium3_sign_verify_45",
+          "parameter_set": "dilithium3",
+          "key_id": "28c9d00c-3611-4313-a6a6-8a7a9b9584a9",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 12.3975
+        },
+        {
+          "test": "dilithium3_sign_verify_46",
+          "parameter_set": "dilithium3",
+          "key_id": "dae81b30-84c4-4ff0-bbc2-ccef578a0389",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 11.0421
+        },
+        {
+          "test": "dilithium3_sign_verify_47",
+          "parameter_set": "dilithium3",
+          "key_id": "fb60bcaf-347d-4682-9ab6-b958ebedb81f",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 12.093
+        },
+        {
+          "test": "dilithium3_sign_verify_48",
+          "parameter_set": "dilithium3",
+          "key_id": "12d8b604-5f5a-4fc5-93cf-83c28d1aefee",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 13.7652
+        },
+        {
+          "test": "dilithium3_sign_verify_49",
+          "parameter_set": "dilithium3",
+          "key_id": "8312a19a-f260-44c1-9d8c-b42b00c68ab2",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 13.483
+        },
+        {
+          "test": "dilithium3_sign_verify_50",
+          "parameter_set": "dilithium3",
+          "key_id": "dbf86953-0479-4a34-ae7e-035517237f46",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 17.6794
+        },
+        {
+          "test": "dilithium3_sign_verify_51",
+          "parameter_set": "dilithium3",
+          "key_id": "e0c96101-e421-4691-8cb0-6a1724d402bc",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 12.5814
+        },
+        {
+          "test": "dilithium3_sign_verify_52",
+          "parameter_set": "dilithium3",
+          "key_id": "ab67cf96-d3eb-44e6-a18a-437ffe3c6bfa",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 11.3483
+        },
+        {
+          "test": "dilithium3_sign_verify_53",
+          "parameter_set": "dilithium3",
+          "key_id": "7117433a-1ee5-4dcc-9a03-3aefd18849e1",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 14.4205
+        },
+        {
+          "test": "dilithium3_sign_verify_54",
+          "parameter_set": "dilithium3",
+          "key_id": "0fcae994-c8f2-47b5-ba47-28ae253738a0",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 13.7733
+        },
+        {
+          "test": "dilithium3_sign_verify_55",
+          "parameter_set": "dilithium3",
+          "key_id": "947ef7fa-7da7-4800-895d-1b83eeb465c8",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 11.3972
+        },
+        {
+          "test": "dilithium3_sign_verify_56",
+          "parameter_set": "dilithium3",
+          "key_id": "34b872d6-70f3-4203-8cf3-2c0fe2c6cbb4",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 10.549
+        },
+        {
+          "test": "dilithium3_sign_verify_57",
+          "parameter_set": "dilithium3",
+          "key_id": "7c38f876-3c6e-4b66-9d7f-e4df44c4f0fc",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 16.6393
+        },
+        {
+          "test": "dilithium3_sign_verify_58",
+          "parameter_set": "dilithium3",
+          "key_id": "0ddc63f7-e39e-42d5-b63f-f1cd4a3541ec",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 13.2923
+        },
+        {
+          "test": "dilithium3_sign_verify_59",
+          "parameter_set": "dilithium3",
+          "key_id": "165749ac-3efa-4bfe-8cec-2521cd13525e",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 11.8568
+        },
+        {
+          "test": "dilithium3_sign_verify_60",
+          "parameter_set": "dilithium3",
+          "key_id": "99d498d4-e677-4ae1-90dc-cabe2ccbaf70",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 10.8263
+        },
+        {
+          "test": "dilithium3_sign_verify_61",
+          "parameter_set": "dilithium3",
+          "key_id": "2452a193-8095-43cf-9ff4-27de1b478488",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 11.961
+        },
+        {
+          "test": "dilithium3_sign_verify_62",
+          "parameter_set": "dilithium3",
+          "key_id": "bb0c26ce-970d-46e1-b759-67e6d468a869",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 13.3429
+        },
+        {
+          "test": "dilithium3_sign_verify_63",
+          "parameter_set": "dilithium3",
+          "key_id": "4091c719-7825-45d8-8b6d-782b49c33624",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 13.2237
+        },
+        {
+          "test": "dilithium3_sign_verify_64",
+          "parameter_set": "dilithium3",
+          "key_id": "08d95f2c-ac18-4fb7-b576-6790cd063956",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 9.8728
+        },
+        {
+          "test": "dilithium3_sign_verify_65",
+          "parameter_set": "dilithium3",
+          "key_id": "b05e3a87-d286-44f9-add1-3816b84ad780",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 14.5739
+        },
+        {
+          "test": "dilithium3_sign_verify_66",
+          "parameter_set": "dilithium3",
+          "key_id": "aa32b4e1-907d-4646-9413-73d25ad931b0",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 11.4124
+        },
+        {
+          "test": "dilithium3_sign_verify_67",
+          "parameter_set": "dilithium3",
+          "key_id": "4ca58fad-d4b0-440c-80d4-b97f63a20e46",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 13.3005
+        },
+        {
+          "test": "dilithium3_sign_verify_68",
+          "parameter_set": "dilithium3",
+          "key_id": "8d1f5461-38dd-4d50-b744-7e3914723b8d",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 11.8307
+        },
+        {
+          "test": "dilithium3_sign_verify_69",
+          "parameter_set": "dilithium3",
+          "key_id": "150c4b2d-628c-4875-941f-2c6ec7c6af0e",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 12.0833
+        },
+        {
+          "test": "dilithium3_sign_verify_70",
+          "parameter_set": "dilithium3",
+          "key_id": "7380b502-9c00-4586-a087-1ac4f7f9baf9",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 12.2667
+        },
+        {
+          "test": "dilithium3_sign_verify_71",
+          "parameter_set": "dilithium3",
+          "key_id": "a324dfd6-1b4d-4e09-9e10-8e9a9029f93a",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 15.4829
+        },
+        {
+          "test": "dilithium3_sign_verify_72",
+          "parameter_set": "dilithium3",
+          "key_id": "7cce39a1-3b04-4be8-89ce-45927513c599",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 13.3044
+        },
+        {
+          "test": "dilithium3_sign_verify_73",
+          "parameter_set": "dilithium3",
+          "key_id": "7dc29f39-7e42-4691-978d-ce627acf2d49",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 14.7843
+        },
+        {
+          "test": "dilithium3_sign_verify_74",
+          "parameter_set": "dilithium3",
+          "key_id": "81efa3d9-2d7c-44de-9a93-e6e2a1081fd7",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 14.3035
+        },
+        {
+          "test": "dilithium3_sign_verify_75",
+          "parameter_set": "dilithium3",
+          "key_id": "c83a1dff-34a0-42bf-bc2c-674aee82c4b8",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 16.5952
+        },
+        {
+          "test": "dilithium3_sign_verify_76",
+          "parameter_set": "dilithium3",
+          "key_id": "3f9ca863-873e-4a4c-9246-9b01aafbaf6b",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 16.6161
+        },
+        {
+          "test": "dilithium3_sign_verify_77",
+          "parameter_set": "dilithium3",
+          "key_id": "a71e3f8a-8b23-41c6-9eef-deaa615efdc8",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 70.2187
+        },
+        {
+          "test": "dilithium3_sign_verify_78",
+          "parameter_set": "dilithium3",
+          "key_id": "720768b4-5570-4b99-8e04-b1b6dc8597ac",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 113.2852
+        },
+        {
+          "test": "dilithium3_sign_verify_79",
+          "parameter_set": "dilithium3",
+          "key_id": "620fc35d-de50-4d39-a1cc-561257ffbcf8",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 42.0387
+        },
+        {
+          "test": "dilithium3_sign_verify_80",
+          "parameter_set": "dilithium3",
+          "key_id": "1284a05d-c509-4de7-a255-6c4cfca512ee",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 47.7501
+        },
+        {
+          "test": "dilithium3_sign_verify_81",
+          "parameter_set": "dilithium3",
+          "key_id": "857967bd-e67a-4a18-8297-f510e9f1e868",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 12.7809
+        },
+        {
+          "test": "dilithium3_sign_verify_82",
+          "parameter_set": "dilithium3",
+          "key_id": "90d8b321-5201-4926-98fe-c212b730f6a8",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 35.5403
+        },
+        {
+          "test": "dilithium3_sign_verify_83",
+          "parameter_set": "dilithium3",
+          "key_id": "c2bdbcd2-3c52-468e-b386-75feef59ca9b",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 41.9498
+        },
+        {
+          "test": "dilithium3_sign_verify_84",
+          "parameter_set": "dilithium3",
+          "key_id": "4d8e73f6-d17e-4661-97f3-306a227b3957",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 18.6894
+        },
+        {
+          "test": "dilithium3_sign_verify_85",
+          "parameter_set": "dilithium3",
+          "key_id": "7970c4f8-1252-4787-9f96-b1bf32f776ff",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 47.5535
+        },
+        {
+          "test": "dilithium3_sign_verify_86",
+          "parameter_set": "dilithium3",
+          "key_id": "09f8422c-1579-4380-8445-791679ff410b",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 30.2593
+        },
+        {
+          "test": "dilithium3_sign_verify_87",
+          "parameter_set": "dilithium3",
+          "key_id": "4be31e3e-bb19-49f6-a6cc-58590b96939f",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 20.6967
+        },
+        {
+          "test": "dilithium3_sign_verify_88",
+          "parameter_set": "dilithium3",
+          "key_id": "2148990c-a648-4d02-aeb1-3e87ef6b98f1",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 12.8201
+        },
+        {
+          "test": "dilithium3_sign_verify_89",
+          "parameter_set": "dilithium3",
+          "key_id": "c9125008-b7ab-4994-a58d-8959c96f4187",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 11.5998
+        },
+        {
+          "test": "dilithium3_sign_verify_90",
+          "parameter_set": "dilithium3",
+          "key_id": "f458eb34-2f47-466d-9fb9-14213da899ca",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 10.8968
+        },
+        {
+          "test": "dilithium3_sign_verify_91",
+          "parameter_set": "dilithium3",
+          "key_id": "0e950a1f-8c31-47d0-a284-1b8519f62b26",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 13.5165
+        },
+        {
+          "test": "dilithium3_sign_verify_92",
+          "parameter_set": "dilithium3",
+          "key_id": "51fad02b-6e7b-44d6-89a9-01f3b01c3202",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 12.9021
+        },
+        {
+          "test": "dilithium3_sign_verify_93",
+          "parameter_set": "dilithium3",
+          "key_id": "a339358f-9e41-4df9-bc37-db55c6d91e94",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 22.7212
+        },
+        {
+          "test": "dilithium3_sign_verify_94",
+          "parameter_set": "dilithium3",
+          "key_id": "82fc6186-f0c9-4cce-9d1f-eb3de75a73fb",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 13.0734
+        },
+        {
+          "test": "dilithium3_sign_verify_95",
+          "parameter_set": "dilithium3",
+          "key_id": "ecc92086-50c1-49fd-909f-f45496d58dee",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 17.8296
+        },
+        {
+          "test": "dilithium3_sign_verify_96",
+          "parameter_set": "dilithium3",
+          "key_id": "c4edb793-a4f4-4d7d-9c38-f9bceea34772",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 14.4588
+        },
+        {
+          "test": "dilithium3_sign_verify_97",
+          "parameter_set": "dilithium3",
+          "key_id": "bd495e5c-c2f7-4d25-90ac-62d74ab5c98d",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 15.7789
+        },
+        {
+          "test": "dilithium3_sign_verify_98",
+          "parameter_set": "dilithium3",
+          "key_id": "dca6133a-4489-4d3e-ba37-bc4768e4f23f",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 17.4026
+        },
+        {
+          "test": "dilithium3_sign_verify_99",
+          "parameter_set": "dilithium3",
+          "key_id": "70b8af80-1879-410a-afbd-df4c2d0ef58a",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 14.7427
+        },
+        {
+          "test": "dilithium3_sign_verify_100",
+          "parameter_set": "dilithium3",
+          "key_id": "7491b03b-9b2d-4ae8-b5e2-4cc92507cacb",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 12.3985
+        }
+      ]
+    },
+    {
+      "suite": "falcon512_sign_verify",
+      "parameter_set": "falcon512",
+      "iterations": 100,
+      "passed": 100,
+      "failed": 0,
+      "skipped": 0,
+      "success_rate_executed": 100.0,
+      "latency": {
+        "avg_ms": 20.7388,
+        "p95_ms": 29.4476,
+        "p99_ms": 107.2254,
+        "min_ms": 14.5927,
+        "max_ms": 107.2254
+      },
+      "details": [
+        {
+          "test": "falcon512_sign_verify_1",
+          "parameter_set": "falcon512",
+          "key_id": "ffbaa518-626c-4a2f-a767-e04722ce5cb6",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 18.1867
+        },
+        {
+          "test": "falcon512_sign_verify_2",
+          "parameter_set": "falcon512",
+          "key_id": "b4177210-1b4a-43b0-9270-81e68e91eeca",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 20.2027
+        },
+        {
+          "test": "falcon512_sign_verify_3",
+          "parameter_set": "falcon512",
+          "key_id": "4c7d6f81-1597-41c2-8bfa-a372f7783a5b",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 18.3487
+        },
+        {
+          "test": "falcon512_sign_verify_4",
+          "parameter_set": "falcon512",
+          "key_id": "c29aa960-d53f-4d92-afd5-3cc99ed85c9f",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 18.9718
+        },
+        {
+          "test": "falcon512_sign_verify_5",
+          "parameter_set": "falcon512",
+          "key_id": "1cea6e89-94ff-48fd-8c15-264f200c8ad8",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 22.0032
+        },
+        {
+          "test": "falcon512_sign_verify_6",
+          "parameter_set": "falcon512",
+          "key_id": "f04fb26c-89d0-4951-bc93-fb0eb778b04e",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 21.5053
+        },
+        {
+          "test": "falcon512_sign_verify_7",
+          "parameter_set": "falcon512",
+          "key_id": "674c1333-2b08-486f-81ab-9e3a1cc0b2bc",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 19.3064
+        },
+        {
+          "test": "falcon512_sign_verify_8",
+          "parameter_set": "falcon512",
+          "key_id": "549db216-a4fe-4795-9855-df0ee3e7211b",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 17.266
+        },
+        {
+          "test": "falcon512_sign_verify_9",
+          "parameter_set": "falcon512",
+          "key_id": "2c260eec-8655-47ee-ba6d-2c448b510f49",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 20.4695
+        },
+        {
+          "test": "falcon512_sign_verify_10",
+          "parameter_set": "falcon512",
+          "key_id": "e3a3bb6b-2fbe-40e0-961b-3d7c2bcfca57",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 21.9032
+        },
+        {
+          "test": "falcon512_sign_verify_11",
+          "parameter_set": "falcon512",
+          "key_id": "0189af7b-149e-48a3-bd8c-1b7ed7a37442",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 20.5786
+        },
+        {
+          "test": "falcon512_sign_verify_12",
+          "parameter_set": "falcon512",
+          "key_id": "7c1f49a3-7571-4fd3-837f-b21aaa872f44",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 22.4607
+        },
+        {
+          "test": "falcon512_sign_verify_13",
+          "parameter_set": "falcon512",
+          "key_id": "6b564ab8-bb23-452f-b7d5-75dad9f3286b",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 23.0605
+        },
+        {
+          "test": "falcon512_sign_verify_14",
+          "parameter_set": "falcon512",
+          "key_id": "5f4a85c7-c07d-4ad8-aeb3-1049c6a96a13",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 17.5105
+        },
+        {
+          "test": "falcon512_sign_verify_15",
+          "parameter_set": "falcon512",
+          "key_id": "a0cd8323-841e-4f9f-9ee0-34dbc27b84a7",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 17.6583
+        },
+        {
+          "test": "falcon512_sign_verify_16",
+          "parameter_set": "falcon512",
+          "key_id": "2f9deabf-eedd-4fbc-afbb-be763a696c89",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 20.6916
+        },
+        {
+          "test": "falcon512_sign_verify_17",
+          "parameter_set": "falcon512",
+          "key_id": "67f45445-c99d-4e1f-b35d-f31e51b157df",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 107.2254
+        },
+        {
+          "test": "falcon512_sign_verify_18",
+          "parameter_set": "falcon512",
+          "key_id": "f79bc531-d4ea-4f5c-a0ca-7d898d55e883",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 20.3407
+        },
+        {
+          "test": "falcon512_sign_verify_19",
+          "parameter_set": "falcon512",
+          "key_id": "04b76189-8ec9-4ddb-bf9a-a8bcc94b711c",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 17.9782
+        },
+        {
+          "test": "falcon512_sign_verify_20",
+          "parameter_set": "falcon512",
+          "key_id": "48b8d2dc-379a-402f-a1a6-2d4a9a11e04e",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 17.7638
+        },
+        {
+          "test": "falcon512_sign_verify_21",
+          "parameter_set": "falcon512",
+          "key_id": "13a6f815-9e65-400e-aa31-00b2351940a7",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 21.0759
+        },
+        {
+          "test": "falcon512_sign_verify_22",
+          "parameter_set": "falcon512",
+          "key_id": "69835ef2-69cc-4de2-88f1-f788ce3fb117",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 29.4476
+        },
+        {
+          "test": "falcon512_sign_verify_23",
+          "parameter_set": "falcon512",
+          "key_id": "7e62310a-82c2-4602-8bb7-3f654c386b76",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 20.2945
+        },
+        {
+          "test": "falcon512_sign_verify_24",
+          "parameter_set": "falcon512",
+          "key_id": "5f2e5482-98b3-4dd4-8683-c70bf1963a64",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 20.2193
+        },
+        {
+          "test": "falcon512_sign_verify_25",
+          "parameter_set": "falcon512",
+          "key_id": "d51b5daa-b0c7-4628-b6c9-78d70e43e40d",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 16.055
+        },
+        {
+          "test": "falcon512_sign_verify_26",
+          "parameter_set": "falcon512",
+          "key_id": "ac119245-cd99-4fdc-b974-00b12c191eab",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 18.2753
+        },
+        {
+          "test": "falcon512_sign_verify_27",
+          "parameter_set": "falcon512",
+          "key_id": "0b7ad46d-f2c9-45b7-9085-6ebde28559f2",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 18.117
+        },
+        {
+          "test": "falcon512_sign_verify_28",
+          "parameter_set": "falcon512",
+          "key_id": "0175d0d2-fb60-44c3-bc77-c4dcdaefe2de",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 15.5822
+        },
+        {
+          "test": "falcon512_sign_verify_29",
+          "parameter_set": "falcon512",
+          "key_id": "218344f3-4b04-4717-8d10-332662f6bdf6",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 14.5927
+        },
+        {
+          "test": "falcon512_sign_verify_30",
+          "parameter_set": "falcon512",
+          "key_id": "736e4bca-3a97-41bb-a332-e938cce5e51f",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 15.9778
+        },
+        {
+          "test": "falcon512_sign_verify_31",
+          "parameter_set": "falcon512",
+          "key_id": "1a07ab3d-a571-4618-9a1b-4e50e151b5ea",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 15.6231
+        },
+        {
+          "test": "falcon512_sign_verify_32",
+          "parameter_set": "falcon512",
+          "key_id": "7d74c727-1604-44f7-a6aa-64d775c70a4c",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 17.263
+        },
+        {
+          "test": "falcon512_sign_verify_33",
+          "parameter_set": "falcon512",
+          "key_id": "9d6de3e4-85ca-47f5-87e5-7ed9e1acf816",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 17.3767
+        },
+        {
+          "test": "falcon512_sign_verify_34",
+          "parameter_set": "falcon512",
+          "key_id": "66649b6f-db1a-4c15-8431-ff0dbd7cfc47",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 15.3125
+        },
+        {
+          "test": "falcon512_sign_verify_35",
+          "parameter_set": "falcon512",
+          "key_id": "c7305b62-6165-458b-88d1-787bb3769e01",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 16.0374
+        },
+        {
+          "test": "falcon512_sign_verify_36",
+          "parameter_set": "falcon512",
+          "key_id": "3b4ca2c6-a6b5-4c9d-a956-d31f2bf1f968",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 18.1981
+        },
+        {
+          "test": "falcon512_sign_verify_37",
+          "parameter_set": "falcon512",
+          "key_id": "0dcf3268-e7dd-48d2-8552-adceacc03573",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 19.8117
+        },
+        {
+          "test": "falcon512_sign_verify_38",
+          "parameter_set": "falcon512",
+          "key_id": "92f5508c-1711-4918-82d2-1698065cd0bc",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 20.6558
+        },
+        {
+          "test": "falcon512_sign_verify_39",
+          "parameter_set": "falcon512",
+          "key_id": "8a3cbb23-53bc-4ac3-b42b-11b1df75e8da",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 26.2439
+        },
+        {
+          "test": "falcon512_sign_verify_40",
+          "parameter_set": "falcon512",
+          "key_id": "65471cab-e24f-49be-a8a5-524bfd647d67",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 18.1946
+        },
+        {
+          "test": "falcon512_sign_verify_41",
+          "parameter_set": "falcon512",
+          "key_id": "584d8914-c7a9-4069-ba31-7950d08d55b9",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 44.4072
+        },
+        {
+          "test": "falcon512_sign_verify_42",
+          "parameter_set": "falcon512",
+          "key_id": "269aefb4-2cc1-4713-9237-14c24070f7a8",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 42.9192
+        },
+        {
+          "test": "falcon512_sign_verify_43",
+          "parameter_set": "falcon512",
+          "key_id": "67180123-e7ad-4b0c-872c-b7e6ec4205ba",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 19.0015
+        },
+        {
+          "test": "falcon512_sign_verify_44",
+          "parameter_set": "falcon512",
+          "key_id": "e0eb7cdb-dcb2-41b5-aa2c-4b6097534fcf",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 19.2326
+        },
+        {
+          "test": "falcon512_sign_verify_45",
+          "parameter_set": "falcon512",
+          "key_id": "ca639d2e-3653-4898-9745-c23550da4554",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 21.1195
+        },
+        {
+          "test": "falcon512_sign_verify_46",
+          "parameter_set": "falcon512",
+          "key_id": "f11c51de-0d56-401e-878d-9784f3a8133d",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 22.1126
+        },
+        {
+          "test": "falcon512_sign_verify_47",
+          "parameter_set": "falcon512",
+          "key_id": "dfd04139-aee5-44d7-9184-3151e81c0490",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 15.1246
+        },
+        {
+          "test": "falcon512_sign_verify_48",
+          "parameter_set": "falcon512",
+          "key_id": "939d7cdd-dcd5-4914-9736-4c216f0b8980",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 21.8081
+        },
+        {
+          "test": "falcon512_sign_verify_49",
+          "parameter_set": "falcon512",
+          "key_id": "ee2608d0-b7af-41ef-a98e-840f3c971692",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 20.8017
+        },
+        {
+          "test": "falcon512_sign_verify_50",
+          "parameter_set": "falcon512",
+          "key_id": "f1b0a0a1-22b8-482c-a302-c191360a1514",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 16.1289
+        },
+        {
+          "test": "falcon512_sign_verify_51",
+          "parameter_set": "falcon512",
+          "key_id": "692f4dd9-d4e6-4d32-8cf1-425726a72366",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 18.4926
+        },
+        {
+          "test": "falcon512_sign_verify_52",
+          "parameter_set": "falcon512",
+          "key_id": "69058c78-c6dd-41c6-81f6-8cb4f82776ff",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 17.3324
+        },
+        {
+          "test": "falcon512_sign_verify_53",
+          "parameter_set": "falcon512",
+          "key_id": "2d02e773-7d0a-4425-a9bd-b84bb606f24e",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 17.3754
+        },
+        {
+          "test": "falcon512_sign_verify_54",
+          "parameter_set": "falcon512",
+          "key_id": "b79bf846-9ada-4703-9fc7-8fbf1478b01e",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 19.2135
+        },
+        {
+          "test": "falcon512_sign_verify_55",
+          "parameter_set": "falcon512",
+          "key_id": "db2fb7e5-2f6c-4f3c-b9ad-428e0d6cc64c",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 20.8854
+        },
+        {
+          "test": "falcon512_sign_verify_56",
+          "parameter_set": "falcon512",
+          "key_id": "8587c437-b670-4dec-9302-d5197e270f61",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 20.3648
+        },
+        {
+          "test": "falcon512_sign_verify_57",
+          "parameter_set": "falcon512",
+          "key_id": "caacd860-62a1-4a61-b64e-c645a3d82c6e",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 19.5361
+        },
+        {
+          "test": "falcon512_sign_verify_58",
+          "parameter_set": "falcon512",
+          "key_id": "a692c184-af94-4996-9ecd-dfeb570a6bec",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 17.1678
+        },
+        {
+          "test": "falcon512_sign_verify_59",
+          "parameter_set": "falcon512",
+          "key_id": "5f91348d-fa7b-401f-ac76-a295bd8e10d4",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 20.0236
+        },
+        {
+          "test": "falcon512_sign_verify_60",
+          "parameter_set": "falcon512",
+          "key_id": "e93356a9-ac98-469a-9fc7-91ffdc3e8755",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 15.9591
+        },
+        {
+          "test": "falcon512_sign_verify_61",
+          "parameter_set": "falcon512",
+          "key_id": "d717a7d0-5db1-4164-a680-1acd417d235b",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 21.3025
+        },
+        {
+          "test": "falcon512_sign_verify_62",
+          "parameter_set": "falcon512",
+          "key_id": "bb88682a-55d3-46ea-bc19-e632af48ff16",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 20.2935
+        },
+        {
+          "test": "falcon512_sign_verify_63",
+          "parameter_set": "falcon512",
+          "key_id": "09799c9d-015d-4290-9cf3-07a838b9491a",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 22.1593
+        },
+        {
+          "test": "falcon512_sign_verify_64",
+          "parameter_set": "falcon512",
+          "key_id": "468ec35e-a557-47db-8f03-bbe857abc161",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 17.5115
+        },
+        {
+          "test": "falcon512_sign_verify_65",
+          "parameter_set": "falcon512",
+          "key_id": "18af5caf-463b-4fda-ad52-dd57abdce5eb",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 20.498
+        },
+        {
+          "test": "falcon512_sign_verify_66",
+          "parameter_set": "falcon512",
+          "key_id": "40d5848f-b5fc-4fe8-ae75-115c9e630430",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 22.3935
+        },
+        {
+          "test": "falcon512_sign_verify_67",
+          "parameter_set": "falcon512",
+          "key_id": "7b8b5456-41f8-418f-8901-880106c37b7c",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 18.9295
+        },
+        {
+          "test": "falcon512_sign_verify_68",
+          "parameter_set": "falcon512",
+          "key_id": "35674fe0-eae0-46b5-8a50-9dc4ab985648",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 22.3769
+        },
+        {
+          "test": "falcon512_sign_verify_69",
+          "parameter_set": "falcon512",
+          "key_id": "60b513be-7c83-4dfd-b8d6-8d4a044a7a38",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 19.7053
+        },
+        {
+          "test": "falcon512_sign_verify_70",
+          "parameter_set": "falcon512",
+          "key_id": "1ff3c5eb-db6b-4def-be15-c2fe0a9ec157",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 19.446
+        },
+        {
+          "test": "falcon512_sign_verify_71",
+          "parameter_set": "falcon512",
+          "key_id": "798f8071-be7a-4f53-a2c7-ff8377a2b5cc",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 55.9069
+        },
+        {
+          "test": "falcon512_sign_verify_72",
+          "parameter_set": "falcon512",
+          "key_id": "cd53bce8-1751-4e4a-9ea2-329261e081d4",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 19.4798
+        },
+        {
+          "test": "falcon512_sign_verify_73",
+          "parameter_set": "falcon512",
+          "key_id": "ef784337-f0e7-4e85-aeb6-a0e88a8f8660",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 21.2112
+        },
+        {
+          "test": "falcon512_sign_verify_74",
+          "parameter_set": "falcon512",
+          "key_id": "b6c4d9d5-78f1-4869-8b3a-6fa0fca8dbba",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 17.2658
+        },
+        {
+          "test": "falcon512_sign_verify_75",
+          "parameter_set": "falcon512",
+          "key_id": "aaf9874b-fa8f-4164-830c-591683870eaf",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 18.4726
+        },
+        {
+          "test": "falcon512_sign_verify_76",
+          "parameter_set": "falcon512",
+          "key_id": "da67b292-13d7-4fdc-853a-1a5cf57e1362",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 20.1915
+        },
+        {
+          "test": "falcon512_sign_verify_77",
+          "parameter_set": "falcon512",
+          "key_id": "4ca24403-35b4-4217-ad05-3aafe9fcac49",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 17.7814
+        },
+        {
+          "test": "falcon512_sign_verify_78",
+          "parameter_set": "falcon512",
+          "key_id": "f89cacdc-e441-4819-ba0d-0c1ea51dc422",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 18.4939
+        },
+        {
+          "test": "falcon512_sign_verify_79",
+          "parameter_set": "falcon512",
+          "key_id": "cbb0f553-84f2-4d99-a9c6-828e51b978dd",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 15.9883
+        },
+        {
+          "test": "falcon512_sign_verify_80",
+          "parameter_set": "falcon512",
+          "key_id": "c6e9dd82-153d-4137-b5b4-d7841c2377b7",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 17.3736
+        },
+        {
+          "test": "falcon512_sign_verify_81",
+          "parameter_set": "falcon512",
+          "key_id": "6e37dfa5-2c5e-45a4-925c-40ade3abb3e8",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 20.17
+        },
+        {
+          "test": "falcon512_sign_verify_82",
+          "parameter_set": "falcon512",
+          "key_id": "45c55d5c-b54c-452f-8853-79589c3cdec3",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 14.8995
+        },
+        {
+          "test": "falcon512_sign_verify_83",
+          "parameter_set": "falcon512",
+          "key_id": "b1efac6d-8879-4eb4-9e2b-5a188031f4be",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 16.3007
+        },
+        {
+          "test": "falcon512_sign_verify_84",
+          "parameter_set": "falcon512",
+          "key_id": "b10a993a-390e-4cc4-9ff1-abf818855743",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 17.2148
+        },
+        {
+          "test": "falcon512_sign_verify_85",
+          "parameter_set": "falcon512",
+          "key_id": "be4f7ac0-fa85-4e3a-8198-7928ae91552a",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 16.5923
+        },
+        {
+          "test": "falcon512_sign_verify_86",
+          "parameter_set": "falcon512",
+          "key_id": "d2c5fcab-a2eb-4ae7-80b5-b1c4b6aa4dd4",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 17.9037
+        },
+        {
+          "test": "falcon512_sign_verify_87",
+          "parameter_set": "falcon512",
+          "key_id": "080430c3-0397-499f-8487-ba5fd9de6b69",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 20.1868
+        },
+        {
+          "test": "falcon512_sign_verify_88",
+          "parameter_set": "falcon512",
+          "key_id": "c0e0d303-e77a-4643-abc4-e1b834f6cb84",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 17.5173
+        },
+        {
+          "test": "falcon512_sign_verify_89",
+          "parameter_set": "falcon512",
+          "key_id": "0b5ec05c-7dc0-4379-8b76-e94bfc8c86c0",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 15.7694
+        },
+        {
+          "test": "falcon512_sign_verify_90",
+          "parameter_set": "falcon512",
+          "key_id": "5bba442d-5739-4258-a604-6b06274412d8",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 16.5576
+        },
+        {
+          "test": "falcon512_sign_verify_91",
+          "parameter_set": "falcon512",
+          "key_id": "65b148b2-badf-4f3c-82ba-3f9f9a840c59",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 20.1879
+        },
+        {
+          "test": "falcon512_sign_verify_92",
+          "parameter_set": "falcon512",
+          "key_id": "b01aeb53-093c-4b76-af09-9693173d9046",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 15.6432
+        },
+        {
+          "test": "falcon512_sign_verify_93",
+          "parameter_set": "falcon512",
+          "key_id": "9da6113d-2a0c-4c18-b394-2a02f01c00c0",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 17.0015
+        },
+        {
+          "test": "falcon512_sign_verify_94",
+          "parameter_set": "falcon512",
+          "key_id": "a7fb4951-644b-479a-b91c-7256b9689e38",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 19.7708
+        },
+        {
+          "test": "falcon512_sign_verify_95",
+          "parameter_set": "falcon512",
+          "key_id": "d14f4502-8233-43d5-8909-d26ad525c412",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 18.3611
+        },
+        {
+          "test": "falcon512_sign_verify_96",
+          "parameter_set": "falcon512",
+          "key_id": "dcf8460e-fbf5-48bd-a359-7e5e9af7a4d0",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 20.0187
+        },
+        {
+          "test": "falcon512_sign_verify_97",
+          "parameter_set": "falcon512",
+          "key_id": "afebe194-35f6-4b71-8166-f1b94436871a",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 20.0488
+        },
+        {
+          "test": "falcon512_sign_verify_98",
+          "parameter_set": "falcon512",
+          "key_id": "c2b99724-04b8-44af-9888-7db7c91c9b0e",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 20.5513
+        },
+        {
+          "test": "falcon512_sign_verify_99",
+          "parameter_set": "falcon512",
+          "key_id": "3239da26-9205-4de1-9f7a-ac0d738ef2a0",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 19.3602
+        },
+        {
+          "test": "falcon512_sign_verify_100",
+          "parameter_set": "falcon512",
+          "key_id": "9612defc-7c09-4ca5-9b97-52123095492d",
+          "success": true,
+          "skipped": false,
+          "elapsed_ms": 16.2492
+        }
+      ]
+    }
+  ],
+  "security_tests": [
+    {
+      "test": "cross_key_decryption",
+      "expected": "failure",
+      "success": true,
+      "reason": "blocked as expected: /decrypt returned 400: Decryption failed: AES-GCM decryption failed: "
+    }
+  ]
+}

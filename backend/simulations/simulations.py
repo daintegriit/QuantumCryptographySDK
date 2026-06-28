@@ -74,14 +74,7 @@ class MigrationSimulationEngine:
     ) -> SimulationResult:
         """
         Simulate cryptographic risk year-by-year.
-
-        horizon_years:
-          How far into the future to simulate (30–50 typical)
-
-        safety_margin_years:
-          How many years before break migration must occur
         """
-
         start_year = start_year or datetime.now(timezone.utc).year
 
         # Evaluate once to get scheme + params
@@ -133,11 +126,9 @@ class MigrationSimulationEngine:
                 )
             )
 
-            # Track earliest migration trigger
             if risk in ("MIGRATE_SOON", "BROKEN") and first_migration_year is None:
                 first_migration_year = year
 
-            # Track worst observed risk
             if risk == "BROKEN":
                 worst_risk = "BROKEN"
             elif risk == "MIGRATE_SOON" and worst_risk != "BROKEN":
@@ -161,9 +152,6 @@ class MigrationSimulationEngine:
             ),
         )
 
-        # ------------------------------------------------
-        # Audit (critical for gov / research)
-        # ------------------------------------------------
         record_key_event(
             event_type="migration_simulation",
             key_id=key_id,
@@ -210,8 +198,15 @@ def simulate_key(
         safety_margin_years=safety_margin_years,
     )
 
-    return {
-        **asdict(result),
-        "timeline": [asdict(p) for p in result.timeline],
-        "registry_snapshot": registry_snapshot(),
-    }
+    # BUG FIX: asdict() on a frozen dataclass that contains a list of
+    # other frozen dataclasses (YearlyRiskPoint) works correctly, BUT
+    # the original code did BOTH asdict(result) AND manually re-built
+    # "timeline" from result.timeline — this caused timeline to appear
+    # TWICE in the output dict, with the manual version overwriting the
+    # asdict version. Use asdict() alone; it handles nested dataclasses.
+    serialized = asdict(result)
+
+    # Attach registry snapshot as extra metadata (not part of the dataclass)
+    serialized["registry_snapshot"] = registry_snapshot()
+
+    return serialized
