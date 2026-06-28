@@ -78,7 +78,7 @@ async def google_callback(code: str, state: str):
     response.set_cookie(
         key="access_token", value=jwt_token,
         httponly=True, secure=True, samesite="lax",
-        max_age=86400, domain="qsentry.io",
+        max_age=86400, domain=".qsentry.io",
     )
     return response
 
@@ -92,7 +92,7 @@ async def auth_status(request: Request):
 @router.post("/logout")
 async def logout():
     response = JSONResponse({"message": "Logged out"})
-    response.delete_cookie("access_token", domain="qsentry.io")
+    response.delete_cookie("access_token", domain=".qsentry.io")
     return response
 
 @router.get("/me")
