@@ -48,6 +48,9 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3008",
         "http://127.0.0.1:3008",
+        "https://qsentry.io",
+        "https://www.qsentry.io",
+        "http://qsentry.io",
     ],
     allow_credentials=True,
     allow_methods=["*"],
