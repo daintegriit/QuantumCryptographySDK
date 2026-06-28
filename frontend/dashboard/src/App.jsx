@@ -1,9 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext";
 import { ActiveKeyProvider } from "./context/ActiveKeyContext";
+import { AuthProvider, useAuth } from "./context/AuthContext";
 import DashboardLayout from "./components/layout/DashboardLayout";
 
-// Pages
 import DashboardPage from "./pages/DashboardPage";
 import CryptoPage from "./pages/CryptoPage";
 import KeysPage from "./pages/KeysPage";
@@ -18,32 +18,54 @@ import ExplainPage from "./pages/ExplainPage";
 import CliPage from "./pages/CliPage";
 import AlgorithmsPage from "./pages/AlgorithmsPage";
 import HowItWorksPage from "./pages/HowItWorksPage";
+import LoginPage from "./pages/LoginPage";
+
+function ProtectedRoute({ children }) {
+  const { user, loading } = useAuth();
+  if (loading) return (
+    <div className="min-h-screen flex items-center justify-center bg-black">
+      <div className="text-cyan-400 text-sm animate-pulse">Loading Q-SENTRY...</div>
+    </div>
+  );
+  if (!user) return <Navigate to="/login" replace />;
+  return children;
+}
+
+function AppRoutes() {
+  return (
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
+      <Route element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
+        <Route index element={<DashboardPage />} />
+        <Route path="dashboard" element={<DashboardPage />} />
+        <Route path="crypto" element={<CryptoPage />} />
+        <Route path="keys" element={<KeysPage />} />
+        <Route path="governance" element={<GovernancePage />} />
+        <Route path="simulation" element={<SimulationPage />} />
+        <Route path="audit" element={<AuditPage />} />
+        <Route path="telemetry" element={<TelemetryDashboard />} />
+        <Route path="metrics" element={<MetricsPage />} />
+        <Route path="risk" element={<RiskSummaryPage />} />
+        <Route path="anomalies" element={<AnomalyDashboard />} />
+        <Route path="explain" element={<ExplainPage />} />
+        <Route path="cli" element={<CliPage />} />
+        <Route path="algorithms" element={<AlgorithmsPage />} />
+        <Route path="how-it-works" element={<HowItWorksPage />} />
+      </Route>
+    </Routes>
+  );
+}
 
 export default function App() {
   return (
     <ThemeProvider>
-      <ActiveKeyProvider>
-        <Router>
-          <Routes>
-            <Route element={<DashboardLayout />}>
-              <Route index element={<DashboardPage />} />
-              <Route path="crypto" element={<CryptoPage />} />
-              <Route path="keys" element={<KeysPage />} />
-              <Route path="governance" element={<GovernancePage />} />
-              <Route path="simulation" element={<SimulationPage />} />
-              <Route path="audit" element={<AuditPage />} />
-              <Route path="telemetry" element={<TelemetryDashboard />} />
-              <Route path="metrics" element={<MetricsPage />} />
-              <Route path="risk" element={<RiskSummaryPage />} />
-              <Route path="anomalies" element={<AnomalyDashboard />} />
-              <Route path="explain" element={<ExplainPage />} />
-              <Route path="cli" element={<CliPage />} />
-              <Route path="algorithms" element={<AlgorithmsPage />} />
-              <Route path="how-it-works" element={<HowItWorksPage />} />
-            </Route>
-          </Routes>
-        </Router>
-      </ActiveKeyProvider>
+      <AuthProvider>
+        <ActiveKeyProvider>
+          <Router>
+            <AppRoutes />
+          </Router>
+        </ActiveKeyProvider>
+      </AuthProvider>
     </ThemeProvider>
   );
 }
