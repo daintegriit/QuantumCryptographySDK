@@ -83,7 +83,6 @@ export default function Sidebar() {
   ];
 
   return (
-    <aside style={{ background: "var(--sidebar-bg, var(--panel))" }}
       className="w-64 h-full flex flex-col"
       style={{ background: "var(--sidebar-bg, var(--panel))", borderRight: "1px solid var(--border)" }}>
 
