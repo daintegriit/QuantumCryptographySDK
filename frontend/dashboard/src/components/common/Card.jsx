@@ -1,28 +1,7 @@
-// src/components/common/Card.jsx
-import { useTheme } from "../../context/ThemeContext";
-
-/**
- * Card
- *
- * Core layout primitive for all dashboard panels.
- *
- * Design goals:
- * - Theme-aware
- * - Deterministic
- * - Audit-safe
- * - Zero business logic
- *
- * Used across:
- * - SystemPosturePanel
- * - RiskSummary
- * - GovernanceOverview
- * - TelemetryDashboard
- */
-export default function Card({ children, className = "" }) {
-  const { theme } = useTheme();
-
+export default function Card({ children, className = "", highlight = false }) {
   return (
-    <div className={`${theme.panel} p-6 rounded-xl ${className}`}>
+    <div className={`p-6 rounded-xl ${className}`}
+      style={{ background: "var(--panel)", border: highlight ? "1px solid var(--accent)" : "1px solid var(--border)" }}>
       {children}
     </div>
   );
