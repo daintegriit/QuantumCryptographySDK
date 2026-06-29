@@ -253,3 +253,106 @@ export default function AdminPage() {
     </div>
   );
 }
+
+function AIIntelligenceTab() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [refreshing, setRefreshing] = useState(false);
+
+  async function load(silent = false) {
+    try {
+      if (!silent) setLoading(true);
+      setError(null);
+      const res = await apiGet("/api/anomalies/ai-scan");
+      setData(res);
+    } catch (e) { setError(e.message); }
+    finally { setLoading(false); setRefreshing(false); }
+  }
+
+  useEffect(() => { load(); }, []);
+
+  if (loading) return (
+    <div className="flex items-center gap-3 p-4" style={{ color: "var(--text-muted)" }}>
+      <FaSpinner className="animate-spin" style={{ color: "var(--accent)" }} /> Loading AI scan…
+    </div>
+  );
+
+  if (error) return (
+    <div className="p-4 rounded-xl text-red-400" style={{ border: "1px solid rgba(239,68,68,0.3)" }}>{error}</div>
+  );
+
+  if (!data) return null;
+
+  return (
+    <div className="space-y-6">
+      {/* Model Info */}
+      <div className="p-5 rounded-xl" style={{ background: "var(--panel)", border: "1px solid rgba(167,139,250,0.3)" }}>
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="font-semibold flex items-center gap-2" style={{ color: "var(--text-primary)" }}>
+            <FaRobot style={{ color: "#a78bfa" }} /> Isolation Forest Model — Live Status
+          </h3>
+          <button onClick={() => { setRefreshing(true); load(true); }} disabled={refreshing}
+            className="text-xs px-3 py-1.5 rounded transition flex items-center gap-1.5"
+            style={{ background: "var(--accent-subtle)", color: "var(--accent)", border: "1px solid var(--border)" }}>
+            <FaShieldAlt className={refreshing ? "animate-spin" : ""} />
+            {refreshing ? "Scanning…" : "Rescan"}
+          </button>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+          {[
+            ["Status",          data.status === "ok" ? "Trained · Active" : "Awaiting Data"],
+            ["Events Trained",  data.model_trained ?? "—"],
+            ["Events Scanned",  data.total_scanned ?? "—"],
+            ["Anomaly Rate",    data.anomaly_rate != null ? `${(data.anomaly_rate * 100).toFixed(1)}%` : "—"],
+          ].map(([label, value]) => (
+            <div key={label} className="p-3 rounded-xl" style={{ background: "var(--input-bg)", border: "1px solid var(--border)" }}>
+              <div className="text-xs" style={{ color: "var(--text-muted)" }}>{label}</div>
+              <div className="font-semibold mt-1" style={{ color: "#a78bfa" }}>{value}</div>
+            </div>
+          ))}
+        </div>
+        <div className="mt-3 text-xs" style={{ color: "var(--text-muted)" }}>
+          Features: event_type · scheme · policy_result · duration_ms · Auto-retrains every 100 new events
+        </div>
+        <div className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>
+          Last scan: {data.scanned_at ? new Date(data.scanned_at).toLocaleString() : "—"}
+        </div>
+      </div>
+
+      {/* Anomalies found */}
+      <div className="p-5 rounded-xl" style={{ background: "var(--panel)", border: "1px solid var(--border)" }}>
+        <h3 className="font-semibold mb-3 flex items-center gap-2" style={{ color: "var(--text-primary)" }}>
+          <FaBrain style={{ color: "var(--accent)" }} />
+          Anomalies Detected ({data.anomalies_found ?? 0})
+        </h3>
+        {!data.anomalies?.length ? (
+          <p className="text-sm flex items-center gap-2 text-green-400">
+            <FaCheckCircle /> No anomalies detected in current scan window.
+          </p>
+        ) : (
+          <div className="space-y-2">
+            {data.anomalies.map((a, idx) => (
+              <div key={idx} className="p-3 rounded-xl text-xs font-mono flex items-start justify-between gap-4"
+                style={{ background: "var(--input-bg)", border: "1px solid rgba(239,68,68,0.2)" }}>
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2">
+                    <span style={{ color: "#f87171" }}>{a.reason}</span>
+                    <span className="px-1.5 py-0.5 rounded text-xs" style={{ background: "rgba(239,68,68,0.1)", color: "#f87171" }}>
+                      score: {a.score}
+                    </span>
+                  </div>
+                  <div style={{ color: "var(--text-muted)" }}>
+                    {a.event_type} · scheme: <span style={{ color: "var(--accent)" }}>{a.scheme}</span>
+                    · policy: {a.policy_result}
+                    · duration: {a.duration_ms}ms
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
