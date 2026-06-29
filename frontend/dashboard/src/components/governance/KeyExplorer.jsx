@@ -82,13 +82,6 @@ export default function KeyExplorer({ selectable, selectedKeyId, onSelectKey }) 
   return (
     <>
       <div className="space-y-4">
-        <div>
-          <h2 className={`text-xl font-bold ${theme.panelTitle}`}>Key Explorer</h2>
-          <p className={theme.mutedText}>
-            Inspect cryptographic keys, policy posture, usage, and migration risk.
-          </p>
-        </div>
-
         <div className={`${theme.panel} rounded-xl overflow-x-auto`}>
           <table className="w-full text-sm">
             <thead>
@@ -149,7 +142,6 @@ export default function KeyExplorer({ selectable, selectedKeyId, onSelectKey }) 
 
                     <Td>
                       <div className="flex gap-1 flex-wrap">
-                        {/* Set Active button */}
                         {isActive ? (
                           <span className="text-xs px-2 py-1 rounded bg-green-500/10 text-green-400 border border-green-500/30">
                             Active
