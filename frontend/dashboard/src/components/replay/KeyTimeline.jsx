@@ -1,26 +1,28 @@
 import { useEffect, useMemo, useState } from "react";
-
+import { FaKey, FaLock, FaShieldAlt, FaExchangeAlt, FaScroll, FaSpinner, FaExclamationTriangle, FaHistory } from "react-icons/fa";
 import TimelineEvent from "./TimelineEvent";
 import { apiGet } from "../../services/apiClient";
 
-export default function KeyTimeline({ keyId }) {
+const PHASE_ICONS = {
+  CREATION: <FaKey className="text-cyan-400" />,
+  USAGE: <FaLock className="text-purple-400" />,
+  ENFORCEMENT: <FaShieldAlt className="text-yellow-400" />,
+  MIGRATION: <FaExchangeAlt className="text-orange-400" />,
+  OTHER: <FaScroll className="text-gray-400" />,
+};
 
+export default function KeyTimeline({ keyId }) {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     if (!keyId) return;
-
     async function loadTimeline() {
       try {
         setLoading(true);
         setError(null);
-        // BUG FIX 1: hardcoded http://localhost:8008 → use apiGet
-        // BUG FIX 2: /api/replay/keys/:id → /api/keys/:id/replay
         const data = await apiGet(`/api/keys/${keyId}/replay`);
-        // BUG FIX 3: response shape is { key_id, timeline: { events: [...] } }
-        // not { events: [...] } directly
         setEvents(data?.timeline?.events || data?.events || []);
       } catch (err) {
         setError(err.message);
@@ -28,7 +30,6 @@ export default function KeyTimeline({ keyId }) {
         setLoading(false);
       }
     }
-
     loadTimeline();
   }, [keyId]);
 
@@ -47,42 +48,46 @@ export default function KeyTimeline({ keyId }) {
   }, [events]);
 
   if (!keyId) return (
-    <div className={`bg-gray-900 p-6 rounded-xl`}>
-      <p className="text-gray-400">Select a key to view its audit timeline.</p>
+    <div className="bg-gray-900 p-6 rounded-xl border border-gray-800">
+      <p className="text-gray-400 text-sm">Select a key to view its audit timeline.</p>
     </div>
   );
 
   if (loading) return (
-    <div className={`bg-gray-900 p-6 rounded-xl`}>
-      <p className="text-gray-400">Loading cryptographic audit timeline…</p>
+    <div className="bg-gray-900 p-6 rounded-xl border border-gray-800 flex items-center gap-3">
+      <FaSpinner className="animate-spin text-cyan-400" />
+      <p className="text-gray-400 text-sm">Loading cryptographic audit timeline…</p>
     </div>
   );
 
   if (error) return (
-    <div className={`bg-gray-900 p-6 rounded-xl border border-red-500/30`}>
-      <p className="text-red-400 font-semibold">Audit Timeline Error</p>
-      <p className="text-gray-400">{error}</p>
+    <div className="bg-gray-900 p-6 rounded-xl border border-red-500/30">
+      <p className="text-red-400 font-semibold flex items-center gap-2"><FaExclamationTriangle /> Audit Timeline Error</p>
+      <p className="text-gray-400 text-sm mt-1">{error}</p>
     </div>
   );
 
   if (events.length === 0) return (
-    <div className={`bg-gray-900 p-6 rounded-xl`}>
-      <p className="text-gray-400">No audit events recorded for this key yet.</p>
+    <div className="bg-gray-900 p-6 rounded-xl border border-gray-800">
+      <p className="text-gray-400 text-sm">No audit events recorded for this key yet.</p>
     </div>
   );
 
   return (
-    <div className="space-y-8">
-      <div>
-        <h3 className={`text-lg font-bold text-white`}>Key Audit Timeline</h3>
-        <p className="text-gray-400">Immutable, phase-structured sequence of cryptographic, policy, and lifecycle events.</p>
+    <div className="space-y-6">
+      <div className="flex items-center gap-3">
+        <FaHistory className="text-cyan-400" />
+        <div>
+          <h3 className="text-lg font-bold text-white">Key Audit Timeline</h3>
+          <p className="text-gray-400 text-xs">Immutable, phase-structured sequence of cryptographic, policy, and lifecycle events.</p>
+        </div>
       </div>
       {Object.entries(phases).map(([phase, items]) => {
         if (items.length === 0) return null;
         return (
-          <div key={phase} className="space-y-4">
+          <div key={phase} className="space-y-3">
             <PhaseHeader phase={phase} />
-            <div className="space-y-4">
+            <div className="space-y-3 pl-2">
               {items.map((event, idx) => (
                 <TimelineEvent key={`${event.timestamp_utc}-${idx}`} event={event} />
               ))}
@@ -96,13 +101,19 @@ export default function KeyTimeline({ keyId }) {
 
 function PhaseHeader({ phase }) {
   const labels = {
-    CREATION: "Key Creation & Activation", USAGE: "Cryptographic Usage",
-    ENFORCEMENT: "Policy Enforcement", MIGRATION: "Rotation & Migration", OTHER: "Other Events",
+    CREATION: "Key Creation & Activation",
+    USAGE: "Cryptographic Usage",
+    ENFORCEMENT: "Policy Enforcement",
+    MIGRATION: "Rotation & Migration",
+    OTHER: "Other Events",
   };
   return (
     <div className="flex items-center gap-3">
       <div className="h-px flex-1 bg-gray-800" />
-      <span className={`text-xs uppercase tracking-wide text-gray-400`}>{labels[phase] || phase}</span>
+      <div className="flex items-center gap-1.5 text-xs uppercase tracking-wide text-gray-400">
+        {PHASE_ICONS[phase]}
+        {labels[phase] || phase}
+      </div>
       <div className="h-px flex-1 bg-gray-800" />
     </div>
   );
