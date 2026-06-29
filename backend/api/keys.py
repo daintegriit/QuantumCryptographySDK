@@ -226,7 +226,7 @@ def api_key_explain(key_id: str, request: Request,
         "risk_score": rec.get("policy_risk_score", 0),
         "warnings": rec.get("policy_warnings", []),
         "required_actions": rec.get("policy_required_actions", []),
-        "explanation": f"{rec['algorithm']} ({rec['parameter_set']}) rated {rec['security_level']}. Policy: {status}. Risk score: {rec.get('policy_risk_score', 0):.2f}.",
+        "explanation": [{"level": "INFO", "message": f"{rec['algorithm']} ({rec['parameter_set']}) rated {rec['security_level']}. Policy: {status}. Risk score: {rec.get('policy_risk_score', 0):.2f}."}],
         "nist_standard": policy.get("nist_standard", ""),
         "recommendation": policy.get("recommendation", ""),
     }
