@@ -73,7 +73,9 @@ export function ThemeProvider({ children }) {
 export function useTheme() {
   const ctx = useContext(ThemeContext);
   if (!ctx) {
-    throw new Error("useTheme must be used inside ThemeProvider");
+    // Return default theme when used outside ThemeProvider
+    const { THEMES } = require("../styles/themes");
+    return { theme: THEMES["apple"], themeName: "apple", setThemeName: () => {} };
   }
   return ctx;
 }
