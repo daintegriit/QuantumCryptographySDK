@@ -34,7 +34,7 @@ export default function ExplainPanel({ keyId }) {
   if (!keyId) {
     return (
       <div className={`bg-gray-900 p-6 rounded-xl`}>
-        <p className={theme.mutedText}>Select a key to view governance explanations.</p>
+        <p className="text-gray-400">Select a key to view governance explanations.</p>
       </div>
     );
   }
@@ -42,7 +42,7 @@ export default function ExplainPanel({ keyId }) {
   if (loading) {
     return (
       <div className={`bg-gray-900 p-6 rounded-xl`}>
-        <p className={theme.mutedText}>Constructing deterministic explanation…</p>
+        <p className="text-gray-400">Constructing deterministic explanation…</p>
       </div>
     );
   }
@@ -67,7 +67,7 @@ export default function ExplainPanel({ keyId }) {
     <div className="space-y-6">
       <div>
         <h2 className={`text-xl font-bold text-white`}>Governance Explanation</h2>
-        <p className={theme.mutedText}>
+        <p className="text-gray-400">
           Deterministic explanation derived from policy evaluation, lifecycle analysis, and telemetry.
         </p>
       </div>

@@ -55,7 +55,7 @@ function ErrorFallback({ error }) {
           Application Error
         </h2>
 
-        <p className={theme.mutedText}>
+        <p className="text-gray-400">
           A critical interface error occurred. The system remains secure and
           operational, but this view could not be rendered.
         </p>

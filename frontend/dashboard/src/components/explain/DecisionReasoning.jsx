@@ -24,7 +24,7 @@ export default function DecisionReasoning({ decision }) {
   if (!decision) {
     return (
       <div className={`bg-gray-900 p-6 rounded-xl`}>
-        <p className={theme.mutedText}>
+        <p className="text-gray-400">
           No governance decision data available for this key.
         </p>
       </div>
@@ -52,7 +52,7 @@ export default function DecisionReasoning({ decision }) {
         <h3 className={`text-lg font-bold text-white`}>
           Decision Reasoning
         </h3>
-        <p className={theme.mutedText}>
+        <p className="text-gray-400">
           Deterministic justification for governance outcomes derived from
           policy evaluation, lifecycle analysis, and cryptographic telemetry.
         </p>
@@ -76,7 +76,7 @@ export default function DecisionReasoning({ decision }) {
         </div>
 
         {reasons.length === 0 ? (
-          <p className={theme.mutedText}>
+          <p className="text-gray-400">
             No explicit factors were required to reach this decision.
           </p>
         ) : (
