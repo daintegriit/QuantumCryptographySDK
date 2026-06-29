@@ -204,7 +204,7 @@ def api_key_explain(key_id: str, request: Request,
     if not record:
         raise HTTPException(status_code=404, detail=f"Key {key_id} not found")
     from dataclasses import asdict
-    from policy.nist_pqc import check_key_allowed
+    from policy.nist_pqc import evaluate_key_policy_dict as check_key_allowed
     rec = asdict(record)
     policy = check_key_allowed(
         scheme=rec["algorithm"],
