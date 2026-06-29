@@ -19,7 +19,7 @@ export default function SystemPosturePanel() {
         setError(null);
         const [riskData, anomalyData, telemetryData] = await Promise.all([
           GovernanceAPI.risk(),
-          AnomalyAPI.summary(),
+          AnomalyAPI.scan(168),
           TelemetryAPI.system(),
         ]);
         if (!mounted) return;
@@ -94,7 +94,7 @@ export default function SystemPosturePanel() {
       <Card>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <Signal label="Cryptographic Usage" value={`${telemetry.total_encryptions + telemetry.total_decryptions} ops`} icon={<FaLock />} />
-          <Signal label="Anomalies Detected"  value={anomalies?.total || 0} icon={<FaExclamationTriangle />} />
+          <Signal label="Anomalies Detected"  value={anomalies?.findings?.length || 0} icon={<FaExclamationTriangle />} />
           <Signal label="System Integrity"    value="Immutable" icon={<FaCheckCircle />} />
         </div>
       </Card>
