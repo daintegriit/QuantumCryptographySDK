@@ -48,26 +48,26 @@ export default function KeyTimeline({ keyId }) {
 
   if (!keyId) return (
     <div className={`bg-gray-900 p-6 rounded-xl`}>
-      <p className={theme.mutedText}>Select a key to view its audit timeline.</p>
+      <p className="text-gray-400">Select a key to view its audit timeline.</p>
     </div>
   );
 
   if (loading) return (
     <div className={`bg-gray-900 p-6 rounded-xl`}>
-      <p className={theme.mutedText}>Loading cryptographic audit timeline…</p>
+      <p className="text-gray-400">Loading cryptographic audit timeline…</p>
     </div>
   );
 
   if (error) return (
     <div className={`bg-gray-900 p-6 rounded-xl border border-red-500/30`}>
       <p className="text-red-400 font-semibold">Audit Timeline Error</p>
-      <p className={theme.mutedText}>{error}</p>
+      <p className="text-gray-400">{error}</p>
     </div>
   );
 
   if (events.length === 0) return (
     <div className={`bg-gray-900 p-6 rounded-xl`}>
-      <p className={theme.mutedText}>No audit events recorded for this key yet.</p>
+      <p className="text-gray-400">No audit events recorded for this key yet.</p>
     </div>
   );
 
@@ -75,7 +75,7 @@ export default function KeyTimeline({ keyId }) {
     <div className="space-y-8">
       <div>
         <h3 className={`text-lg font-bold text-white`}>Key Audit Timeline</h3>
-        <p className={theme.mutedText}>Immutable, phase-structured sequence of cryptographic, policy, and lifecycle events.</p>
+        <p className="text-gray-400">Immutable, phase-structured sequence of cryptographic, policy, and lifecycle events.</p>
       </div>
       {Object.entries(phases).map(([phase, items]) => {
         if (items.length === 0) return null;
