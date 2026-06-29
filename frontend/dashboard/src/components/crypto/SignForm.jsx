@@ -1,25 +1,19 @@
-// src/components/crypto/SignForm.jsx
 import { useState } from "react";
-import { useTheme } from "../../context/ThemeContext";
+import { FaPen, FaSpinner, FaExclamationTriangle, FaCopy, FaCheckCircle } from "react-icons/fa";
 import { apiPost } from "../../services/apiClient";
 
 export default function SignForm({ activeKey }) {
-  const { theme } = useTheme();
   const [message, setMessage] = useState("");
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [copied, setCopied] = useState(false);
 
   async function handleSign() {
     if (!message.trim() || !activeKey) return;
     try {
-      setLoading(true);
-      setError(null);
-      setResult(null);
-      const res = await apiPost("/api/sign", {
-        message,
-        key_id: activeKey.key_id,
-      });
+      setLoading(true); setError(null); setResult(null);
+      const res = await apiPost("/api/sign", { message, key_id: activeKey.key_id });
       setResult(res);
     } catch (err) {
       setError(err.message);
@@ -28,19 +22,27 @@ export default function SignForm({ activeKey }) {
     }
   }
 
+  function handleCopy() {
+    navigator.clipboard.writeText(result.signature);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  }
+
   return (
-    <div className={`${theme.panel} p-6 rounded-xl space-y-4`}>
+    <div className="rounded-xl p-6 space-y-4" style={{ background: "var(--panel)", border: "1px solid var(--border)" }}>
       <div>
-        <h3 className={`text-sm font-semibold ${theme.panelTitle}`}>Sign Message</h3>
-        <p className={theme.mutedText}>
+        <h3 className="text-sm font-semibold flex items-center gap-2" style={{ color: "var(--text-primary)" }}>
+          <FaPen style={{ color: "#a78bfa" }} /> Sign Message
+        </h3>
+        <p className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>
           Create a post-quantum digital signature using the active signature key.
         </p>
       </div>
 
       <div className="text-xs">
-        <span className="text-gray-400">Active Key:</span>{" "}
+        <span style={{ color: "var(--text-muted)" }}>Active Key:</span>{" "}
         {activeKey ? (
-          <span className="text-purple-400 font-mono">{activeKey.key_id}</span>
+          <span className="font-mono text-purple-400">{activeKey.key_id}</span>
         ) : (
           <span className="text-red-400">None — set a Dilithium, Falcon, or SPHINCS+ key active</span>
         )}
@@ -48,40 +50,55 @@ export default function SignForm({ activeKey }) {
 
       <textarea
         value={message}
-        onChange={(e) => setMessage(e.target.value)}
+        onChange={e => setMessage(e.target.value)}
         placeholder="Enter message to sign"
         rows={4}
         disabled={!activeKey}
-        className={`w-full rounded p-2 text-sm font-mono bg-black/30 border border-gray-700 text-gray-200 resize-none focus:outline-none focus:border-purple-500/50 ${!activeKey ? "opacity-50" : ""}`}
+        className="w-full rounded p-2 text-sm font-mono resize-none focus:outline-none transition"
+        style={{
+          background: "var(--input-bg)",
+          border: "1px solid var(--border)",
+          color: "var(--text-primary)",
+          opacity: !activeKey ? 0.5 : 1,
+        }}
       />
 
       <button
         onClick={handleSign}
         disabled={!activeKey || loading}
-        className={`px-4 py-2 rounded text-sm font-medium transition ${
-          !activeKey || loading
-            ? "bg-gray-500/30 text-gray-400 cursor-not-allowed"
-            : "bg-purple-500/20 text-purple-400 hover:bg-purple-500/30"
-        }`}
+        className="flex items-center gap-2 px-4 py-2 rounded text-sm font-medium transition"
+        style={{
+          background: !activeKey || loading ? "rgba(107,114,128,0.2)" : "rgba(167,139,250,0.15)",
+          color: !activeKey || loading ? "var(--text-muted)" : "#a78bfa",
+          cursor: !activeKey || loading ? "not-allowed" : "pointer",
+          border: "1px solid var(--border)",
+        }}
       >
-        {loading ? "Signing…" : "Sign"}
+        {loading ? <><FaSpinner className="animate-spin text-xs" /> Signing…</> : <><FaPen className="text-xs" /> Sign</>}
       </button>
 
       {error && (
-        <div className="text-xs text-red-400 border border-red-500/30 rounded p-2">{error}</div>
+        <div className="text-xs rounded p-2 flex items-center gap-2 text-red-400"
+          style={{ border: "1px solid rgba(239,68,68,0.3)", background: "rgba(239,68,68,0.05)" }}>
+          <FaExclamationTriangle /> {error}
+        </div>
       )}
 
       {result && (
         <div className="space-y-2">
-          <div className="border border-purple-500/20 rounded p-3 text-xs">
-            <div className="text-gray-400 mb-1">
-              Signature · Scheme: <span className="text-purple-400 font-mono">{result.scheme}</span>
+          <div className="rounded p-3 text-xs" style={{ border: "1px solid rgba(167,139,250,0.2)", background: "rgba(167,139,250,0.05)" }}>
+            <div className="flex items-center justify-between mb-1">
+              <span style={{ color: "var(--text-muted)" }}>
+                Signature · Scheme: <span className="text-purple-400 font-mono">{result.scheme}</span>
+              </span>
+              <button onClick={handleCopy} className="flex items-center gap-1 text-xs transition"
+                style={{ color: copied ? "#4ade80" : "#a78bfa" }}>
+                {copied ? <><FaCheckCircle /> Copied</> : <><FaCopy /> Copy</>}
+              </button>
             </div>
-            <code className="text-purple-300 break-all text-xs leading-relaxed">
-              {result.signature}
-            </code>
+            <code className="text-purple-300 break-all text-xs leading-relaxed">{result.signature}</code>
           </div>
-          <div className="text-xs text-gray-500">
+          <div className="text-xs" style={{ color: "var(--text-muted)" }}>
             Backend: <span className="text-purple-400">{result.crypto_backend || "python"}</span>
           </div>
         </div>
