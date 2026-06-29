@@ -1,122 +1,66 @@
 import { useState } from "react";
-import { useTheme } from "../../context/ThemeContext";
-
+import { FaChartBar } from "react-icons/fa";
 import Card from "../common/Card";
 import EmptyState from "../common/EmptyState";
-
 import MigrationProjectionChart from "./MigrationProjectionChart";
 
-/**
- * SimulationPanel
- *
- * Analysis + interpretation surface for completed simulations.
- *
- * RESPONSIBILITIES:
- * - Summarize portfolio-level simulation results
- * - Allow inspection of individual keys
- * - Render per-key migration projections
- *
- * DOES NOT:
- * - Run simulations
- * - Select scenarios
- * - Mutate state or keys
- *
- * GUARANTEES:
- * - Read-only
- * - Deterministic
- * - Audit-safe
- */
 export default function SimulationPanel({ result }) {
-  const { theme } = useTheme();
   const [selectedKey, setSelectedKey] = useState(null);
 
-  // =====================================================
-  // Empty state
-  // =====================================================
-  if (!result) {
-    return (
-      <Card>
-        <EmptyState
-          title="No Simulation Executed"
-          description="Run a scenario-based simulation to evaluate cryptographic durability over time."
-          hint="Simulations are read-only and safe for production environments."
-        />
-      </Card>
-    );
-  }
+  if (!result) return (
+    <Card>
+      <EmptyState
+        title="No Simulation Executed"
+        description="Run a scenario-based simulation to evaluate cryptographic durability over time."
+        hint="Simulations are read-only and safe for production environments."
+      />
+    </Card>
+  );
 
-  const rollup = result.rollup || {};
-  const counts = rollup.severity_counts_worst_case || {};
+  const counts = result.rollup?.severity_counts_worst_case || {};
 
-  // =====================================================
-  // UI
-  // =====================================================
+  const riskColor = (level) => ({
+    SAFE: "#4ade80", MONITOR: "#facc15", MIGRATE_SOON: "#fb923c", BROKEN: "#f87171",
+  })[level] || "var(--accent)";
+
   return (
     <div className="space-y-6">
-      {/* ============================= */}
-      {/* Portfolio Summary */}
-      {/* ============================= */}
       <Card className="space-y-4">
-        <h3 className={`font-semibold ${theme.panelTitle}`}>
-          Portfolio Risk Summary
+        <h3 className="font-semibold flex items-center gap-2" style={{ color: "var(--text-primary)" }}>
+          <FaChartBar style={{ color: "var(--accent)" }} /> Portfolio Risk Summary
         </h3>
-
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-sm">
           {Object.entries(counts).map(([level, count]) => (
-            <div
-              key={level}
-              className="p-3 rounded bg-black/30 border border-gray-800"
-            >
-              <div className="text-gray-400">{level}</div>
-              <div className="text-2xl font-bold text-cyan-400">
-                {count}
-              </div>
+            <div key={level} className="p-3 rounded" style={{ background: "var(--input-bg)", border: "1px solid var(--border)" }}>
+              <div className="text-xs" style={{ color: "var(--text-muted)" }}>{level}</div>
+              <div className="text-2xl font-bold" style={{ color: riskColor(level) }}>{count}</div>
             </div>
           ))}
         </div>
-
-        <div className={`text-xs ${theme.mutedText}`}>
-          Keys simulated:{" "}
-          <span className="font-mono text-cyan-400">
-            {result.keys_simulated}
-          </span>
-          <br />
-          Safety margin:{" "}
-          <span className="font-mono text-cyan-400">
-            {result.safety_margin_years} years
-          </span>
+        <div className="text-xs" style={{ color: "var(--text-muted)" }}>
+          Keys simulated: <span className="font-mono" style={{ color: "var(--accent)" }}>{result.keys_simulated}</span>
+          {" · "}
+          Safety margin: <span className="font-mono" style={{ color: "var(--accent)" }}>{result.safety_margin_years} years</span>
         </div>
       </Card>
 
-      {/* ============================= */}
-      {/* Key Selector */}
-      {/* ============================= */}
       <Card>
-        <h3 className={`font-semibold mb-3 ${theme.panelTitle}`}>
-          Inspect Individual Key
-        </h3>
-
+        <h3 className="font-semibold mb-3" style={{ color: "var(--text-primary)" }}>Inspect Individual Key</h3>
         <select
-          className="w-full px-3 py-2 rounded bg-black/40 border border-gray-700 text-sm"
           value={selectedKey || ""}
-          onChange={(e) => setSelectedKey(e.target.value)}
-        >
+          onChange={e => setSelectedKey(e.target.value)}
+          style={{
+            width: "100%", padding: "8px 12px", borderRadius: "6px", fontSize: "0.875rem",
+            background: "var(--input-bg)", border: "1px solid var(--border)", color: "var(--text-primary)", outline: "none",
+          }}>
           <option value="">Select a key…</option>
-          {result.results.map((r) => (
-            <option key={r.key_id} value={r.key_id}>
-              {r.key_id} ({r.scheme})
-            </option>
+          {result.results.map(r => (
+            <option key={r.key_id} value={r.key_id}>{r.key_id} ({r.scheme})</option>
           ))}
         </select>
       </Card>
 
-      {/* ============================= */}
-      {/* Per-Key Projection */}
-      {/* ============================= */}
-      <MigrationProjectionChart
-        keyId={selectedKey}
-        safetyMarginYears={result.safety_margin_years}
-      />
+      <MigrationProjectionChart keyId={selectedKey} safetyMarginYears={result.safety_margin_years} />
     </div>
   );
 }
