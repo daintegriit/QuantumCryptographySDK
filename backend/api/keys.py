@@ -16,7 +16,12 @@ router = APIRouter()
 # ── Per-user keystore isolation ──────────────────────────────
 def _get_user_id(request: Request) -> Optional[str]:
     """Extract user_id from JWT cookie — returns None if not authenticated."""
-    token = request.cookies.get("access_token")
+    token = None
+    auth = request.headers.get("Authorization", "")
+    if auth.startswith("Bearer "):
+        token = auth[7:]
+    if not token:
+        token = request.cookies.get("access_token")
     if not token:
         return None
     try:
@@ -140,7 +145,7 @@ def api_activate_key(key_id: str, request: Request):
     record = engine.get(key_id)
     if not record:
         raise HTTPException(status_code=404, detail=f"Key {key_id} not found")
-    rotation.set_active_key(key_id)
+    rotation.set_active_key_id(key_id)
     return {"activated": True, "key_id": key_id, "key": sanitize_key(record)}
 
 @router.get("/keys/{key_id}/status", tags=["policy"])
@@ -198,8 +203,9 @@ def api_key_explain(key_id: str, request: Request,
     record = engine.get(key_id)
     if not record:
         raise HTTPException(status_code=404, detail=f"Key {key_id} not found")
-    from api.explain import explain_key
-    return explain_key(record, profile=profile)
+    from ai.explain import ExplainEngine
+    explain_engine = ExplainEngine(keystore_dir=engine.keystore_dir)
+    return explain_engine.explain_key(key_id=key_id, profile=profile)
 
 @router.get("/keys/{key_id}/replay", tags=["replay"])
 def api_key_replay(key_id: str, request: Request):
@@ -207,5 +213,5 @@ def api_key_replay(key_id: str, request: Request):
     record = engine.get(key_id)
     if not record:
         raise HTTPException(status_code=404, detail=f"Key {key_id} not found")
-    from telemetry.replay import replay_key_events
+    from telemetry.replay import replay_key_timeline as replay_key_events
     return replay_key_events(key_id)
