@@ -239,3 +239,20 @@ def api_key_replay(key_id: str, request: Request):
         raise HTTPException(status_code=404, detail=f"Key {key_id} not found")
     from telemetry.replay import replay_key_timeline as replay_key_events
     return replay_key_events(key_id)
+
+# ── Anomaly scoring on audit write ──────────────────────────
+def _score_and_log_anomaly(event: dict):
+    try:
+        from ai.anomaly_engine import get_engine
+        engine = get_engine()
+        result = engine.score_event(event)
+        if result["anomaly"]:
+            import logging
+            logging.getLogger(__name__).warning(
+                f"ANOMALY DETECTED: {event.get('event_type')} "
+                f"scheme={event.get('scheme')} score={result['score']} "
+                f"reason={result['reason']}"
+            )
+        return result
+    except Exception as e:
+        return {"anomaly": False, "score": 0.0, "reason": str(e)}
