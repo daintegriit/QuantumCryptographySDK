@@ -13,8 +13,9 @@ logger = logging.getLogger(__name__)
 
 MODEL_PATH    = os.environ.get("QS_ANOMALY_MODEL", "/app/data/ai/anomaly_model.pkl")
 AUDIT_PATHS   = [
+    "/app/telemetry/audit_log.jsonl",
+    "/app/telemetry/audit_policy.jsonl",
     "/app/data/keystores/*/audit_log.jsonl",
-    "/app/data/telemetry/audit_policy.jsonl",
     "backend/backend/telemetry/audit_policy.jsonl",
 ]
 MIN_EVENTS    = 50
