@@ -55,6 +55,8 @@ app.add_middleware(
         "http://localhost:3008",
         "http://127.0.0.1:3008",
         "https://qsentry.io",
+        "https://api.qsentry.io",
+        "https://www.api.qsentry.io",
         "https://www.qsentry.io",
         "http://qsentry.io",
     ],
