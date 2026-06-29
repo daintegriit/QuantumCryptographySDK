@@ -81,7 +81,7 @@ export default function KeyTimeline({ keyId }) {
         if (items.length === 0) return null;
         return (
           <div key={phase} className="space-y-4">
-            <PhaseHeader phase={phase} theme={theme} />
+            <PhaseHeader phase={phase} />
             <div className="space-y-4">
               {items.map((event, idx) => (
                 <TimelineEvent key={`${event.timestamp_utc}-${idx}`} event={event} />
@@ -94,7 +94,7 @@ export default function KeyTimeline({ keyId }) {
   );
 }
 
-function PhaseHeader({ phase, theme }) {
+function PhaseHeader({ phase }) {
   const labels = {
     CREATION: "Key Creation & Activation", USAGE: "Cryptographic Usage",
     ENFORCEMENT: "Policy Enforcement", MIGRATION: "Rotation & Migration", OTHER: "Other Events",
