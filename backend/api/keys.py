@@ -203,9 +203,33 @@ def api_key_explain(key_id: str, request: Request,
     record = engine.get(key_id)
     if not record:
         raise HTTPException(status_code=404, detail=f"Key {key_id} not found")
-    from ai.explain import ExplainEngine
-    explain_engine = ExplainEngine(keystore_dir=engine.keystore_dir)
-    return explain_engine.explain_key(key_id=key_id, profile=profile)
+    from dataclasses import asdict
+    from policy.nist_pqc import check_key_allowed
+    rec = asdict(record)
+    policy = check_key_allowed(
+        scheme=rec["algorithm"],
+        parameter_set=rec["parameter_set"],
+        claimed_security_level=rec["security_level"],
+        estimated_longevity_years=rec["estimated_longevity_years"],
+    )
+    status = "ALLOWED" if policy.get("allowed") else "BLOCKED"
+    return {
+        "key_id": key_id,
+        "profile": profile,
+        "algorithm": rec["algorithm"],
+        "parameter_set": rec["parameter_set"],
+        "security_level": rec["security_level"],
+        "key_type": rec.get("key_type", "unknown"),
+        "created_at": rec.get("created_at", ""),
+        "policy_status": status,
+        "policy": policy,
+        "risk_score": rec.get("policy_risk_score", 0),
+        "warnings": rec.get("policy_warnings", []),
+        "required_actions": rec.get("policy_required_actions", []),
+        "explanation": f"{rec['algorithm']} ({rec['parameter_set']}) rated {rec['security_level']}. Policy: {status}. Risk score: {rec.get('policy_risk_score', 0):.2f}.",
+        "nist_standard": policy.get("nist_standard", ""),
+        "recommendation": policy.get("recommendation", ""),
+    }
 
 @router.get("/keys/{key_id}/replay", tags=["replay"])
 def api_key_replay(key_id: str, request: Request):
