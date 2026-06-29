@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
-import { useTheme } from "../../context/ThemeContext";
+
 import TimelineEvent from "./TimelineEvent";
 import { apiGet } from "../../services/apiClient";
 
 export default function KeyTimeline({ keyId }) {
-  const { theme } = useTheme();
+
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -47,26 +47,26 @@ export default function KeyTimeline({ keyId }) {
   }, [events]);
 
   if (!keyId) return (
-    <div className={`${theme.panel} p-6 rounded-xl`}>
+    <div className={`bg-gray-900 p-6 rounded-xl`}>
       <p className={theme.mutedText}>Select a key to view its audit timeline.</p>
     </div>
   );
 
   if (loading) return (
-    <div className={`${theme.panel} p-6 rounded-xl`}>
+    <div className={`bg-gray-900 p-6 rounded-xl`}>
       <p className={theme.mutedText}>Loading cryptographic audit timeline…</p>
     </div>
   );
 
   if (error) return (
-    <div className={`${theme.panel} p-6 rounded-xl border border-red-500/30`}>
+    <div className={`bg-gray-900 p-6 rounded-xl border border-red-500/30`}>
       <p className="text-red-400 font-semibold">Audit Timeline Error</p>
       <p className={theme.mutedText}>{error}</p>
     </div>
   );
 
   if (events.length === 0) return (
-    <div className={`${theme.panel} p-6 rounded-xl`}>
+    <div className={`bg-gray-900 p-6 rounded-xl`}>
       <p className={theme.mutedText}>No audit events recorded for this key yet.</p>
     </div>
   );
@@ -74,7 +74,7 @@ export default function KeyTimeline({ keyId }) {
   return (
     <div className="space-y-8">
       <div>
-        <h3 className={`text-lg font-bold ${theme.panelTitle}`}>Key Audit Timeline</h3>
+        <h3 className={`text-lg font-bold text-white`}>Key Audit Timeline</h3>
         <p className={theme.mutedText}>Immutable, phase-structured sequence of cryptographic, policy, and lifecycle events.</p>
       </div>
       {Object.entries(phases).map(([phase, items]) => {
@@ -102,7 +102,7 @@ function PhaseHeader({ phase, theme }) {
   return (
     <div className="flex items-center gap-3">
       <div className="h-px flex-1 bg-gray-800" />
-      <span className={`text-xs uppercase tracking-wide ${theme.mutedText}`}>{labels[phase] || phase}</span>
+      <span className={`text-xs uppercase tracking-wide text-gray-400`}>{labels[phase] || phase}</span>
       <div className="h-px flex-1 bg-gray-800" />
     </div>
   );
