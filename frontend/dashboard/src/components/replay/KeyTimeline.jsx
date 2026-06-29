@@ -3,12 +3,12 @@ import { FaKey, FaLock, FaShieldAlt, FaExchangeAlt, FaScroll, FaSpinner, FaExcla
 import TimelineEvent from "./TimelineEvent";
 import { apiGet } from "../../services/apiClient";
 
-const PHASE_ICONS = {
-  CREATION: <FaKey className="text-cyan-400" />,
-  USAGE: <FaLock className="text-purple-400" />,
-  ENFORCEMENT: <FaShieldAlt className="text-yellow-400" />,
-  MIGRATION: <FaExchangeAlt className="text-orange-400" />,
-  OTHER: <FaScroll className="text-gray-400" />,
+const PHASE_META = {
+  CREATION:    { icon: <FaKey />,          color: "var(--accent)",  label: "Key Creation & Activation" },
+  USAGE:       { icon: <FaLock />,         color: "#a78bfa",        label: "Cryptographic Usage" },
+  ENFORCEMENT: { icon: <FaShieldAlt />,    color: "#facc15",        label: "Policy Enforcement" },
+  MIGRATION:   { icon: <FaExchangeAlt />,  color: "#fb923c",        label: "Rotation & Migration" },
+  OTHER:       { icon: <FaScroll />,       color: "var(--text-muted)", label: "Other Events" },
 };
 
 export default function KeyTimeline({ keyId }) {
@@ -20,8 +20,7 @@ export default function KeyTimeline({ keyId }) {
     if (!keyId) return;
     async function loadTimeline() {
       try {
-        setLoading(true);
-        setError(null);
+        setLoading(true); setError(null);
         const data = await apiGet(`/api/keys/${keyId}/replay`);
         setEvents(data?.timeline?.events || data?.events || []);
       } catch (err) {
@@ -48,38 +47,38 @@ export default function KeyTimeline({ keyId }) {
   }, [events]);
 
   if (!keyId) return (
-    <div className="bg-gray-900 p-6 rounded-xl border border-gray-800">
-      <p className="text-gray-400 text-sm">Select a key to view its audit timeline.</p>
+    <div className="p-6 rounded-xl" style={{ background: "var(--panel)", border: "1px solid var(--border)" }}>
+      <p className="text-sm" style={{ color: "var(--text-muted)" }}>Select a key to view its audit timeline.</p>
     </div>
   );
 
   if (loading) return (
-    <div className="bg-gray-900 p-6 rounded-xl border border-gray-800 flex items-center gap-3">
-      <FaSpinner className="animate-spin text-cyan-400" />
-      <p className="text-gray-400 text-sm">Loading cryptographic audit timeline…</p>
+    <div className="p-6 rounded-xl flex items-center gap-3" style={{ background: "var(--panel)", border: "1px solid var(--border)" }}>
+      <FaSpinner className="animate-spin" style={{ color: "var(--accent)" }} />
+      <p className="text-sm" style={{ color: "var(--text-muted)" }}>Loading cryptographic audit timeline…</p>
     </div>
   );
 
   if (error) return (
-    <div className="bg-gray-900 p-6 rounded-xl border border-red-500/30">
-      <p className="text-red-400 font-semibold flex items-center gap-2"><FaExclamationTriangle /> Audit Timeline Error</p>
-      <p className="text-gray-400 text-sm mt-1">{error}</p>
+    <div className="p-6 rounded-xl" style={{ background: "var(--panel)", border: "1px solid rgba(239,68,68,0.3)" }}>
+      <p className="font-semibold flex items-center gap-2 text-red-400"><FaExclamationTriangle /> Audit Timeline Error</p>
+      <p className="text-sm mt-1" style={{ color: "var(--text-muted)" }}>{error}</p>
     </div>
   );
 
   if (events.length === 0) return (
-    <div className="bg-gray-900 p-6 rounded-xl border border-gray-800">
-      <p className="text-gray-400 text-sm">No audit events recorded for this key yet.</p>
+    <div className="p-6 rounded-xl" style={{ background: "var(--panel)", border: "1px solid var(--border)" }}>
+      <p className="text-sm" style={{ color: "var(--text-muted)" }}>No audit events recorded for this key yet.</p>
     </div>
   );
 
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-3">
-        <FaHistory className="text-cyan-400" />
+        <FaHistory style={{ color: "var(--accent)" }} />
         <div>
-          <h3 className="text-lg font-bold text-white">Key Audit Timeline</h3>
-          <p className="text-gray-400 text-xs">Immutable, phase-structured sequence of cryptographic, policy, and lifecycle events.</p>
+          <h3 className="text-lg font-bold" style={{ color: "var(--text-primary)" }}>Key Audit Timeline</h3>
+          <p className="text-xs" style={{ color: "var(--text-muted)" }}>Immutable, phase-structured sequence of cryptographic, policy, and lifecycle events.</p>
         </div>
       </div>
       {Object.entries(phases).map(([phase, items]) => {
@@ -100,21 +99,15 @@ export default function KeyTimeline({ keyId }) {
 }
 
 function PhaseHeader({ phase }) {
-  const labels = {
-    CREATION: "Key Creation & Activation",
-    USAGE: "Cryptographic Usage",
-    ENFORCEMENT: "Policy Enforcement",
-    MIGRATION: "Rotation & Migration",
-    OTHER: "Other Events",
-  };
+  const meta = PHASE_META[phase] || PHASE_META.OTHER;
   return (
     <div className="flex items-center gap-3">
-      <div className="h-px flex-1 bg-gray-800" />
-      <div className="flex items-center gap-1.5 text-xs uppercase tracking-wide text-gray-400">
-        {PHASE_ICONS[phase]}
-        {labels[phase] || phase}
+      <div className="h-px flex-1" style={{ background: "var(--border)" }} />
+      <div className="flex items-center gap-1.5 text-xs uppercase tracking-wide"
+        style={{ color: meta.color }}>
+        {meta.icon} {meta.label}
       </div>
-      <div className="h-px flex-1 bg-gray-800" />
+      <div className="h-px flex-1" style={{ background: "var(--border)" }} />
     </div>
   );
 }
