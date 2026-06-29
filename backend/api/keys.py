@@ -193,7 +193,7 @@ def api_key_migration(key_id: str, request: Request):
     record = engine.get(key_id)
     if not record:
         raise HTTPException(status_code=404, detail=f"Key {key_id} not found")
-    from key_management.migration import assess_migration
+    from key_management.migration import evaluate_migration as assess_migration
     return assess_migration(record)
 
 @router.get("/keys/{key_id}/explain", tags=["explain"])
