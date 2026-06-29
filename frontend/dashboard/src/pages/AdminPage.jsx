@@ -33,6 +33,7 @@ export default function AdminPage() {
         telemetry: "/api/admin/telemetry", audit: "/api/admin/audit",
         algorithms: "/api/admin/algorithms/stats", health: "/api/admin/health",
       };
+      if (!endpoints[t]) { setLoading(false); return; }
       const res = await apiGet(endpoints[t]);
       setData(d => ({ ...d, [t]: res }));
     } catch (e) { setError(e.message); }
