@@ -163,7 +163,7 @@ export default function AuditPage() {
             {Object.entries(audit.timelines).map(([keyId, timeline]) => (
               <div
                 key={keyId}
-                className={`${theme.panel} p-6 rounded-xl space-y-4`}
+                className="bg-gray-900 p-6 rounded-xl space-y-4"
               >
                 {/* ================= Key Header ================= */}
                 <div className="flex flex-wrap gap-4 justify-between items-center">
