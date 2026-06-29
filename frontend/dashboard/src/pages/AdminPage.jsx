@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { apiGet, apiPost } from "../services/apiClient";
-import { FaUsers, FaKey, FaChartBar, FaShieldAlt, FaDatabase, FaScroll, FaCheckCircle, FaTimesCircle, FaSpinner } from "react-icons/fa";
+import { FaUsers, FaKey, FaChartBar, FaShieldAlt, FaDatabase, FaScroll, FaCheckCircle, FaTimesCircle, FaSpinner, FaBrain, FaRobot } from "react-icons/fa";
 
 const TABS = [
   { id: "users",      label: "Users",           icon: <FaUsers /> },
@@ -10,6 +10,7 @@ const TABS = [
   { id: "audit",      label: "Audit Log",       icon: <FaScroll /> },
   { id: "algorithms", label: "Algorithm Stats", icon: <FaShieldAlt /> },
   { id: "health",     label: "System Health",   icon: <FaDatabase /> },
+  { id: "ai",         label: "AI Intelligence", icon: <FaBrain /> },
 ];
 
 const panel  = { background: "var(--panel)",    border: "1px solid var(--border)" };
@@ -223,6 +224,9 @@ export default function AdminPage() {
           </div>
         </div>
       )}
+
+      {/* AI Intelligence */}
+      {tab === "ai" && <AIIntelligenceTab />}
 
       {/* System Health */}
       {tab === "health" && d && (
