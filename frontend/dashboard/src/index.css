@@ -1,0 +1,159 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    color: var(--text-primary);
+    @apply rounded-2xl p-6 transition-all duration-300;
+  }
+  .panel-title {
+    color: var(--text-primary);
+    @apply text-lg font-semibold mb-4;
+  }
+  .input {
+    background: var(--input-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    caret-color: var(--text-primary);
+    @apply w-full p-3 rounded-md outline-none resize-none transition;
+  }
+  .input::placeholder { color: var(--text-muted); opacity: 0.8; }
+  .input::selection { background: var(--accent); color: var(--accent-text); }
+  .input:disabled { opacity: 0.6; cursor: not-allowed; }
+  textarea.input { -webkit-text-fill-color: var(--text-primary); font-smooth: always; }
+  input.input:-webkit-autofill,
+  textarea.input:-webkit-autofill {
+    box-shadow: 0 0 0px 1000px var(--input-bg) inset;
+    -webkit-text-fill-color: var(--text-primary);
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--accent-text);
+    box-shadow: var(--accent-glow);
+    @apply px-5 py-2.5 rounded-lg font-semibold transition-all duration-200;
+  }
+  .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
+}
+
+/* ---------- 1. APPLE BLACK ---------- */
+.theme-apple {
+  --bg: #000000;
+  --panel: #18181b;
+  --input-bg: #27272a;
+  --border: #3f3f46;
+  --text-primary: #ffffff;
+  --text-muted: #a1a1aa;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --accent-text: #ffffff;
+  --shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  --accent-glow: none;
+  background: var(--bg);
+  color: var(--text-primary);
+}
+
+/* ---------- 2. CYBERPUNK ---------- */
+.theme-cyberpunk {
+  --bg: linear-gradient(to bottom right, #190019, #440047, #0a0a2e);
+  --panel: rgba(26, 0, 43, 0.90);
+  --input-bg: rgba(0, 0, 0, 0.7);
+  --border: rgba(255, 0, 255, 0.35);
+  --text-primary: #ffffff;
+  --text-muted: #c084fc;      /* was #e9b3ff — too close to white, now clearly purple */
+  --accent: #ff2fdc;
+  --accent-hover: #ff5fe5;
+  --accent-text: #ffffff;     /* was #000000 — black on pink was hard to read */
+  --shadow: 0 30px 60px rgba(255, 47, 220, 0.25);
+  --accent-glow: 0 0 25px rgba(255, 47, 220, 0.8);
+  background: var(--bg);
+  color: var(--text-primary);
+}
+
+/* ---------- 3. FINTECH SLEEK ---------- */
+.theme-fintech {
+  --bg: #f8fafc;
+  --panel: #ffffff;
+  --input-bg: #f1f5f9;
+  --border: #cbd5e1;
+  --text-primary: #0f172a;
+  --text-muted: #64748b;      /* was #475569 — slightly lighter for better hierarchy */
+  --accent: #059669;
+  --accent-hover: #047857;
+  --accent-text: #ffffff;
+  --shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+  --accent-glow: none;
+  background: var(--bg);
+  color: var(--text-primary);
+}
+
+/* ---------- 4. GLASSMORPHISM ---------- */
+.theme-glass {
+  --bg: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 50%, #fce7f3 100%);
+  --panel: rgba(255, 255, 255, 0.75);
+  --input-bg: rgba(255, 255, 255, 0.90);
+  --border: rgba(99, 102, 241, 0.25);   /* was almost invisible white */
+  --text-primary: #1e1b4b;              /* was #020617 — deep indigo for glass feel */
+  --text-muted: #6366f1;                /* was #475569 — indigo muted, readable on white */
+  --accent: #4f46e5;
+  --accent-hover: #4338ca;
+  --accent-text: #ffffff;
+  --shadow: 0 20px 40px rgba(99, 102, 241, 0.15);
+  --accent-glow: none;
+  background: var(--bg);
+  color: var(--text-primary);
+}
+
+/* ---------- 5. NEON GLOW ---------- */
+.theme-neon {
+  --bg: #000000;
+  --panel: #020617;
+  --input-bg: #050d1a;
+  --border: rgba(34, 197, 94, 0.40);
+  --text-primary: #4ade80;
+  --text-muted: #6b7280;                /* was #22c55e — too close to primary, now gray */
+  --accent: #22c55e;
+  --accent-hover: #16a34a;
+  --accent-text: #000000;
+  --shadow: 0 0 40px rgba(34, 197, 94, 0.35);
+  --accent-glow: 0 0 30px rgba(34, 197, 94, 0.85);
+  background: var(--bg);
+  color: var(--text-primary);
+}
+
+/* ---------- 6. MICROSOFT SECURITY ---------- */
+.theme-microsoft {
+  --bg: #f3f3f3;
+  --panel: #ffffff;
+  --input-bg: #fafafa;
+  --border: #e5e7eb;                    /* was #d1d1d1 — softer border */
+  --text-primary: #111827;              /* was #1f1f1f — slightly darker */
+  --text-muted: #6b7280;                /* was #444444 — lighter, better hierarchy */
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --accent-text: #ffffff;
+  --shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+  --accent-glow: none;
+  background: var(--bg);
+  color: var(--text-primary);
+}
+
+/* ---------- 7. QUANT TERMINAL ---------- */
+.theme-quant {
+  --bg: #0b1020;
+  --panel: #111827;
+  --input-bg: #020617;
+  --border: rgba(34, 211, 238, 0.25);
+  --text-primary: #e2f8ff;              /* was #67e8f9 — softer, easier to read */
+  --text-muted: #64748b;                /* was #22d3ee — too close to primary, now slate */
+  --accent: #06b6d4;
+  --accent-hover: #0891b2;
+  --accent-text: #000000;
+  --shadow: 0 25px 50px rgba(6, 182, 212, 0.25);
+  --accent-glow: 0 0 20px rgba(6, 182, 212, 0.7);
+  background: var(--bg);
+  color: var(--text-primary);
+}
