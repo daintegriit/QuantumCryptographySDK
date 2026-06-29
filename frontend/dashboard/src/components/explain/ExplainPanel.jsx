@@ -1,10 +1,10 @@
 // src/components/explain/ExplainPanel.jsx
 import { useEffect, useState } from "react";
-import { useTheme } from "../../context/ThemeContext";
+
 import { apiGet } from "../../services/apiClient";
 
 export default function ExplainPanel({ keyId }) {
-  const { theme } = useTheme();
+
   const [explanation, setExplanation] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -33,7 +33,7 @@ export default function ExplainPanel({ keyId }) {
 
   if (!keyId) {
     return (
-      <div className={`${theme.panel} p-6 rounded-xl`}>
+      <div className={`bg-gray-900 p-6 rounded-xl`}>
         <p className={theme.mutedText}>Select a key to view governance explanations.</p>
       </div>
     );
@@ -41,7 +41,7 @@ export default function ExplainPanel({ keyId }) {
 
   if (loading) {
     return (
-      <div className={`${theme.panel} p-6 rounded-xl`}>
+      <div className={`bg-gray-900 p-6 rounded-xl`}>
         <p className={theme.mutedText}>Constructing deterministic explanation…</p>
       </div>
     );
@@ -49,9 +49,9 @@ export default function ExplainPanel({ keyId }) {
 
   if (error) {
     return (
-      <div className={`${theme.panel} p-6 rounded-xl border border-red-500/30`}>
+      <div className={`bg-gray-900 p-6 rounded-xl border border-red-500/30`}>
         <p className="text-red-400 font-semibold">Explanation Error</p>
-        <p className={`${theme.mutedText} mt-1`}>{error}</p>
+        <p className={`text-gray-400 mt-1`}>{error}</p>
       </div>
     );
   }
@@ -66,14 +66,14 @@ export default function ExplainPanel({ keyId }) {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className={`text-xl font-bold ${theme.panelTitle}`}>Governance Explanation</h2>
+        <h2 className={`text-xl font-bold text-white`}>Governance Explanation</h2>
         <p className={theme.mutedText}>
           Deterministic explanation derived from policy evaluation, lifecycle analysis, and telemetry.
         </p>
       </div>
 
       {/* Headline */}
-      <div className={`${theme.panel} p-5 rounded-xl border border-purple-500/30`}>
+      <div className={`bg-gray-900 p-5 rounded-xl border border-purple-500/30`}>
         <div className="text-xs uppercase tracking-wide text-purple-400 mb-2">Headline</div>
         <p className="text-sm text-gray-200">{explanation.headline}</p>
         <div className="mt-2 flex gap-3 text-xs">
@@ -91,7 +91,7 @@ export default function ExplainPanel({ keyId }) {
       </div>
 
       {/* Explanation lines */}
-      <div className={`${theme.panel} p-5 rounded-xl space-y-3`}>
+      <div className={`bg-gray-900 p-5 rounded-xl space-y-3`}>
         <div className="text-sm font-semibold text-gray-300">Analysis</div>
         {(explanation.explanation || []).map((line, idx) => (
           <div key={idx} className="flex gap-3 text-sm">
@@ -108,7 +108,7 @@ export default function ExplainPanel({ keyId }) {
 
       {/* Required actions */}
       {explanation.required_actions?.length > 0 && (
-        <div className={`${theme.panel} p-5 rounded-xl`}>
+        <div className={`bg-gray-900 p-5 rounded-xl`}>
           <div className="text-sm font-semibold text-red-400 mb-2">Required Actions</div>
           <ul className="space-y-1">
             {explanation.required_actions.map((a, i) => (
@@ -120,7 +120,7 @@ export default function ExplainPanel({ keyId }) {
 
       {/* Recommended actions */}
       {explanation.recommended_actions?.length > 0 && (
-        <div className={`${theme.panel} p-5 rounded-xl`}>
+        <div className={`bg-gray-900 p-5 rounded-xl`}>
           <div className="text-sm font-semibold text-yellow-400 mb-2">Recommended Actions</div>
           <ul className="space-y-1">
             {explanation.recommended_actions.map((a, i) => (
@@ -131,7 +131,7 @@ export default function ExplainPanel({ keyId }) {
       )}
 
       {/* Quantum margin */}
-      <div className={`${theme.panel} p-4 rounded-xl`}>
+      <div className={`bg-gray-900 p-4 rounded-xl`}>
         <div className="flex justify-between text-sm">
           <span className="text-gray-400">Quantum Safety Margin</span>
           <span className="font-mono text-cyan-400">

@@ -1,4 +1,4 @@
-import { useTheme } from "../../context/ThemeContext";
+
 
 /**
  * DecisionReasoning
@@ -16,14 +16,14 @@ import { useTheme } from "../../context/ThemeContext";
  * Why did the system make this decision?
  */
 export default function DecisionReasoning({ decision }) {
-  const { theme } = useTheme();
+
 
   // =====================================================
   // Empty / Missing State
   // =====================================================
   if (!decision) {
     return (
-      <div className={`${theme.panel} p-6 rounded-xl`}>
+      <div className={`bg-gray-900 p-6 rounded-xl`}>
         <p className={theme.mutedText}>
           No governance decision data available for this key.
         </p>
@@ -49,7 +49,7 @@ export default function DecisionReasoning({ decision }) {
       {/* Header */}
       {/* ============================= */}
       <div>
-        <h3 className={`text-lg font-bold ${theme.panelTitle}`}>
+        <h3 className={`text-lg font-bold text-white`}>
           Decision Reasoning
         </h3>
         <p className={theme.mutedText}>
@@ -70,7 +70,7 @@ export default function DecisionReasoning({ decision }) {
       {/* ============================= */}
       {/* Contributing Factors */}
       {/* ============================= */}
-      <div className={`${theme.panel} p-5 rounded-xl`}>
+      <div className={`bg-gray-900 p-5 rounded-xl`}>
         <div className="text-sm font-semibold text-gray-300 mb-3">
           Contributing Factors
         </div>
@@ -94,7 +94,7 @@ export default function DecisionReasoning({ decision }) {
       {/* Recommended Action */}
       {/* ============================= */}
       {recommended_action && (
-        <div className={`${theme.panel} p-5 rounded-xl`}>
+        <div className={`bg-gray-900 p-5 rounded-xl`}>
           <div className="text-sm font-semibold text-gray-300 mb-2">
             Recommended Action
           </div>
@@ -108,7 +108,7 @@ export default function DecisionReasoning({ decision }) {
       {/* Confidence */}
       {/* ============================= */}
       {typeof confidence === "number" && (
-        <div className={`${theme.panel} p-4 rounded-xl`}>
+        <div className={`bg-gray-900 p-4 rounded-xl`}>
           <div className="flex justify-between items-center text-sm">
             <span className="text-gray-400">Decision Confidence</span>
             <span className="font-mono text-cyan-400">

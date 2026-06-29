@@ -1,4 +1,4 @@
-import { useTheme } from "../../context/ThemeContext";
+
 
 /**
  * AnomalyBadge
@@ -11,7 +11,7 @@ import { useTheme } from "../../context/ThemeContext";
  * - Auditor-friendly
  */
 export default function AnomalyBadge({ severity }) {
-  const { theme } = useTheme();
+
 
   const styles = {
     NONE: "bg-green-500/10 text-green-400 border-green-500/30",
