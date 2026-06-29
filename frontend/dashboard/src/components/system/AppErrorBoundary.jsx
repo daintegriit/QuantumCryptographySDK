@@ -1,5 +1,5 @@
 import React from "react";
-import { useTheme } from "../../context/ThemeContext";
+
 
 /**
  * AppErrorBoundary
@@ -46,11 +46,11 @@ export default class AppErrorBoundary extends React.Component {
 // =====================================================
 
 function ErrorFallback({ error }) {
-  const { theme } = useTheme();
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-black">
-      <div className={`${theme.panel} p-8 rounded-xl max-w-lg`}>
+      <div className={`text-gray-300 p-8 rounded-xl max-w-lg`}>
         <h2 className="text-lg font-bold text-red-400 mb-3">
           Application Error
         </h2>

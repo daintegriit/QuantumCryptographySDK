@@ -1,4 +1,4 @@
-import { useTheme } from "../../context/ThemeContext";
+
 
 /**
  * TimelineEvent
@@ -9,7 +9,7 @@ import { useTheme } from "../../context/ThemeContext";
  * This component is intentionally deterministic and side-effect free.
  */
 export default function TimelineEvent({ event }) {
-  const { theme } = useTheme();
+
 
   if (!event) return null;
 
@@ -38,7 +38,7 @@ export default function TimelineEvent({ event }) {
 
       {/* ================= RIGHT: CONTENT ================= */}
       <div
-        className={`${theme.panel} flex-1 p-4 rounded-xl space-y-2`}
+        className={`text-gray-300 flex-1 p-4 rounded-xl space-y-2`}
       >
         {/* Header */}
         <div className="flex justify-between items-center">
@@ -51,7 +51,7 @@ export default function TimelineEvent({ event }) {
         </div>
 
         {/* Summary */}
-        <div className={`text-sm ${theme.panelText}`}>
+        <div className={`text-sm text-gray-300`}>
           {summary || "No summary available"}
         </div>
 
