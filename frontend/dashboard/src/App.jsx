@@ -18,6 +18,7 @@ import ExplainPage from "./pages/ExplainPage";
 import CliPage from "./pages/CliPage";
 import AlgorithmsPage from "./pages/AlgorithmsPage";
 import HowItWorksPage from "./pages/HowItWorksPage";
+import AdminPage from "./pages/AdminPage";
 import LoginPage from "./pages/LoginPage";
 import AuthCallbackPage from "./pages/AuthCallbackPage";
 
@@ -53,6 +54,7 @@ function AppRoutes() {
         <Route path="cli" element={<CliPage />} />
         <Route path="algorithms" element={<AlgorithmsPage />} />
         <Route path="how-it-works" element={<HowItWorksPage />} />
+        <Route path="admin" element={<AdminPage />} />
       </Route>
     </Routes>
   );

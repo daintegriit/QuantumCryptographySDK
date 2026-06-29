@@ -27,6 +27,8 @@ from api.policy_drift import router as policy_drift_router
 from api.policy import router as policy_router
 from api.kem_api import router as kem_router
 from api.algorithms import router as algorithms_router
+from api.admin import router as admin_router
+from api.admin import router as admin_router
 
 
 @asynccontextmanager
@@ -87,4 +89,6 @@ app.include_router(anomaly_router, prefix="/api", tags=["anomalies"])
 app.include_router(policy_drift_router, prefix="/api", tags=["policy-drift"])
 app.include_router(policy_router, prefix="/api", tags=["policy"])
 app.include_router(kem_router, prefix="/api", tags=["kem"])
+app.include_router(admin_router)
 app.include_router(algorithms_router, prefix="/api", tags=["algorithms"])
+app.include_router(admin_router)
