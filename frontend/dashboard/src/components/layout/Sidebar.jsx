@@ -83,7 +83,7 @@ export default function Sidebar() {
   ];
 
   return (
-      className="w-64 h-full flex flex-col"
+<aside className="w-64 h-full flex flex-col"
       style={{ background: "var(--sidebar-bg, var(--panel))", borderRight: "1px solid var(--border)" }}>
 
       {/* Logo */}
