@@ -52,8 +52,9 @@ class ExplainEngine:
     Deterministic governance explanations.
     """
 
-    def __init__(self):
-        self.keys = get_keygen_engine()
+    def __init__(self, keystore_dir=None):
+        from key_management.keygen import KeygenEngine as _KE
+        self.keys = _KE(keystore_dir=keystore_dir) if keystore_dir else get_keygen_engine()
         self.signals = get_signals_engine()
         self.migration = get_migration_engine()
         self.lifecycle = KeyLifecycleEngine()
