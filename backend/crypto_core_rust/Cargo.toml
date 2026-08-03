@@ -12,11 +12,14 @@ name = "crypto_core_rust"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-# Upgrade to v0.11 — better vendoring, no system OpenSSL dependency
-oqs = { version = "0.11", features = ["vendored"] }
-base64 = "0.22"
-serde = { version = "1", features = ["derive"] }
+oqs       = { version = "0.11", features = ["vendored"] }
+base64    = "0.22"
+serde     = { version = "1", features = ["derive"] }
 serde_json = "1"
+pyo3      = { version = "0.21", features = ["extension-module"], optional = true }
+
+[features]
+python-ffi = ["pyo3"]
 
 [profile.release]
 opt-level = 3

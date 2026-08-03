@@ -276,3 +276,71 @@ pub fn verify_signature(
     let valid = sig.verify(message, &signature, &pk).is_ok();
     Ok(VerifyResult { scheme: scheme.to_string(), valid })
 }
+// ============================================================
+// PyO3 FFI — Python extension module
+// Compiled with: maturin build --features python-ffi
+// ============================================================
+#[cfg(feature = "python-ffi")]
+use pyo3::prelude::*;
+#[cfg(feature = "python-ffi")]
+use pyo3::exceptions::PyRuntimeError;
+
+#[cfg(feature = "python-ffi")]
+#[pyfunction]
+fn py_kem_keygen(scheme: &str) -> PyResult<String> {
+    kem_keygen(scheme)
+        .map(|r| serde_json::to_string(&r).unwrap())
+        .map_err(|e| PyRuntimeError::new_err(e.message))
+}
+
+#[cfg(feature = "python-ffi")]
+#[pyfunction]
+fn py_kem_encapsulate(scheme: &str, public_key_b64: &str) -> PyResult<String> {
+    kem_encapsulate(scheme, public_key_b64)
+        .map(|r| serde_json::to_string(&r).unwrap())
+        .map_err(|e| PyRuntimeError::new_err(e.message))
+}
+
+#[cfg(feature = "python-ffi")]
+#[pyfunction]
+fn py_kem_decapsulate(scheme: &str, private_key_b64: &str, ciphertext_b64: &str) -> PyResult<String> {
+    kem_decapsulate(scheme, private_key_b64, ciphertext_b64)
+        .map(|r| serde_json::to_string(&r).unwrap())
+        .map_err(|e| PyRuntimeError::new_err(e.message))
+}
+
+#[cfg(feature = "python-ffi")]
+#[pyfunction]
+fn py_sig_keygen(scheme: &str) -> PyResult<String> {
+    sig_keygen(scheme)
+        .map(|r| serde_json::to_string(&r).unwrap())
+        .map_err(|e| PyRuntimeError::new_err(e.message))
+}
+
+#[cfg(feature = "python-ffi")]
+#[pyfunction]
+fn py_sign_message(scheme: &str, private_key_b64: &str, message: &str) -> PyResult<String> {
+    sign_message(scheme, private_key_b64, message.as_bytes())
+        .map(|r| serde_json::to_string(&r).unwrap())
+        .map_err(|e| PyRuntimeError::new_err(e.message))
+}
+
+#[cfg(feature = "python-ffi")]
+#[pyfunction]
+fn py_verify_signature(scheme: &str, public_key_b64: &str, message: &str, signature_b64: &str) -> PyResult<String> {
+    verify_signature(scheme, public_key_b64, message.as_bytes(), signature_b64)
+        .map(|r| serde_json::to_string(&r).unwrap())
+        .map_err(|e| PyRuntimeError::new_err(e.message))
+}
+
+#[cfg(feature = "python-ffi")]
+#[pymodule]
+fn crypto_core_rust(_py: Python<'_>, m: &PyModule) -> PyResult<()> {
+    m.add_function(wrap_pyfunction!(py_kem_keygen, m)?)?;
+    m.add_function(wrap_pyfunction!(py_kem_encapsulate, m)?)?;
+    m.add_function(wrap_pyfunction!(py_kem_decapsulate, m)?)?;
+    m.add_function(wrap_pyfunction!(py_sig_keygen, m)?)?;
+    m.add_function(wrap_pyfunction!(py_sign_message, m)?)?;
+    m.add_function(wrap_pyfunction!(py_verify_signature, m)?)?;
+    Ok(())
+}
