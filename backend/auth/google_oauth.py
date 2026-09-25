@@ -36,6 +36,9 @@ async def google_login():
 
 @router.get("/google/callback")
 async def google_callback(code: str, state: str):
+    # Dedup check
+    from auth._state_cache import check_state
+    if not check_state(state): return __import__("fastapi").responses.HTMLResponse("<html><body>Auth complete</body></html>")
     async with httpx.AsyncClient() as client:
         token_res = await client.post(GOOGLE_TOKEN_URL, data={
             "code": code, "client_id": GOOGLE_CLIENT_ID,
