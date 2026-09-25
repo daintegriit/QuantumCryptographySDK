@@ -111,6 +111,13 @@ def append_event(
         with open(audit_path, "a", encoding="utf-8") as f:
             f.write(line + "\n")
 
+    # Post-quantum signed audit
+    try:
+        from telemetry.signed_audit import get_signed_log
+        get_signed_log().append(event)
+    except Exception:
+        pass
+
 
 def read_events(
     *,
