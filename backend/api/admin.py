@@ -19,7 +19,7 @@ def _require_admin(request: Request):
         payload = decode_token(token)
         if not payload:
             raise HTTPException(status_code=401, detail="Invalid token")
-        if not payload.get("admin"):
+        if not payload.get("is_admin"):
             raise HTTPException(status_code=403, detail="Admin access required")
         return payload
     except HTTPException:
