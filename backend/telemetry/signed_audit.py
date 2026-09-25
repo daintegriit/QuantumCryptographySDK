@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 SIGNED_LOG_PATH  = os.environ.get("QS_SIGNED_AUDIT", "/app/telemetry/audit_signed.jsonl")
 SIGNING_KEY_PATH = os.environ.get("QS_AUDIT_KEY",    "/app/telemetry/audit_signing.key")
-SCHEME           = "Dilithium3"
+SCHEME           = "ML-DSA-65"
 
 class SignedAuditLog:
     def __init__(self):
